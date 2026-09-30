@@ -1,0 +1,1360 @@
+<!DOCTYPE html>
+<html lang="es-EC">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Header y footer globales · Mediaudience</title>
+<meta name="description" content="Tanda 1 del sitio multipágina de Mediaudience: header y footer globales sobre el sistema visual Signal v1.2.0.">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+/* ============ TOKENS · Mediaudience Signal v1.2.0 (generados desde tokens.json) ============ */
+:root{
+  --color-primary:#58B0FF;
+  --color-primary-hover:#70C0FF;
+  --color-primary-active:#3496EF;
+  --color-primary-disabled:#234566;
+  --color-primary-subtle:rgba(88,176,255,0.10);
+  --color-primary-border:rgba(88,176,255,0.35);
+  --color-on-primary:#040B17;
+  --color-on-accent:#040B17;
+  --color-secondary:#68D7A1;
+  --color-background:#0A0E17;
+  --color-background-alt:#06090F;
+  --color-surface:#121828;
+  --color-surface-raised:#1A2135;
+  --color-surface-hover:#1A2135;
+  --color-text:#E9EDF6;
+  --color-text-muted:#8A93A9;
+  --color-text-tertiary:#565E76;   /* 2.99:1 — solo bordes y deshabilitado */
+  --color-text-placeholder:#7782A3;/* 5.06:1 — mínimo para texto pequeño legible */
+  --color-text-disabled:#565E76;
+  --color-border:rgba(255,255,255,0.09);
+  --color-border-subtle:rgba(255,255,255,0.05);
+  --color-border-strong:rgba(255,255,255,0.16);
+  --color-border-focus:#58B0FF;
+  --color-success:#68D7A1;
+  --color-warning:#EDBC4A;
+  --color-error:#E4665B;
+  --color-success-subtle:rgba(104,215,161,0.10);
+  --color-error-subtle:rgba(228,102,91,0.10);
+
+  --form-bg:#121828;
+  --form-bg-hover:#1A2135;
+  --form-bg-disabled:#0A0E17;
+  --form-border:rgba(255,255,255,0.16);
+  --form-border-hover:rgba(255,255,255,0.28);
+  --form-border-focus:#58B0FF;
+  --form-border-error:#E4665B;
+  --form-text:#E9EDF6;
+  --form-placeholder:#7782A3;
+  --form-label:#8A93A9;
+  --form-help:#8A93A9;
+  --form-error-text:#E4665B;
+  --form-text-disabled:#565E76;
+  --form-focus-ring:0 0 0 1px #58B0FF;
+  --form-min-height:44px;
+  --form-radius:6px;
+
+  --gradient-hero-bloom:radial-gradient(60% 80% at 85% 0%, rgba(88,176,255,0.12) 0%, rgba(88,176,255,0) 70%);
+  --gradient-scanlines:repeating-linear-gradient(90deg, rgba(255,255,255,0.05) 0 1px, transparent 1px 80px);
+  --gradient-data-grid:linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+
+  --font-primary:'Space Grotesk', system-ui, sans-serif;
+  --font-secondary:'IBM Plex Sans', system-ui, sans-serif;
+  --font-mono:'JetBrains Mono', ui-monospace, monospace;
+
+  --fs-display:4rem; --fs-display-md:3rem; --fs-display-sm:2.25rem;
+  --fs-h1:2.375rem; --fs-h1-sm:1.875rem;
+  --fs-h2:1.5rem; --fs-h3:1.25rem;
+  --fs-body:1rem; --fs-body-lg:1.125rem; --fs-small:0.875rem;
+  --fs-caption:0.75rem; --fs-mono:0.8125rem; --fs-eyebrow:0.75rem; --fs-label:0.5625rem;
+  --fs-kpi:2.5rem; --fs-kpi-sm:2rem; --fs-kpi-small:1.625rem;
+
+  --sp-xs:0.25rem; --sp-sm:0.5rem; --sp-md:0.75rem; --sp-lg:1rem;
+  --sp-xl:1.5rem; --sp-2xl:2.25rem; --sp-3xl:4.5rem;
+  --grid-gap:0.75rem; --section-gap:1rem; --gutter:1.5rem;
+
+  --radius-sm:4px; --radius-md:6px; --radius-lg:12px; --radius-app-frame:12px;
+  --shadow-lg:0 40px 80px -40px rgba(0,0,0,1);
+  --shadow-focus:0 0 0 1px #58B0FF;
+
+  --max-width:1200px; --max-width-wide:1440px; --max-width-prose:620px; --topbar-height:58px;
+
+  --dur-fast:120ms; --dur-base:220ms; --dur-slow:700ms; --dur-pulse:1800ms;
+  --ease:cubic-bezier(0.2, 0.7, 0.3, 1);
+}
+
+/* ============ BASE ============ */
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--color-background);color:var(--color-text);font-family:var(--font-secondary);font-size:var(--fs-body);line-height:1.5;-webkit-font-smoothing:antialiased}
+a{color:var(--color-primary);text-decoration:none;text-underline-offset:3px;transition:color var(--dur-fast) var(--ease)}
+a:hover{color:var(--color-primary-hover);text-decoration:underline}
+:focus-visible{outline:1px solid var(--color-border-focus);outline-offset:2px}
+code,pre{font-family:var(--font-mono);font-size:var(--fs-mono)}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.container{max-width:var(--max-width);margin:0 auto;padding:0 var(--gutter)}
+.section-pad{padding:var(--sp-3xl) 0}
+
+/* ============ TIPOGRAFÍA ============ */
+.display{font-family:var(--font-primary);font-weight:600;font-size:var(--fs-display);line-height:1.02;letter-spacing:-0.03em;margin:0;text-wrap:pretty}
+.h1{font-family:var(--font-primary);font-weight:600;font-size:var(--fs-h1);line-height:1.1;letter-spacing:-0.02em;margin:0 0 var(--sp-lg);text-wrap:pretty}
+.h2{font-family:var(--font-primary);font-weight:500;font-size:var(--fs-h2);line-height:1.25;letter-spacing:-0.02em;margin:0 0 var(--sp-lg);text-wrap:pretty}
+.h3{font-family:var(--font-primary);font-weight:600;font-size:var(--fs-h3);line-height:1.35;letter-spacing:-0.01em;margin:0;text-wrap:pretty}
+.eyebrow{font-family:var(--font-mono);font-size:var(--fs-eyebrow);line-height:1.2;letter-spacing:0.24em;text-transform:uppercase;color:var(--color-primary);margin:0 0 var(--sp-md)}
+.caption{font-family:var(--font-mono);font-size:var(--fs-caption);line-height:1.4;letter-spacing:0.14em;text-transform:uppercase;color:var(--color-text-muted);margin:0}
+.prose{max-width:var(--max-width-prose)}
+.prose p{margin:0 0 var(--sp-lg);color:var(--color-text-muted)}
+.prose p:last-child{margin-bottom:0}
+.slot{font-family:var(--font-mono);font-size:var(--fs-mono);letter-spacing:0.02em;color:var(--color-text-placeholder);border-bottom:1px dashed var(--color-border-strong)}
+
+/* ============ WORDMARK ============ */
+.wordmark{font-family:var(--font-primary);font-weight:600;font-size:1.375rem;letter-spacing:-0.02em;line-height:1;color:var(--color-text);text-decoration:none;white-space:nowrap}
+.wordmark:hover{color:var(--color-text);text-decoration:none}
+.wordmark__a{color:var(--color-primary)}
+
+/* ============ BOTONES ============ */
+.btn{display:inline-flex;align-items:center;gap:var(--sp-sm);height:40px;padding:0 var(--sp-lg);border:1px solid transparent;border-radius:var(--radius-md);font-family:var(--font-mono);font-size:var(--fs-caption);font-weight:500;letter-spacing:0.12em;text-transform:uppercase;line-height:1;cursor:pointer;white-space:nowrap;transition:background-color var(--dur-base) var(--ease),color var(--dur-base) var(--ease),border-color var(--dur-base) var(--ease)}
+.btn:hover{text-decoration:none}
+.btn:active{transform:translateY(1px)}
+.btn--primary{background:var(--color-primary);color:var(--color-on-primary)}
+.btn--primary:hover,.btn--primary.is-hover{background:var(--color-primary-hover);color:var(--color-on-primary)}
+.btn--secondary{background:transparent;border-color:var(--color-border);color:var(--color-text)}
+.btn--secondary:hover,.btn--secondary.is-hover{background:var(--color-surface-hover);color:var(--color-text)}
+.btn--ghost{background:transparent;color:var(--color-text-muted)}
+.btn--ghost:hover{background:var(--color-surface-hover);color:var(--color-text)}
+.btn[disabled],.btn[aria-disabled=true]{background:var(--color-primary-disabled);color:var(--color-text-disabled);cursor:not-allowed;transform:none}
+.link-arrow{font-size:var(--fs-small)}
+
+/* ============ HEADER GLOBAL ============ */
+.site-header{position:relative;z-index:50;background:var(--color-surface);border-bottom:1px solid var(--color-border);transition:background-color var(--dur-base) var(--ease),border-color var(--dur-base) var(--ease)}
+.site-header--sticky{position:sticky;top:0}
+.site-header--overlay{position:absolute;top:0;left:0;right:0}
+.site-header.is-scrolled{background:rgba(18,24,40,0.86);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom-color:var(--color-border-strong)}
+.site-header__bar{max-width:var(--max-width);margin:0 auto;padding:0 var(--gutter);height:var(--topbar-height);display:flex;align-items:center}
+.site-nav{flex:1;display:flex;height:100%;margin-left:var(--sp-2xl)}
+.site-nav__list{flex:1;display:flex;align-items:stretch;list-style:none;margin:0;padding:0;gap:var(--sp-xs)}
+.site-nav__item{display:flex}
+.site-nav__item--dd{position:relative}
+.site-nav__trigger{appearance:none;background:none;border:0;border-bottom:2px solid transparent;margin:0;padding:0 var(--sp-md);display:flex;align-items:center;gap:var(--sp-sm);height:100%;font-family:var(--font-mono);font-size:var(--fs-caption);letter-spacing:0.14em;text-transform:uppercase;color:var(--color-text-muted);cursor:pointer;transition:color var(--dur-base) var(--ease)}
+.site-nav__trigger:hover,.site-nav__trigger.is-hover,.site-nav__trigger[aria-expanded=true]{color:var(--color-text)}
+.site-nav__trigger.is-current{color:var(--color-text);border-bottom-color:var(--color-primary)}
+.chev{width:6px;height:6px;border-right:1px solid currentColor;border-bottom:1px solid currentColor;transform:translateY(-2px) rotate(45deg);transition:transform var(--dur-base) var(--ease)}
+.site-nav__trigger[aria-expanded=true] .chev{transform:translateY(1px) rotate(-135deg)}
+.site-nav__cta{margin-left:auto;display:flex;align-items:center}
+.site-header__burger{display:none;margin-left:auto;align-items:center;gap:var(--sp-sm);min-height:44px;padding:0 var(--sp-md);background:transparent;border:1px solid var(--color-border);border-radius:var(--radius-md);color:var(--color-text);font-family:var(--font-mono);font-size:var(--fs-caption);letter-spacing:0.14em;text-transform:uppercase;cursor:pointer}
+.burger__open{display:none}
+.is-menu-open .burger__open{display:inline}
+.is-menu-open .burger__closed{display:none}
+.burger__icon{width:14px;height:8px;border-top:1px solid currentColor;border-bottom:1px solid currentColor}
+
+.mega{display:none;position:absolute;top:100%;left:0;right:0;background:var(--color-surface);border-top:1px solid var(--color-border);border-bottom:1px solid var(--color-border)}
+.mega__inner{max-width:var(--max-width);margin:0 auto;padding:var(--sp-xl) var(--gutter);display:grid;grid-template-columns:repeat(4,minmax(0,1fr))}
+.mega__col{padding:0 var(--sp-xl);border-left:1px solid var(--color-border-subtle)}
+.mega__col:first-child{padding-left:0;border-left:0}
+.mega__label{font-family:var(--font-mono);font-size:var(--fs-caption);letter-spacing:0.14em;text-transform:uppercase;color:var(--color-text-muted);margin:0 0 var(--sp-md)}
+.mega__links{list-style:none;margin:0;padding:0}
+.mega__link{display:block;padding:6px 0;font-size:var(--fs-small);line-height:1.4;color:var(--color-text)}
+.mega__link:hover,.mega__link.is-hover{color:var(--color-primary);text-decoration:none}
+.mega__link.is-current{color:var(--color-primary)}
+.mega__foot{max-width:var(--max-width);margin:0 auto;padding:var(--sp-md) var(--gutter);display:flex;justify-content:space-between;align-items:center;gap:var(--sp-lg);border-top:1px solid var(--color-border-subtle)}
+.mega__note{margin:0;font-family:var(--font-mono);font-size:var(--fs-caption);letter-spacing:0.14em;text-transform:uppercase;color:var(--color-text-muted)}
+.mega__all{font-size:var(--fs-small)}
+
+.dropdown{display:none;position:absolute;top:100%;left:0;min-width:240px;background:var(--color-surface);border:1px solid var(--color-border);border-radius:0 0 var(--radius-md) var(--radius-md);padding:var(--sp-sm) 0}
+.dropdown__list{list-style:none;margin:0;padding:0}
+.dropdown__link{display:block;padding:10px var(--sp-lg);border-left:2px solid transparent;font-size:var(--fs-small);color:var(--color-text)}
+.dropdown__link:hover,.dropdown__link.is-hover{background:var(--color-surface-raised);color:var(--color-text);text-decoration:none}
+.dropdown__link.is-current{border-left-color:var(--color-primary);background:var(--color-primary-subtle)}
+
+.site-nav__item.is-open>.mega,.site-nav__item.is-open>.dropdown{display:block}
+@media (hover:hover) and (min-width:900px){
+  .site-nav__item:hover>.mega,.site-nav__item:hover>.dropdown,
+  .site-nav__item:focus-within>.mega,.site-nav__item:focus-within>.dropdown{display:block}
+}
+@media (max-width:899px){
+  .site-nav{display:none;position:absolute;top:100%;left:0;right:0;margin:0;height:auto;max-height:calc(100vh - var(--topbar-height));overflow-y:auto;background:var(--color-surface);border-bottom:1px solid var(--color-border)}
+  .site-header.is-menu-open .site-nav{display:block}
+  .site-header__burger{display:inline-flex}
+  .site-nav__list{flex-direction:column;height:auto;gap:0;padding:0 0 var(--sp-lg)}
+  .site-nav__item{display:block;border-bottom:1px solid var(--color-border-subtle)}
+  .site-nav__item--dd{position:static}
+  .site-nav__trigger{width:100%;height:52px;justify-content:space-between;padding:0 var(--gutter);border-bottom:0;border-left:2px solid transparent;font-size:var(--fs-mono)}
+  .site-nav__trigger.is-current{border-left-color:var(--color-primary);background:var(--color-primary-subtle);color:var(--color-text)}
+  .mega,  .dropdown{position:static;display:none;min-width:0;border:0;border-radius:0;background:var(--color-background);padding:0}
+  .site-nav__item.is-open>.mega,  .site-nav__item.is-open>.dropdown{display:block}
+  .mega__inner{grid-template-columns:minmax(0,1fr);padding:0 var(--gutter)}
+  .mega__col{padding:var(--sp-lg) 0;border-left:0;border-top:1px solid var(--color-border-subtle)}
+  .mega__col:first-child{border-top:0}
+  .mega__link{padding:var(--sp-md) 0;min-height:44px;display:flex;align-items:center}
+  .mega__foot{flex-direction:column;align-items:flex-start;gap:var(--sp-sm);padding:var(--sp-lg) var(--gutter)}
+  .dropdown__link{min-height:44px;display:flex;align-items:center;padding:0 var(--gutter)}
+  .site-nav__cta{margin:var(--sp-lg) var(--gutter) 0}
+  .site-nav__cta .btn{width:100%;height:44px;justify-content:center}
+}
+
+/* ============ FOOTER GLOBAL ============ */
+.site-footer{background:var(--color-background-alt);border-top:1px solid var(--color-border);color:var(--color-text-muted)}
+.site-footer__inner{max-width:var(--max-width);margin:0 auto;padding:0 var(--gutter)}
+.site-footer__nav{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:var(--sp-xl);padding:var(--sp-3xl) 0 var(--sp-2xl)}
+.site-footer__heading{margin:0 0 var(--sp-md);font-family:var(--font-mono);font-size:var(--fs-caption);letter-spacing:0.14em;text-transform:uppercase;color:var(--color-text)}
+.site-footer__links{list-style:none;margin:0;padding:0;display:grid;gap:var(--sp-sm)}
+.site-footer__links a{font-size:var(--fs-small);line-height:1.4;color:var(--color-text-muted)}
+.site-footer__links a:hover{color:var(--color-text)}
+.entity{display:grid;grid-template-columns:minmax(0,220px) minmax(0,1fr);gap:var(--sp-xl);padding:var(--sp-2xl) 0;border-top:1px solid var(--color-border)}
+.entity__brand{margin:0;font-size:1.25rem}
+.entity__statement{margin:0 0 var(--sp-md);max-width:var(--max-width-prose);font-size:var(--fs-body);line-height:1.6;color:var(--color-text);text-wrap:pretty}
+.entity__meta{display:flex;flex-wrap:wrap;align-items:baseline;gap:var(--sp-sm);font-style:normal;font-family:var(--font-mono);font-size:var(--fs-mono);letter-spacing:0.02em;color:var(--color-text-muted)}
+.entity__meta a{color:var(--color-text-muted);text-decoration:underline;text-decoration-color:var(--color-border-strong)}
+.entity__meta a:hover{color:var(--color-text)}
+.site-footer__legal{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:var(--sp-md) var(--sp-xl);padding:var(--sp-lg) 0;border-top:1px solid var(--color-border)}
+.site-footer__legal-links{display:flex;flex-wrap:wrap;gap:var(--sp-lg);list-style:none;margin:0;padding:0}
+.site-footer__legal a,.site-footer__copy{font-family:var(--font-mono);font-size:var(--fs-caption);letter-spacing:0.14em;text-transform:uppercase;color:var(--color-text-muted);margin:0}
+.site-footer__legal a:hover{color:var(--color-text)}
+@media (max-width:1099px){
+  .site-footer__nav{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+
+/* ============ B-01 · ANSWER TARGET ============ */
+.page-head{padding:var(--sp-3xl) 0 var(--sp-2xl)}
+.page-head--bloom{background:var(--gradient-hero-bloom),var(--gradient-scanlines)}
+.answer-target{max-width:var(--max-width-prose);margin:0 0 var(--sp-lg);font-family:var(--font-secondary);font-size:var(--fs-body-lg);line-height:1.6;color:var(--color-text);text-wrap:pretty}
+
+/* ============ B-02 · LÍNEA DE ENCUADRE ============ */
+.framing{display:flex;align-items:center;gap:10px;margin:var(--sp-md) 0 0;font-family:var(--font-mono);font-size:var(--fs-caption);line-height:1.4;letter-spacing:0.14em;text-transform:uppercase;color:var(--color-text-muted)}
+.framing::before{content:"";flex:none;width:16px;height:1px;background:var(--color-border-strong)}
+.framing time{color:inherit}
+
+/* ============ TABLAS (B-03, B-07) ============ */
+.table-wrap{border:1px solid var(--color-border);border-radius:var(--radius-md);background:var(--color-surface);overflow-x:auto}
+.table{width:100%;border-collapse:collapse;font-size:var(--fs-mono)}
+.table caption{caption-side:top;text-align:left;padding:var(--sp-md) var(--sp-lg);border-bottom:1px solid var(--color-border);font-family:var(--font-mono);font-size:var(--fs-caption);letter-spacing:0.14em;text-transform:uppercase;color:var(--color-text-muted)}
+.table th[scope=col]{padding:var(--sp-md) var(--sp-lg);border-bottom:1px solid var(--color-border);text-align:left;vertical-align:bottom;font-family:var(--font-mono);font-size:0.625rem;font-weight:400;letter-spacing:0.14em;text-transform:uppercase;color:var(--color-text-muted)}
+.table th[scope=row],.table td{padding:14px var(--sp-lg);border-bottom:1px solid var(--color-border-subtle);text-align:left;vertical-align:top}
+.table tbody tr:last-child>*{border-bottom:0}
+.table tbody tr{transition:background-color var(--dur-fast) var(--ease)}
+.table tbody tr:hover{background:var(--color-surface-raised)}
+.table th[scope=row]{font-family:var(--font-primary);font-size:var(--fs-small);font-weight:500;color:var(--color-text)}
+.table td{font-size:var(--fs-small);line-height:1.5;color:var(--color-text-muted)}
+.table .num{font-family:var(--font-mono);font-size:var(--fs-mono);text-align:right;font-variant-numeric:tabular-nums}
+.market-code{display:inline-block;margin-right:var(--sp-sm);font-family:var(--font-mono);font-size:var(--fs-caption);letter-spacing:0.14em;color:var(--color-text-muted)}
+.table--compare{min-width:760px}
+.table--compare th[scope=col]{width:25%}
+.table--compare th[scope=col]:first-child{width:18%}
+.table--compare th[scope=row]{position:sticky;left:0;background:var(--color-surface)}
+.table--compare tbody tr:hover th[scope=row]{background:var(--color-surface-raised)}
+.table--compare td{color:var(--color-text)}
+
+/* ============ B-04 · BLOQUE LEGAL ============ */
+.legal{border-top:1px solid var(--color-border);padding:var(--sp-xl) 0 0}
+.legal__title{margin:0 0 var(--sp-md);font-family:var(--font-mono);font-size:var(--fs-caption);font-weight:400;letter-spacing:0.14em;text-transform:uppercase;color:var(--color-text-muted)}
+.legal__list{margin:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:var(--sp-md) 0}
+.legal__item{padding:0 var(--sp-lg);border-left:1px solid var(--color-border-subtle)}
+.legal__item:first-child{padding-left:0;border-left:0}
+.legal__item dt{margin:0 0 var(--sp-xs);font-family:var(--font-mono);font-size:var(--fs-label);letter-spacing:0.14em;text-transform:uppercase;color:var(--color-text-muted)}
+.legal__item dd{margin:0;font-size:var(--fs-small);line-height:1.45;color:var(--color-text)}
+
+/* ============ B-05 · FAQ ============ */
+.faq{border-top:1px solid var(--color-border);max-width:820px}
+.faq__item{border-bottom:1px solid var(--color-border)}
+.faq__q{display:flex;justify-content:space-between;align-items:flex-start;gap:var(--sp-lg);padding:var(--sp-lg) 0;cursor:pointer;list-style:none}
+.faq__q::-webkit-details-marker{display:none}
+.faq__q .h3{font-size:var(--fs-body-lg);font-weight:500;transition:color var(--dur-fast) var(--ease)}
+.faq__q:hover .h3{color:var(--color-primary)}
+.faq__icon{position:relative;flex:none;width:12px;height:12px;margin-top:8px;color:var(--color-text-muted)}
+.faq__icon::before,.faq__icon::after{content:"";position:absolute;background:currentColor}
+.faq__icon::before{left:0;right:0;top:50%;height:1px}
+.faq__icon::after{top:0;bottom:0;left:50%;width:1px;transition:opacity var(--dur-base) var(--ease)}
+.faq__item[open] .faq__icon::after{opacity:0}
+.faq__a{max-width:var(--max-width-prose);padding:0 0 var(--sp-xl);color:var(--color-text-muted)}
+.faq__a p{margin:0 0 var(--sp-md)}
+.faq__a p:last-child{margin:0}
+.faq--list .faq__item{padding:var(--sp-lg) 0}
+.faq--list .h3{font-size:var(--fs-body-lg);font-weight:500;margin-bottom:var(--sp-sm)}
+.faq--list .faq__a{padding:0}
+
+/* ============ B-06 · KPI EN TEXTO ============ */
+.kpi-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:var(--grid-gap)}
+.kpi-card{margin:0;padding:var(--sp-xl);background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-md)}
+.kpi-card__body{margin:0;display:grid;gap:var(--sp-sm)}
+.kpi-card__label{font-family:var(--font-mono);font-size:var(--fs-caption);letter-spacing:0.14em;text-transform:uppercase;color:var(--color-text-muted)}
+.kpi-card__figure{font-family:var(--font-primary);font-weight:600;font-size:var(--fs-kpi);line-height:1;letter-spacing:-0.02em;color:var(--color-text);font-variant-numeric:tabular-nums}
+.kpi-card__figure--signal{color:var(--color-primary)}
+.kpi-card__unit{margin-left:2px;font-size:0.5em;color:var(--color-text-muted);letter-spacing:0}
+.kpi-card__ratio{font-family:var(--font-primary);font-weight:500;font-size:var(--fs-h3);line-height:1.35;letter-spacing:-0.01em;color:var(--color-text)}
+.kpi-card__ratio-word{color:var(--color-text-muted)}
+.kpi-card__context{font-family:var(--font-mono);font-size:var(--fs-caption);letter-spacing:0.14em;text-transform:uppercase;color:var(--color-text-muted)}
+.kpi-card .framing{padding-top:var(--sp-md);border-top:1px solid var(--color-border-subtle)}
+.kpi-inline{font-family:var(--font-primary);font-weight:600;color:var(--color-text);font-variant-numeric:tabular-nums}
+
+/* ============ B-08 · GLOSARIO ============ */
+.term{padding:var(--sp-xl) 0;border-top:1px solid var(--color-border-subtle)}
+.term:first-child{border-top:0;padding-top:0}
+.term dt{font-family:var(--font-primary);font-weight:600;font-size:var(--fs-h3);line-height:1.35;letter-spacing:-0.01em;color:var(--color-text)}
+.term__expansion{font-family:var(--font-secondary);font-weight:400;font-size:var(--fs-small);color:var(--color-text-muted);letter-spacing:0;margin-left:var(--sp-sm)}
+.term dd{margin:var(--sp-sm) 0 0;max-width:var(--max-width-prose);color:var(--color-text-muted)}
+.term dd.term__more{font-size:var(--fs-small)}
+.term--card{padding:var(--sp-xl);background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-md);margin:0}
+.alpha{display:flex;flex-wrap:wrap;gap:var(--sp-xs);list-style:none;margin:0 0 var(--sp-xl);padding:0}
+.alpha a,.alpha span{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:var(--radius-sm);font-family:var(--font-mono);font-size:var(--fs-mono);text-transform:uppercase}
+.alpha a{color:var(--color-text);border:1px solid var(--color-border)}
+.alpha a:hover{background:var(--color-surface-hover);text-decoration:none;color:var(--color-text)}
+.alpha a.is-current{border-color:var(--color-primary-border);background:var(--color-primary-subtle);color:var(--color-primary)}
+.alpha span{color:var(--color-text-disabled)}
+.glossary{margin:0}
+.glossary__group{display:grid;grid-template-columns:72px minmax(0,1fr);gap:var(--sp-xl);padding:var(--sp-xl) 0;border-top:1px solid var(--color-border)}
+.glossary__letter{margin:0;font-family:var(--font-primary);font-weight:600;font-size:var(--fs-kpi-small);line-height:1;color:var(--color-text-muted)}
+.glossary__list{margin:0}
+
+/* ============ B-09 · SELECTOR DE TRES PRODUCTOS ============ */
+.trio-head{display:grid;gap:var(--sp-sm);margin-bottom:var(--sp-xl)}
+.trio-tabs{display:flex;gap:0;margin:0 0 var(--grid-gap);padding:0;list-style:none;border-bottom:1px solid var(--color-border);overflow-x:auto}
+.trio-tabs a{display:flex;align-items:center;gap:var(--sp-sm);min-height:44px;padding:0 var(--sp-lg);margin-bottom:-1px;border-bottom:2px solid transparent;white-space:nowrap;font-family:var(--font-mono);font-size:var(--fs-caption);letter-spacing:0.14em;text-transform:uppercase;color:var(--color-text-muted)}
+.trio-tabs a:hover{color:var(--color-text);text-decoration:none}
+.trio-tabs a[aria-current]{color:var(--color-text);border-bottom-color:var(--color-primary)}
+.trio-tabs__n{color:var(--color-text-placeholder)}
+.trio{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:var(--grid-gap);list-style:none;margin:0;padding:0}
+.trio__card{position:relative;display:flex;flex-direction:column;gap:var(--sp-md);height:100%;padding:var(--sp-xl);background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-md)}
+.trio__card.is-selected::before{content:"";position:absolute;top:-1px;left:-1px;right:-1px;height:2px;background:var(--color-primary);border-radius:var(--radius-md) var(--radius-md) 0 0}
+.trio__index{margin:0;font-family:var(--font-mono);font-size:var(--fs-caption);letter-spacing:0.14em;text-transform:uppercase;color:var(--color-text-placeholder)}
+.trio__desc{margin:0;font-size:var(--fs-small);line-height:1.55;color:var(--color-text-muted)}
+.trio__facts{margin:0;display:grid;gap:var(--sp-md);padding-top:var(--sp-md);border-top:1px solid var(--color-border-subtle)}
+.trio__facts dt{font-family:var(--font-mono);font-size:var(--fs-label);letter-spacing:0.14em;text-transform:uppercase;color:var(--color-text-muted)}
+.trio__facts dd{margin:2px 0 0;font-size:var(--fs-small);line-height:1.45;color:var(--color-text)}
+.trio__link{margin-top:auto;padding-top:var(--sp-sm);font-size:var(--fs-small)}
+.trio-note{margin:var(--sp-lg) 0 0;max-width:var(--max-width-prose);font-size:var(--fs-small);color:var(--color-text-muted)}
+
+/* ============ B-10 · CONTACTO LOCAL ============ */
+.local-contact{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:var(--sp-xl);padding:var(--sp-xl);background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-md)}
+.local-contact__intro{display:grid;gap:var(--sp-md);align-content:start}
+.local-contact__intro p{margin:0;font-size:var(--fs-small);color:var(--color-text-muted);max-width:44ch}
+.local-contact__list{margin:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:var(--sp-lg) var(--sp-xl)}
+.local-contact__list dt{font-family:var(--font-mono);font-size:var(--fs-label);letter-spacing:0.14em;text-transform:uppercase;color:var(--color-text-muted);margin-bottom:var(--sp-xs)}
+.local-contact__list dd{margin:0;font-size:var(--fs-small);color:var(--color-text)}
+
+/* ============ B-11 · SECCIONES DE PÁGINA ============ */
+.page-section{padding:var(--sp-2xl) 0;border-top:1px solid var(--color-border)}
+.page-section>.h2{margin-bottom:var(--sp-xl)}
+
+/* ============ FORMULARIOS ============ */
+.field{display:grid;gap:var(--sp-sm);align-content:start}
+.field__label{font-family:var(--font-mono);font-size:var(--fs-caption);line-height:1.2;letter-spacing:0.14em;text-transform:uppercase;color:var(--form-label)}
+.req{margin-left:var(--sp-xs);color:var(--color-primary)}
+.input,.textarea,.select__control{width:100%;min-height:var(--form-min-height);margin:0;padding:12px 14px;background:var(--form-bg);border:1px solid var(--form-border);border-radius:var(--form-radius);color:var(--form-text);font-family:var(--font-secondary);font-size:0.9375rem;line-height:1.4;transition:border-color var(--dur-base) var(--ease),background-color var(--dur-base) var(--ease)}
+.textarea{min-height:120px;resize:vertical}
+.input::placeholder,.textarea::placeholder{color:var(--form-placeholder);opacity:1}
+.input:hover,.textarea:hover,.select__control:hover,.is-hover.input,.is-hover.textarea,.is-hover.select__control{background:var(--form-bg-hover);border-color:var(--form-border-hover)}
+.input:focus,.textarea:focus,.select__control:focus,.is-focus.input,.is-focus.textarea,.is-focus.select__control{outline:none;border-color:var(--form-border-focus);box-shadow:var(--form-focus-ring)}
+.input[aria-invalid=true],.textarea[aria-invalid=true],.select__control[aria-invalid=true]{border-color:var(--form-border-error)}
+.input:disabled,.textarea:disabled,.select__control:disabled{background:var(--form-bg-disabled);border-color:var(--color-border);color:var(--form-text-disabled);cursor:not-allowed}
+.input:disabled::placeholder,.textarea:disabled::placeholder{color:var(--form-text-disabled)}
+.select{position:relative}
+.select__control{appearance:none;-webkit-appearance:none;padding-right:40px;cursor:pointer}
+.select::after{content:"";position:absolute;right:16px;top:50%;width:6px;height:6px;border-right:1px solid var(--color-text-muted);border-bottom:1px solid var(--color-text-muted);transform:translateY(-70%) rotate(45deg);pointer-events:none}
+.field__help{margin:0;font-size:var(--fs-small);color:var(--form-help)}
+.field__error{margin:0;font-family:var(--font-mono);font-size:0.625rem;line-height:1.4;letter-spacing:0.14em;text-transform:uppercase;color:var(--form-error-text)}
+.check{display:flex;align-items:flex-start;gap:var(--sp-md);min-height:44px;padding:var(--sp-sm) 0;font-size:var(--fs-small);line-height:1.5;color:var(--color-text);cursor:pointer}
+.check__box{appearance:none;-webkit-appearance:none;flex:none;display:grid;place-content:center;width:18px;height:18px;margin:1px 0 0;background:var(--form-bg);border:1px solid var(--form-border);border-radius:var(--radius-sm);cursor:pointer;transition:background-color var(--dur-fast) var(--ease),border-color var(--dur-fast) var(--ease)}
+.check__box::after{content:"";width:9px;height:5px;border-left:2px solid var(--color-on-primary);border-bottom:2px solid var(--color-on-primary);transform:translateY(-1px) rotate(-45deg);opacity:0}
+.check__box:checked{background:var(--color-primary);border-color:var(--color-primary)}
+.check__box:checked::after{opacity:1}
+.check__box:hover,.check__box.is-hover{border-color:var(--form-border-hover);background:var(--form-bg-hover)}
+.check__box:checked:hover{background:var(--color-primary-hover);border-color:var(--color-primary-hover)}
+.check__box:focus-visible,.check__box.is-focus{outline:none;box-shadow:var(--form-focus-ring);border-color:var(--form-border-focus)}
+.check__box[aria-invalid=true]{border-color:var(--form-border-error)}
+.check__box:disabled{background:var(--form-bg-disabled);border-color:var(--color-border);cursor:not-allowed}
+.check--disabled{color:var(--form-text-disabled);cursor:not-allowed}
+.demo-form{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:var(--sp-2xl)}
+.demo-form__grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--sp-lg)}
+.demo-form__full{grid-column:1 / -1}
+.demo-form__actions{grid-column:1 / -1;display:flex;flex-wrap:wrap;align-items:center;gap:var(--sp-lg)}
+.demo-form__actions p{margin:0;font-size:var(--fs-small);color:var(--color-text-muted)}
+
+@media (max-width:639px){
+  .section-pad{padding:var(--sp-2xl) 0}
+  .h1{font-size:var(--fs-h1-sm)}
+  .display{font-size:var(--fs-display-sm)}
+  .kpi-card__figure{font-size:var(--fs-kpi-sm)}
+  .btn--block-sm{width:100%;justify-content:center;height:44px}
+  .site-footer__nav{grid-template-columns:repeat(2,minmax(0,1fr));padding:var(--sp-2xl) 0 var(--sp-xl)}
+  .site-footer__col--wide{grid-column:1 / -1}
+  .site-footer__links a{min-height:32px;display:inline-flex;align-items:center}
+  .entity{grid-template-columns:minmax(0,1fr);gap:var(--sp-md)}
+  .entity__meta{flex-direction:column;align-items:flex-start;gap:var(--sp-xs)}
+  .entity__sep{display:none}
+  .site-footer__legal{flex-direction:column;align-items:flex-start}
+  .table--stack thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+  .table--stack tr{display:block;padding:var(--sp-md) var(--sp-lg);border-bottom:1px solid var(--color-border-subtle)}
+  .table--stack tbody tr:last-child{border-bottom:0}
+  .table--stack th[scope=row],  .table--stack td{display:grid;grid-template-columns:96px minmax(0,1fr);gap:var(--sp-md);padding:var(--sp-xs) 0;border:0}
+  .table--stack th[scope=row]::before,  .table--stack td::before{content:attr(data-label);font-family:var(--font-mono);font-size:var(--fs-label);letter-spacing:.14em;text-transform:uppercase;color:var(--color-text-muted);padding-top:4px;font-weight:400}
+  .alpha{flex-wrap:nowrap;overflow-x:auto;padding-bottom:var(--sp-sm)}
+  .alpha li{flex:none}
+  .glossary__group{grid-template-columns:minmax(0,1fr);gap:var(--sp-md)}
+  .spec__head{grid-template-columns:minmax(0,1fr)}
+  .demo-form__grid{grid-template-columns:minmax(0,1fr)}
+}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{transition-property:color,background-color,border-color !important;animation:none !important}
+}
+
+/* =========================================================================
+   SOLO HOJA DE REFERENCIA — no se porta a Astro.
+   Estilos de la documentación y réplica de las reglas móviles bajo .vp-sm
+   para poder mostrar marcos de 375px junto a la versión desktop.
+   ========================================================================= */
+.doc-hero{background:var(--gradient-hero-bloom),var(--gradient-scanlines);border-bottom:1px solid var(--color-border)}
+.doc-hero__inner{padding-top:var(--sp-3xl);padding-bottom:var(--sp-2xl)}
+.doc-legend{display:flex;flex-wrap:wrap;gap:var(--sp-sm) var(--sp-xl);margin:var(--sp-xl) 0 0;padding:0;list-style:none;font-size:var(--fs-small);color:var(--color-text-muted)}
+.toc{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));margin:var(--sp-2xl) 0 0;padding:0;list-style:none;border-top:1px solid var(--color-border);border-left:1px solid var(--color-border)}
+.toc li{border-right:1px solid var(--color-border);border-bottom:1px solid var(--color-border)}
+.toc a{display:grid;gap:2px;padding:var(--sp-md) var(--sp-lg);color:var(--color-text);font-size:var(--fs-small)}
+.toc a:hover{background:var(--color-surface);text-decoration:none;color:var(--color-text)}
+.toc__code{font-family:var(--font-mono);font-size:var(--fs-caption);letter-spacing:0.14em;color:var(--color-primary)}
+.spec{border-top:1px solid var(--color-border);padding:var(--sp-3xl) 0}
+.spec:first-of-type{border-top:0}
+.spec__head{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:var(--sp-2xl);margin-bottom:var(--sp-xl)}
+.spec__lead{margin:0;max-width:var(--max-width-prose);color:var(--color-text-muted)}
+.spec__rules{margin:0;padding:0;list-style:none;display:grid;gap:var(--sp-sm);font-size:var(--fs-small);color:var(--color-text-muted)}
+.spec__rules li{position:relative;padding-left:var(--sp-lg)}
+.spec__rules li::before{content:"–";position:absolute;left:0;color:var(--color-text-placeholder)}
+.spec__rules code,.spec__lead code{color:var(--color-text)}
+.spec__meta{display:flex;flex-wrap:wrap;gap:var(--sp-xs) var(--sp-lg);margin:var(--sp-md) 0 0;font-family:var(--font-mono);font-size:var(--fs-caption);color:var(--color-text-muted)}
+.spec__meta dt{letter-spacing:0.14em;text-transform:uppercase}
+.spec__meta dd{margin:0 var(--sp-md) 0 0;color:var(--color-text)}
+.specimen{border:1px solid var(--color-border);border-radius:var(--radius-md);overflow:hidden;background:var(--color-background)}
+.specimen+.specimen,.specimen-grid+.specimen,.specimen+.specimen-grid{margin-top:var(--sp-lg)}
+.specimen__bar{display:flex;justify-content:space-between;gap:var(--sp-lg);padding:10px var(--sp-lg);background:var(--color-background-alt);border-bottom:1px solid var(--color-border);font-family:var(--font-mono);font-size:var(--fs-caption);letter-spacing:0.14em;text-transform:uppercase;color:var(--color-text-muted)}
+.specimen__bar b{font-weight:400;color:var(--color-text)}
+.specimen__body{padding:var(--sp-2xl)}
+.specimen__body--flush{padding:0}
+.specimen-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,460px),1fr));gap:var(--sp-lg)}
+.stage{position:relative;overflow:hidden;background:var(--color-background)}
+.stage--mega{min-height:400px}
+.stage--dd{min-height:230px}
+.stage--scrolled{height:230px}
+.stage__behind{padding:var(--sp-lg) var(--sp-xl);background:var(--gradient-scanlines)}
+.stage__behind .h1{margin-top:var(--sp-md)}
+.note-table{margin-top:var(--sp-lg)}
+.devices{display:flex;flex-wrap:wrap;gap:var(--sp-xl);align-items:flex-start}
+.device{flex:none;width:375px;max-width:100%}
+.device__label{margin:0 0 var(--sp-sm);font-family:var(--font-mono);font-size:var(--fs-caption);letter-spacing:0.14em;text-transform:uppercase;color:var(--color-text-muted)}
+.device__screen{position:relative;height:680px;overflow:auto;border:1px solid var(--color-border-strong);border-radius:var(--radius-app-frame);background:var(--color-background)}
+.device__screen--auto{height:auto}
+.device__pad{padding:var(--sp-xl) var(--gutter)}
+.pages{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,520px),1fr));gap:var(--sp-lg);align-items:start}
+.pages__meta{display:flex;justify-content:space-between;gap:var(--sp-md)}
+.page-demo{padding:0 var(--sp-xl) var(--sp-xl)}
+.page-demo .page-head{padding:var(--sp-2xl) 0 var(--sp-xl)}
+.code{margin:var(--sp-lg) 0 0;padding:var(--sp-lg);background:var(--color-background-alt);border:1px solid var(--color-border);border-radius:var(--radius-md);color:var(--color-text);overflow-x:auto;line-height:1.6}
+.states{display:grid;gap:var(--sp-lg)}
+.states__row{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,190px),1fr));gap:var(--sp-lg);padding-top:var(--sp-lg);border-top:1px solid var(--color-border-subtle)}
+.states__row:first-child{border-top:0;padding-top:0}
+.states__tag{margin:0 0 var(--sp-sm);font-family:var(--font-mono);font-size:var(--fs-label);letter-spacing:0.14em;text-transform:uppercase;color:var(--color-text-placeholder)}
+.states__title{grid-column:1 / -1;margin:0}
+.btn-row{display:flex;flex-wrap:wrap;gap:var(--sp-md);align-items:center}
+
+/* réplica móvil para marcos .vp-sm */
+.vp-sm .site-nav__item:not(.is-open)>.mega,.vp-sm .site-nav__item:not(.is-open)>.dropdown{display:none}
+
+.vp-sm .site-nav{display:none;position:absolute;top:100%;left:0;right:0;margin:0;height:auto;max-height:calc(100vh - var(--topbar-height));overflow-y:auto;background:var(--color-surface);border-bottom:1px solid var(--color-border)}
+.vp-sm .site-header.is-menu-open .site-nav{display:block}
+.vp-sm .site-header__burger{display:inline-flex}
+.vp-sm .site-nav__list{flex-direction:column;height:auto;gap:0;padding:0 0 var(--sp-lg)}
+.vp-sm .site-nav__item{display:block;border-bottom:1px solid var(--color-border-subtle)}
+.vp-sm .site-nav__item--dd{position:static}
+.vp-sm .site-nav__trigger{width:100%;height:52px;justify-content:space-between;padding:0 var(--gutter);border-bottom:0;border-left:2px solid transparent;font-size:var(--fs-mono)}
+.vp-sm .site-nav__trigger.is-current{border-left-color:var(--color-primary);background:var(--color-primary-subtle);color:var(--color-text)}
+.vp-sm .mega,.vp-sm .dropdown{position:static;display:none;min-width:0;border:0;border-radius:0;background:var(--color-background);padding:0}
+.vp-sm .site-nav__item.is-open>.mega,.vp-sm .site-nav__item.is-open>.dropdown{display:block}
+.vp-sm .mega__inner{grid-template-columns:minmax(0,1fr);padding:0 var(--gutter)}
+.vp-sm .mega__col{padding:var(--sp-lg) 0;border-left:0;border-top:1px solid var(--color-border-subtle)}
+.vp-sm .mega__col:first-child{border-top:0}
+.vp-sm .mega__link{padding:var(--sp-md) 0;min-height:44px;display:flex;align-items:center}
+.vp-sm .mega__foot{flex-direction:column;align-items:flex-start;gap:var(--sp-sm);padding:var(--sp-lg) var(--gutter)}
+.vp-sm .dropdown__link{min-height:44px;display:flex;align-items:center;padding:0 var(--gutter)}
+.vp-sm .site-nav__cta{margin:var(--sp-lg) var(--gutter) 0}
+.vp-sm .site-nav__cta .btn{width:100%;height:44px;justify-content:center}
+
+.vp-sm .section-pad{padding:var(--sp-2xl) 0}
+.vp-sm .h1{font-size:var(--fs-h1-sm)}
+.vp-sm .display{font-size:var(--fs-display-sm)}
+.vp-sm .kpi-card__figure{font-size:var(--fs-kpi-sm)}
+.vp-sm .btn--block-sm{width:100%;justify-content:center;height:44px}
+.vp-sm .site-footer__nav{grid-template-columns:repeat(2,minmax(0,1fr));padding:var(--sp-2xl) 0 var(--sp-xl)}
+.vp-sm .site-footer__col--wide{grid-column:1 / -1}
+.vp-sm .site-footer__links a{min-height:32px;display:inline-flex;align-items:center}
+.vp-sm .entity{grid-template-columns:minmax(0,1fr);gap:var(--sp-md)}
+.vp-sm .entity__meta{flex-direction:column;align-items:flex-start;gap:var(--sp-xs)}
+.vp-sm .entity__sep{display:none}
+.vp-sm .site-footer__legal{flex-direction:column;align-items:flex-start}
+.vp-sm .table--stack thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.vp-sm .table--stack tr{display:block;padding:var(--sp-md) var(--sp-lg);border-bottom:1px solid var(--color-border-subtle)}
+.vp-sm .table--stack tbody tr:last-child{border-bottom:0}
+.vp-sm .table--stack th[scope=row],.vp-sm .table--stack td{display:grid;grid-template-columns:96px minmax(0,1fr);gap:var(--sp-md);padding:var(--sp-xs) 0;border:0}
+.vp-sm .table--stack th[scope=row]::before,.vp-sm .table--stack td::before{content:attr(data-label);font-family:var(--font-mono);font-size:var(--fs-label);letter-spacing:.14em;text-transform:uppercase;color:var(--color-text-muted);padding-top:4px;font-weight:400}
+.vp-sm .alpha{flex-wrap:nowrap;overflow-x:auto;padding-bottom:var(--sp-sm)}
+.vp-sm .alpha li{flex:none}
+.vp-sm .glossary__group{grid-template-columns:minmax(0,1fr);gap:var(--sp-md)}
+.vp-sm .spec__head{grid-template-columns:minmax(0,1fr)}
+.vp-sm .demo-form__grid{grid-template-columns:minmax(0,1fr)}
+.vp-sm .site-footer__nav{grid-template-columns:repeat(2,minmax(0,1fr))}
+.vp-sm .page-head{padding:var(--sp-2xl) 0 var(--sp-xl)}
+@media (max-width:899px){
+  .spec__head{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:639px){
+  .specimen__body{padding:var(--sp-lg)}
+  .spec{padding:var(--sp-2xl) 0}
+}
+</style>
+</head>
+<body>
+
+<header class="site-header site-header--sticky" data-header data-header-live>
+  <div class="site-header__bar">
+    <a class="wordmark" href="/" aria-label="Mediaudience, ir al inicio">medi<span class="wordmark__a">a</span>udience</a>
+    <nav class="site-nav" id="live-nav" aria-label="Navegación principal">
+      <ul class="site-nav__list">
+      <li class="site-nav__item">
+        <button type="button" class="site-nav__trigger" aria-expanded="false" aria-controls="live-soluciones">Soluciones<span class="chev" aria-hidden="true"></span></button>
+        <div class="mega" id="live-soluciones">
+          <div class="mega__inner">
+            <div class="mega__col">
+              <p class="mega__label">Por objetivo</p>
+              <ul class="mega__links">
+                <li><a class="mega__link" href="/soluciones/connected-tv/#alcance">Alcance y awareness</a></li>
+                <li><a class="mega__link" href="/soluciones/programmatic/#consideracion">Consideración</a></li>
+                <li><a class="mega__link" href="/soluciones/mobile-push/programatico/#conversion">Conversión</a></li>
+                <li><a class="mega__link" href="/soluciones/mobile-push/premium-video/#visitas-a-tienda">Visitas a tienda</a></li>
+              </ul>
+            </div>
+            <div class="mega__col">
+              <p class="mega__label">Por producto</p>
+              <ul class="mega__links">
+                <li><a class="mega__link" href="/soluciones/ssp/">SSP</a></li>
+                <li><a class="mega__link" href="/soluciones/representacion-de-medios/">Representación de medios</a></li>
+                <li><a class="mega__link" href="/soluciones/mobile-push/premium-claro/">Mobile Push Premium con Claro</a></li>
+                <li><a class="mega__link" href="/soluciones/mobile-push/premium-video/">Mobile Push Premium Video georreferenciado</a></li>
+                <li><a class="mega__link" href="/soluciones/mobile-push/programatico/">Mobile Push Programático</a></li>
+              </ul>
+            </div>
+            <div class="mega__col">
+              <p class="mega__label">Por canal</p>
+              <ul class="mega__links">
+                <li><a class="mega__link" href="/soluciones/connected-tv/">Connected TV</a></li>
+                <li><a class="mega__link" href="/soluciones/mobile-push/">Mobile Push</a></li>
+                <li><a class="mega__link" href="/soluciones/programmatic/">Display y video programático</a></li>
+              </ul>
+            </div>
+            <div class="mega__col">
+              <p class="mega__label">Por herramienta</p>
+              <ul class="mega__links">
+                <li><a class="mega__link" href="/soluciones/ssp/#consola">Consola de campañas</a></li>
+                <li><a class="mega__link" href="/soluciones/ssp/#segmentos">Segmentos de audiencia</a></li>
+                <li><a class="mega__link" href="/soluciones/representacion-de-medios/#medicion">Medición y reportes</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="mega__foot">
+            <p class="mega__note">Cuatro formas de llegar al mismo catálogo de soluciones</p>
+            <a class="mega__all" href="/soluciones/">Todas las soluciones de Mediaudience →</a>
+          </div>
+        </div>
+      </li>
+      <li class="site-nav__item site-nav__item--dd">
+        <button type="button" class="site-nav__trigger" aria-expanded="false" aria-controls="live-nosotros">Nosotros<span class="chev" aria-hidden="true"></span></button>
+        <div class="dropdown" id="live-nosotros">
+          <ul class="dropdown__list">
+            <li><a class="dropdown__link" href="/nosotros/">Qué es Mediaudience</a></li>
+            <li><a class="dropdown__link" href="/nosotros/socios/">Socios</a></li>
+            <li><a class="dropdown__link" href="/contacto/">Contacto</a></li>
+          </ul>
+        </div>
+      </li>
+      <li class="site-nav__item site-nav__item--dd">
+        <button type="button" class="site-nav__trigger" aria-expanded="false" aria-controls="live-recursos">Recursos<span class="chev" aria-hidden="true"></span></button>
+        <div class="dropdown" id="live-recursos">
+          <ul class="dropdown__list">
+            <li><a class="dropdown__link" href="/recursos/explicadores/">Explicadores</a></li>
+            <li><a class="dropdown__link" href="/recursos/panorama/">Panorama por mercado</a></li>
+            <li><a class="dropdown__link" href="/recursos/comparativas/">Comparativas</a></li>
+            <li><a class="dropdown__link" href="/recursos/glosario-adtech/">Glosario</a></li>
+          </ul>
+        </div>
+      </li>
+        <li class="site-nav__cta"><a class="btn btn--primary" href="/demo/">Agenda una demo</a></li>
+      </ul>
+    </nav>
+    <button type="button" class="site-header__burger" aria-expanded="false" aria-controls="live-nav"><span class="burger__closed">Menú</span><span class="burger__open">Cerrar</span><span class="burger__icon" aria-hidden="true"></span></button>
+  </div>
+</header>
+
+<main>
+<div class="doc-hero">
+  <div class="container doc-hero__inner">
+    <p class="eyebrow">Signal v1.2.0 · Tanda 1 · Navegación</p>
+    <h1 class="h1">Header y footer globales de Mediaudience</h1>
+    <p class="answer-target">Esta hoja define el header y el footer que comparten las 25 páginas del sitio multipágina de Mediaudience, con navegación a URLs reales y el bloque de entidad repetido en cada página.</p>
+    <div class="prose"><p>Todo el texto es HTML real y el único JavaScript cambia visibilidad: menús desplegables y menú móvil. Con JavaScript desactivado se ven todos los estados.</p></div>
+    <ul class="doc-legend">
+      <li><span class="slot">[dato]</span> Dato que debe aportar Mediaudience. No se inventó.</li>
+      <li>El header de arriba es el componente real: fijo, cambia a estado «scrolled» al desplazarte.</li>
+    </ul>
+    <nav aria-label="Índice de la hoja">
+      <ul class="toc">
+        <li><a href="#header"><span class="toc__code">H</span>Header global</a></li>
+        <li><a href="#footer"><span class="toc__code">F</span>Footer global</a></li>
+      </ul>
+    </nav>
+  </div>
+</div>
+
+<section class="spec" id="header" aria-labelledby="header-t">
+  <div class="container">
+    <header class="spec__head">
+      <div>
+        <p class="eyebrow">H — Header global</p>
+        <h2 class="h1" id="header-t">Tres entradas y una conversión</h2>
+        <p class="spec__lead">Los cuatro ejes (objetivos, productos, canales, herramientas) se consolidan en «Soluciones»: un mega-menú de cuatro columnas etiquetadas «Por objetivo · Por producto · Por canal · Por herramienta». La preposición dice que son formas de filtrar un mismo catálogo, no cuatro secciones. Nosotros y Recursos quedan en primer nivel.</p>
+        <dl class="spec__meta"><dt>Astro</dt><dd>&lt;SiteHeader current="nosotros" /&gt;</dd><dt>Elemento</dt><dd>&lt;header class="site-header"&gt;</dd></dl>
+      </div>
+      <ul class="spec__rules">
+        <li>Una sola conversión: <code>Agenda una demo</code>, botón primario. Sin «Contacto» en primer nivel (vive en Nosotros) ni «Resultados».</li>
+        <li>Ítems en mono 12px <code>textMuted</code>; hover y abierto en <code>text</code>; sección actual con regla inferior de 2px <code>primary</code>. En vertical (móvil y desplegables) la selección es regla izquierda + <code>primarySubtle</code>.</li>
+        <li>Scrolled: <code>surface</code> al 86% + <code>backdrop-filter: blur(12px)</code> + hairline <code>borderStrong</code>. La altura no cambia (58px): no se anima layout.</li>
+        <li>Desktop abre por hover y por foco de teclado sin JavaScript (<code>:hover</code> / <code>:focus-within</code>). El clic y el menú móvil usan JS solo para alternar <code>.is-open</code> / <code>.is-menu-open</code>.</li>
+        <li>El wordmark se escribe en minúscula como logotipo, con <code>aria-label="Mediaudience…"</code>. Cuando exista SVG: <code>alt="Mediaudience"</code>.</li>
+        <li>Colapsa a menú móvil bajo 900px.</li>
+      </ul>
+    </header>
+<div class="specimen">
+  <div class="specimen__bar"><span><b>Estado 1</b> · Reposo</span><span>surface · hairline</span></div>
+  <div class="specimen__body specimen__body--flush">
+<header class="site-header" data-header>
+  <div class="site-header__bar">
+    <a class="wordmark" href="/" aria-label="Mediaudience, ir al inicio">medi<span class="wordmark__a">a</span>udience</a>
+    <nav class="site-nav" id="h-rest-nav" aria-label="Navegación principal">
+      <ul class="site-nav__list">
+      <li class="site-nav__item">
+        <button type="button" class="site-nav__trigger" aria-expanded="false" aria-controls="h-rest-soluciones">Soluciones<span class="chev" aria-hidden="true"></span></button>
+        <div class="mega" id="h-rest-soluciones">
+          <div class="mega__inner">
+            <div class="mega__col">
+              <p class="mega__label">Por objetivo</p>
+              <ul class="mega__links">
+                <li><a class="mega__link" href="/soluciones/connected-tv/#alcance">Alcance y awareness</a></li>
+                <li><a class="mega__link" href="/soluciones/programmatic/#consideracion">Consideración</a></li>
+                <li><a class="mega__link" href="/soluciones/mobile-push/programatico/#conversion">Conversión</a></li>
+                <li><a class="mega__link" href="/soluciones/mobile-push/premium-video/#visitas-a-tienda">Visitas a tienda</a></li>
+              </ul>
+            </div>
+            <div class="mega__col">
+              <p class="mega__label">Por producto</p>
+              <ul class="mega__links">
+                <li><a class="mega__link" href="/soluciones/ssp/">SSP</a></li>
+                <li><a class="mega__link" href="/soluciones/representacion-de-medios/">Representación de medios</a></li>
+                <li><a class="mega__link" href="/soluciones/mobile-push/premium-claro/">Mobile Push Premium con Claro</a></li>
+                <li><a class="mega__link" href="/soluciones/mobile-push/premium-video/">Mobile Push Premium Video georreferenciado</a></li>
+                <li><a class="mega__link" href="/soluciones/mobile-push/programatico/">Mobile Push Programático</a></li>
+              </ul>
+            </div>
+            <div class="mega__col">
+              <p class="mega__label">Por canal</p>
+              <ul class="mega__links">
+                <li><a class="mega__link" href="/soluciones/connected-tv/">Connected TV</a></li>
+                <li><a class="mega__link" href="/soluciones/mobile-push/">Mobile Push</a></li>
+                <li><a class="mega__link" href="/soluciones/programmatic/">Display y video programático</a></li>
+              </ul>
+            </div>
+            <div class="mega__col">
+              <p class="mega__label">Por herramienta</p>
+              <ul class="mega__links">
+                <li><a class="mega__link" href="/soluciones/ssp/#consola">Consola de campañas</a></li>
+                <li><a class="mega__link" href="/soluciones/ssp/#segmentos">Segmentos de audiencia</a></li>
+                <li><a class="mega__link" href="/soluciones/representacion-de-medios/#medicion">Medición y reportes</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="mega__foot">
+            <p class="mega__note">Cuatro formas de llegar al mismo catálogo de soluciones</p>
+            <a class="mega__all" href="/soluciones/">Todas las soluciones de Mediaudience →</a>
+          </div>
+        </div>
+      </li>
+      <li class="site-nav__item site-nav__item--dd">
+        <button type="button" class="site-nav__trigger" aria-expanded="false" aria-controls="h-rest-nosotros">Nosotros<span class="chev" aria-hidden="true"></span></button>
+        <div class="dropdown" id="h-rest-nosotros">
+          <ul class="dropdown__list">
+            <li><a class="dropdown__link" href="/nosotros/">Qué es Mediaudience</a></li>
+            <li><a class="dropdown__link" href="/nosotros/socios/">Socios</a></li>
+            <li><a class="dropdown__link" href="/contacto/">Contacto</a></li>
+          </ul>
+        </div>
+      </li>
+      <li class="site-nav__item site-nav__item--dd">
+        <button type="button" class="site-nav__trigger" aria-expanded="false" aria-controls="h-rest-recursos">Recursos<span class="chev" aria-hidden="true"></span></button>
+        <div class="dropdown" id="h-rest-recursos">
+          <ul class="dropdown__list">
+            <li><a class="dropdown__link" href="/recursos/explicadores/">Explicadores</a></li>
+            <li><a class="dropdown__link" href="/recursos/panorama/">Panorama por mercado</a></li>
+            <li><a class="dropdown__link" href="/recursos/comparativas/">Comparativas</a></li>
+            <li><a class="dropdown__link" href="/recursos/glosario-adtech/">Glosario</a></li>
+          </ul>
+        </div>
+      </li>
+        <li class="site-nav__cta"><a class="btn btn--primary" href="/demo/">Agenda una demo</a></li>
+      </ul>
+    </nav>
+    <button type="button" class="site-header__burger" aria-expanded="false" aria-controls="h-rest-nav"><span class="burger__closed">Menú</span><span class="burger__open">Cerrar</span><span class="burger__icon" aria-hidden="true"></span></button>
+  </div>
+</header>
+  </div>
+</div>
+<div class="specimen">
+  <div class="specimen__bar"><span><b>Estado 2</b> · Hover sobre Soluciones · mega-menú abierto</span><span>4 facetas · 1 catálogo</span></div>
+  <div class="specimen__body specimen__body--flush">
+<div class="stage stage--mega"><header class="site-header" data-header>
+  <div class="site-header__bar">
+    <a class="wordmark" href="/" aria-label="Mediaudience, ir al inicio">medi<span class="wordmark__a">a</span>udience</a>
+    <nav class="site-nav" id="h-hover-nav" aria-label="Navegación principal">
+      <ul class="site-nav__list">
+      <li class="site-nav__item is-open">
+        <button type="button" class="site-nav__trigger is-hover" aria-expanded="true" aria-controls="h-hover-soluciones">Soluciones<span class="chev" aria-hidden="true"></span></button>
+        <div class="mega" id="h-hover-soluciones">
+          <div class="mega__inner">
+            <div class="mega__col">
+              <p class="mega__label">Por objetivo</p>
+              <ul class="mega__links">
+                <li><a class="mega__link" href="/soluciones/connected-tv/#alcance">Alcance y awareness</a></li>
+                <li><a class="mega__link" href="/soluciones/programmatic/#consideracion">Consideración</a></li>
+                <li><a class="mega__link" href="/soluciones/mobile-push/programatico/#conversion">Conversión</a></li>
+                <li><a class="mega__link" href="/soluciones/mobile-push/premium-video/#visitas-a-tienda">Visitas a tienda</a></li>
+              </ul>
+            </div>
+            <div class="mega__col">
+              <p class="mega__label">Por producto</p>
+              <ul class="mega__links">
+                <li><a class="mega__link" href="/soluciones/ssp/">SSP</a></li>
+                <li><a class="mega__link" href="/soluciones/representacion-de-medios/">Representación de medios</a></li>
+                <li><a class="mega__link" href="/soluciones/mobile-push/premium-claro/">Mobile Push Premium con Claro</a></li>
+                <li><a class="mega__link" href="/soluciones/mobile-push/premium-video/">Mobile Push Premium Video georreferenciado</a></li>
+                <li><a class="mega__link" href="/soluciones/mobile-push/programatico/">Mobile Push Programático</a></li>
+              </ul>
+            </div>
+            <div class="mega__col">
+              <p class="mega__label">Por canal</p>
+              <ul class="mega__links">
+                <li><a class="mega__link" href="/soluciones/connected-tv/">Connected TV</a></li>
+                <li><a class="mega__link is-hover" href="/soluciones/mobile-push/">Mobile Push</a></li>
+                <li><a class="mega__link" href="/soluciones/programmatic/">Display y video programático</a></li>
+              </ul>
+            </div>
+            <div class="mega__col">
+              <p class="mega__label">Por herramienta</p>
+              <ul class="mega__links">
+                <li><a class="mega__link" href="/soluciones/ssp/#consola">Consola de campañas</a></li>
+                <li><a class="mega__link" href="/soluciones/ssp/#segmentos">Segmentos de audiencia</a></li>
+                <li><a class="mega__link" href="/soluciones/representacion-de-medios/#medicion">Medición y reportes</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="mega__foot">
+            <p class="mega__note">Cuatro formas de llegar al mismo catálogo de soluciones</p>
+            <a class="mega__all" href="/soluciones/">Todas las soluciones de Mediaudience →</a>
+          </div>
+        </div>
+      </li>
+      <li class="site-nav__item site-nav__item--dd">
+        <button type="button" class="site-nav__trigger" aria-expanded="false" aria-controls="h-hover-nosotros">Nosotros<span class="chev" aria-hidden="true"></span></button>
+        <div class="dropdown" id="h-hover-nosotros">
+          <ul class="dropdown__list">
+            <li><a class="dropdown__link" href="/nosotros/">Qué es Mediaudience</a></li>
+            <li><a class="dropdown__link" href="/nosotros/socios/">Socios</a></li>
+            <li><a class="dropdown__link" href="/contacto/">Contacto</a></li>
+          </ul>
+        </div>
+      </li>
+      <li class="site-nav__item site-nav__item--dd">
+        <button type="button" class="site-nav__trigger" aria-expanded="false" aria-controls="h-hover-recursos">Recursos<span class="chev" aria-hidden="true"></span></button>
+        <div class="dropdown" id="h-hover-recursos">
+          <ul class="dropdown__list">
+            <li><a class="dropdown__link" href="/recursos/explicadores/">Explicadores</a></li>
+            <li><a class="dropdown__link" href="/recursos/panorama/">Panorama por mercado</a></li>
+            <li><a class="dropdown__link" href="/recursos/comparativas/">Comparativas</a></li>
+            <li><a class="dropdown__link" href="/recursos/glosario-adtech/">Glosario</a></li>
+          </ul>
+        </div>
+      </li>
+        <li class="site-nav__cta"><a class="btn btn--primary" href="/demo/">Agenda una demo</a></li>
+      </ul>
+    </nav>
+    <button type="button" class="site-header__burger" aria-expanded="false" aria-controls="h-hover-nav"><span class="burger__closed">Menú</span><span class="burger__open">Cerrar</span><span class="burger__icon" aria-hidden="true"></span></button>
+  </div>
+</header></div>
+  </div>
+</div>
+<div class="specimen">
+  <div class="specimen__bar"><span><b>Estado 3</b> · Activo · página actual /nosotros/socios/</span><span>regla 2px inferior + izquierda</span></div>
+  <div class="specimen__body specimen__body--flush">
+<div class="stage stage--dd"><header class="site-header" data-header>
+  <div class="site-header__bar">
+    <a class="wordmark" href="/" aria-label="Mediaudience, ir al inicio">medi<span class="wordmark__a">a</span>udience</a>
+    <nav class="site-nav" id="h-active-nav" aria-label="Navegación principal">
+      <ul class="site-nav__list">
+      <li class="site-nav__item">
+        <button type="button" class="site-nav__trigger" aria-expanded="false" aria-controls="h-active-soluciones">Soluciones<span class="chev" aria-hidden="true"></span></button>
+        <div class="mega" id="h-active-soluciones">
+          <div class="mega__inner">
+            <div class="mega__col">
+              <p class="mega__label">Por objetivo</p>
+              <ul class="mega__links">
+                <li><a class="mega__link" href="/soluciones/connected-tv/#alcance">Alcance y awareness</a></li>
+                <li><a class="mega__link" href="/soluciones/programmatic/#consideracion">Consideración</a></li>
+                <li><a class="mega__link" href="/soluciones/mobile-push/programatico/#conversion">Conversión</a></li>
+                <li><a class="mega__link" href="/soluciones/mobile-push/premium-video/#visitas-a-tienda">Visitas a tienda</a></li>
+              </ul>
+            </div>
+            <div class="mega__col">
+              <p class="mega__label">Por producto</p>
+              <ul class="mega__links">
+                <li><a class="mega__link" href="/soluciones/ssp/">SSP</a></li>
+                <li><a class="mega__link" href="/soluciones/representacion-de-medios/">Representación de medios</a></li>
+                <li><a class="mega__link" href="/soluciones/mobile-push/premium-claro/">Mobile Push Premium con Claro</a></li>
+                <li><a class="mega__link" href="/soluciones/mobile-push/premium-video/">Mobile Push Premium Video georreferenciado</a></li>
+                <li><a class="mega__link" href="/soluciones/mobile-push/programatico/">Mobile Push Programático</a></li>
+              </ul>
+            </div>
+            <div class="mega__col">
+              <p class="mega__label">Por canal</p>
+              <ul class="mega__links">
+                <li><a class="mega__link" href="/soluciones/connected-tv/">Connected TV</a></li>
+                <li><a class="mega__link" href="/soluciones/mobile-push/">Mobile Push</a></li>
+                <li><a class="mega__link" href="/soluciones/programmatic/">Display y video programático</a></li>
+              </ul>
+            </div>
+            <div class="mega__col">
+              <p class="mega__label">Por herramienta</p>
+              <ul class="mega__links">
+                <li><a class="mega__link" href="/soluciones/ssp/#consola">Consola de campañas</a></li>
+                <li><a class="mega__link" href="/soluciones/ssp/#segmentos">Segmentos de audiencia</a></li>
+                <li><a class="mega__link" href="/soluciones/representacion-de-medios/#medicion">Medición y reportes</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="mega__foot">
+            <p class="mega__note">Cuatro formas de llegar al mismo catálogo de soluciones</p>
+            <a class="mega__all" href="/soluciones/">Todas las soluciones de Mediaudience →</a>
+          </div>
+        </div>
+      </li>
+      <li class="site-nav__item site-nav__item--dd is-open">
+        <button type="button" class="site-nav__trigger is-current" aria-expanded="true" aria-controls="h-active-nosotros">Nosotros<span class="chev" aria-hidden="true"></span></button>
+        <div class="dropdown" id="h-active-nosotros">
+          <ul class="dropdown__list">
+            <li><a class="dropdown__link" href="/nosotros/">Qué es Mediaudience</a></li>
+            <li><a class="dropdown__link is-current" href="/nosotros/socios/" aria-current="page">Socios</a></li>
+            <li><a class="dropdown__link" href="/contacto/">Contacto</a></li>
+          </ul>
+        </div>
+      </li>
+      <li class="site-nav__item site-nav__item--dd">
+        <button type="button" class="site-nav__trigger" aria-expanded="false" aria-controls="h-active-recursos">Recursos<span class="chev" aria-hidden="true"></span></button>
+        <div class="dropdown" id="h-active-recursos">
+          <ul class="dropdown__list">
+            <li><a class="dropdown__link" href="/recursos/explicadores/">Explicadores</a></li>
+            <li><a class="dropdown__link" href="/recursos/panorama/">Panorama por mercado</a></li>
+            <li><a class="dropdown__link" href="/recursos/comparativas/">Comparativas</a></li>
+            <li><a class="dropdown__link" href="/recursos/glosario-adtech/">Glosario</a></li>
+          </ul>
+        </div>
+      </li>
+        <li class="site-nav__cta"><a class="btn btn--primary" href="/demo/">Agenda una demo</a></li>
+      </ul>
+    </nav>
+    <button type="button" class="site-header__burger" aria-expanded="false" aria-controls="h-active-nav"><span class="burger__closed">Menú</span><span class="burger__open">Cerrar</span><span class="burger__icon" aria-hidden="true"></span></button>
+  </div>
+</header></div>
+  </div>
+</div>
+<div class="specimen">
+  <div class="specimen__bar"><span><b>Estado 4</b> · Scrolled sobre contenido</span><span>blur 12px · borderStrong</span></div>
+  <div class="specimen__body specimen__body--flush">
+<div class="stage stage--scrolled"><header class="site-header site-header--overlay is-scrolled" data-header>
+  <div class="site-header__bar">
+    <a class="wordmark" href="/" aria-label="Mediaudience, ir al inicio">medi<span class="wordmark__a">a</span>udience</a>
+    <nav class="site-nav" id="h-scr-nav" aria-label="Navegación principal">
+      <ul class="site-nav__list">
+      <li class="site-nav__item">
+        <button type="button" class="site-nav__trigger" aria-expanded="false" aria-controls="h-scr-soluciones">Soluciones<span class="chev" aria-hidden="true"></span></button>
+        <div class="mega" id="h-scr-soluciones">
+          <div class="mega__inner">
+            <div class="mega__col">
+              <p class="mega__label">Por objetivo</p>
+              <ul class="mega__links">
+                <li><a class="mega__link" href="/soluciones/connected-tv/#alcance">Alcance y awareness</a></li>
+                <li><a class="mega__link" href="/soluciones/programmatic/#consideracion">Consideración</a></li>
+                <li><a class="mega__link" href="/soluciones/mobile-push/programatico/#conversion">Conversión</a></li>
+                <li><a class="mega__link" href="/soluciones/mobile-push/premium-video/#visitas-a-tienda">Visitas a tienda</a></li>
+              </ul>
+            </div>
+            <div class="mega__col">
+              <p class="mega__label">Por producto</p>
+              <ul class="mega__links">
+                <li><a class="mega__link" href="/soluciones/ssp/">SSP</a></li>
+                <li><a class="mega__link" href="/soluciones/representacion-de-medios/">Representación de medios</a></li>
+                <li><a class="mega__link" href="/soluciones/mobile-push/premium-claro/">Mobile Push Premium con Claro</a></li>
+                <li><a class="mega__link" href="/soluciones/mobile-push/premium-video/">Mobile Push Premium Video georreferenciado</a></li>
+                <li><a class="mega__link" href="/soluciones/mobile-push/programatico/">Mobile Push Programático</a></li>
+              </ul>
+            </div>
+            <div class="mega__col">
+              <p class="mega__label">Por canal</p>
+              <ul class="mega__links">
+                <li><a class="mega__link" href="/soluciones/connected-tv/">Connected TV</a></li>
+                <li><a class="mega__link" href="/soluciones/mobile-push/">Mobile Push</a></li>
+                <li><a class="mega__link" href="/soluciones/programmatic/">Display y video programático</a></li>
+              </ul>
+            </div>
+            <div class="mega__col">
+              <p class="mega__label">Por herramienta</p>
+              <ul class="mega__links">
+                <li><a class="mega__link" href="/soluciones/ssp/#consola">Consola de campañas</a></li>
+                <li><a class="mega__link" href="/soluciones/ssp/#segmentos">Segmentos de audiencia</a></li>
+                <li><a class="mega__link" href="/soluciones/representacion-de-medios/#medicion">Medición y reportes</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="mega__foot">
+            <p class="mega__note">Cuatro formas de llegar al mismo catálogo de soluciones</p>
+            <a class="mega__all" href="/soluciones/">Todas las soluciones de Mediaudience →</a>
+          </div>
+        </div>
+      </li>
+      <li class="site-nav__item site-nav__item--dd">
+        <button type="button" class="site-nav__trigger" aria-expanded="false" aria-controls="h-scr-nosotros">Nosotros<span class="chev" aria-hidden="true"></span></button>
+        <div class="dropdown" id="h-scr-nosotros">
+          <ul class="dropdown__list">
+            <li><a class="dropdown__link" href="/nosotros/">Qué es Mediaudience</a></li>
+            <li><a class="dropdown__link" href="/nosotros/socios/">Socios</a></li>
+            <li><a class="dropdown__link" href="/contacto/">Contacto</a></li>
+          </ul>
+        </div>
+      </li>
+      <li class="site-nav__item site-nav__item--dd">
+        <button type="button" class="site-nav__trigger" aria-expanded="false" aria-controls="h-scr-recursos">Recursos<span class="chev" aria-hidden="true"></span></button>
+        <div class="dropdown" id="h-scr-recursos">
+          <ul class="dropdown__list">
+            <li><a class="dropdown__link" href="/recursos/explicadores/">Explicadores</a></li>
+            <li><a class="dropdown__link" href="/recursos/panorama/">Panorama por mercado</a></li>
+            <li><a class="dropdown__link" href="/recursos/comparativas/">Comparativas</a></li>
+            <li><a class="dropdown__link" href="/recursos/glosario-adtech/">Glosario</a></li>
+          </ul>
+        </div>
+      </li>
+        <li class="site-nav__cta"><a class="btn btn--primary" href="/demo/">Agenda una demo</a></li>
+      </ul>
+    </nav>
+    <button type="button" class="site-header__burger" aria-expanded="false" aria-controls="h-scr-nav"><span class="burger__closed">Menú</span><span class="burger__open">Cerrar</span><span class="burger__icon" aria-hidden="true"></span></button>
+  </div>
+</header><div class="stage__behind" aria-hidden="true"><p class="eyebrow">&nbsp;</p><p class="eyebrow">&nbsp;</p><p class="eyebrow">Nosotros</p><p class="h1">Qué es Mediaudience</p><p class="answer-target">Mediaudience es una compañía multilatina de tecnología publicitaria (AdTech) y representación de medios digitales, de origen peruano, que opera como empresa local en Perú, México, Ecuador y Chile.</p></div></div>
+  </div>
+</div>
+<div class="specimen">
+  <div class="specimen__bar"><span><b>Estado 5</b> · Móvil &lt;900px</span><span>target 44px · CTA a ancho completo</span></div>
+  <div class="specimen__body">
+    <div class="devices">
+<div class="device">
+  <p class="device__label">Cerrado</p>
+  <div class="device__screen vp-sm">
+<header class="site-header" data-header>
+  <div class="site-header__bar">
+    <a class="wordmark" href="/" aria-label="Mediaudience, ir al inicio">medi<span class="wordmark__a">a</span>udience</a>
+    <nav class="site-nav" id="m-closed-nav" aria-label="Navegación principal">
+      <ul class="site-nav__list">
+      <li class="site-nav__item">
+        <button type="button" class="site-nav__trigger" aria-expanded="false" aria-controls="m-closed-soluciones">Soluciones<span class="chev" aria-hidden="true"></span></button>
+        <div class="mega" id="m-closed-soluciones">
+          <div class="mega__inner">
+            <div class="mega__col">
+              <p class="mega__label">Por objetivo</p>
+              <ul class="mega__links">
+                <li><a class="mega__link" href="/soluciones/connected-tv/#alcance">Alcance y awareness</a></li>
+                <li><a class="mega__link" href="/soluciones/programmatic/#consideracion">Consideración</a></li>
+                <li><a class="mega__link" href="/soluciones/mobile-push/programatico/#conversion">Conversión</a></li>
+                <li><a class="mega__link" href="/soluciones/mobile-push/premium-video/#visitas-a-tienda">Visitas a tienda</a></li>
+              </ul>
+            </div>
+            <div class="mega__col">
+              <p class="mega__label">Por producto</p>
+              <ul class="mega__links">
+                <li><a class="mega__link" href="/soluciones/ssp/">SSP</a></li>
+                <li><a class="mega__link" href="/soluciones/representacion-de-medios/">Representación de medios</a></li>
+                <li><a class="mega__link" href="/soluciones/mobile-push/premium-claro/">Mobile Push Premium con Claro</a></li>
+                <li><a class="mega__link" href="/soluciones/mobile-push/premium-video/">Mobile Push Premium Video georreferenciado</a></li>
+                <li><a class="mega__link" href="/soluciones/mobile-push/programatico/">Mobile Push Programático</a></li>
+              </ul>
+            </div>
+            <div class="mega__col">
+              <p class="mega__label">Por canal</p>
+              <ul class="mega__links">
+                <li><a class="mega__link" href="/soluciones/connected-tv/">Connected TV</a></li>
+                <li><a class="mega__link" href="/soluciones/mobile-push/">Mobile Push</a></li>
+                <li><a class="mega__link" href="/soluciones/programmatic/">Display y video programático</a></li>
+              </ul>
+            </div>
+            <div class="mega__col">
+              <p class="mega__label">Por herramienta</p>
+              <ul class="mega__links">
+                <li><a class="mega__link" href="/soluciones/ssp/#consola">Consola de campañas</a></li>
+                <li><a class="mega__link" href="/soluciones/ssp/#segmentos">Segmentos de audiencia</a></li>
+                <li><a class="mega__link" href="/soluciones/representacion-de-medios/#medicion">Medición y reportes</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="mega__foot">
+            <p class="mega__note">Cuatro formas de llegar al mismo catálogo de soluciones</p>
+            <a class="mega__all" href="/soluciones/">Todas las soluciones de Mediaudience →</a>
+          </div>
+        </div>
+      </li>
+      <li class="site-nav__item site-nav__item--dd">
+        <button type="button" class="site-nav__trigger" aria-expanded="false" aria-controls="m-closed-nosotros">Nosotros<span class="chev" aria-hidden="true"></span></button>
+        <div class="dropdown" id="m-closed-nosotros">
+          <ul class="dropdown__list">
+            <li><a class="dropdown__link" href="/nosotros/">Qué es Mediaudience</a></li>
+            <li><a class="dropdown__link" href="/nosotros/socios/">Socios</a></li>
+            <li><a class="dropdown__link" href="/contacto/">Contacto</a></li>
+          </ul>
+        </div>
+      </li>
+      <li class="site-nav__item site-nav__item--dd">
+        <button type="button" class="site-nav__trigger" aria-expanded="false" aria-controls="m-closed-recursos">Recursos<span class="chev" aria-hidden="true"></span></button>
+        <div class="dropdown" id="m-closed-recursos">
+          <ul class="dropdown__list">
+            <li><a class="dropdown__link" href="/recursos/explicadores/">Explicadores</a></li>
+            <li><a class="dropdown__link" href="/recursos/panorama/">Panorama por mercado</a></li>
+            <li><a class="dropdown__link" href="/recursos/comparativas/">Comparativas</a></li>
+            <li><a class="dropdown__link" href="/recursos/glosario-adtech/">Glosario</a></li>
+          </ul>
+        </div>
+      </li>
+        <li class="site-nav__cta"><a class="btn btn--primary" href="/demo/">Agenda una demo</a></li>
+      </ul>
+    </nav>
+    <button type="button" class="site-header__burger" aria-expanded="false" aria-controls="m-closed-nav"><span class="burger__closed">Menú</span><span class="burger__open">Cerrar</span><span class="burger__icon" aria-hidden="true"></span></button>
+  </div>
+</header><div class="device__pad"><div class="page-head">
+  <p class="eyebrow">Nosotros</p>
+  <h1 class="h1">Qué es Mediaudience</h1>
+  <p class="answer-target">Mediaudience es una compañía multilatina de tecnología publicitaria (AdTech) y representación de medios digitales, de origen peruano, que opera como empresa local en Perú, México, Ecuador y Chile.</p>
+  
+</div></div>
+  </div>
+</div>
+<div class="device">
+  <p class="device__label">Desplegado · Soluciones abierto</p>
+  <div class="device__screen vp-sm">
+<header class="site-header is-menu-open" data-header>
+  <div class="site-header__bar">
+    <a class="wordmark" href="/" aria-label="Mediaudience, ir al inicio">medi<span class="wordmark__a">a</span>udience</a>
+    <nav class="site-nav" id="m-open-nav" aria-label="Navegación principal">
+      <ul class="site-nav__list">
+      <li class="site-nav__item is-open">
+        <button type="button" class="site-nav__trigger" aria-expanded="true" aria-controls="m-open-soluciones">Soluciones<span class="chev" aria-hidden="true"></span></button>
+        <div class="mega" id="m-open-soluciones">
+          <div class="mega__inner">
+            <div class="mega__col">
+              <p class="mega__label">Por objetivo</p>
+              <ul class="mega__links">
+                <li><a class="mega__link" href="/soluciones/connected-tv/#alcance">Alcance y awareness</a></li>
+                <li><a class="mega__link" href="/soluciones/programmatic/#consideracion">Consideración</a></li>
+                <li><a class="mega__link" href="/soluciones/mobile-push/programatico/#conversion">Conversión</a></li>
+                <li><a class="mega__link" href="/soluciones/mobile-push/premium-video/#visitas-a-tienda">Visitas a tienda</a></li>
+              </ul>
+            </div>
+            <div class="mega__col">
+              <p class="mega__label">Por producto</p>
+              <ul class="mega__links">
+                <li><a class="mega__link" href="/soluciones/ssp/">SSP</a></li>
+                <li><a class="mega__link" href="/soluciones/representacion-de-medios/">Representación de medios</a></li>
+                <li><a class="mega__link" href="/soluciones/mobile-push/premium-claro/">Mobile Push Premium con Claro</a></li>
+                <li><a class="mega__link" href="/soluciones/mobile-push/premium-video/">Mobile Push Premium Video georreferenciado</a></li>
+                <li><a class="mega__link" href="/soluciones/mobile-push/programatico/">Mobile Push Programático</a></li>
+              </ul>
+            </div>
+            <div class="mega__col">
+              <p class="mega__label">Por canal</p>
+              <ul class="mega__links">
+                <li><a class="mega__link" href="/soluciones/connected-tv/">Connected TV</a></li>
+                <li><a class="mega__link" href="/soluciones/mobile-push/">Mobile Push</a></li>
+                <li><a class="mega__link" href="/soluciones/programmatic/">Display y video programático</a></li>
+              </ul>
+            </div>
+            <div class="mega__col">
+              <p class="mega__label">Por herramienta</p>
+              <ul class="mega__links">
+                <li><a class="mega__link" href="/soluciones/ssp/#consola">Consola de campañas</a></li>
+                <li><a class="mega__link" href="/soluciones/ssp/#segmentos">Segmentos de audiencia</a></li>
+                <li><a class="mega__link" href="/soluciones/representacion-de-medios/#medicion">Medición y reportes</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="mega__foot">
+            <p class="mega__note">Cuatro formas de llegar al mismo catálogo de soluciones</p>
+            <a class="mega__all" href="/soluciones/">Todas las soluciones de Mediaudience →</a>
+          </div>
+        </div>
+      </li>
+      <li class="site-nav__item site-nav__item--dd">
+        <button type="button" class="site-nav__trigger" aria-expanded="false" aria-controls="m-open-nosotros">Nosotros<span class="chev" aria-hidden="true"></span></button>
+        <div class="dropdown" id="m-open-nosotros">
+          <ul class="dropdown__list">
+            <li><a class="dropdown__link" href="/nosotros/">Qué es Mediaudience</a></li>
+            <li><a class="dropdown__link" href="/nosotros/socios/">Socios</a></li>
+            <li><a class="dropdown__link" href="/contacto/">Contacto</a></li>
+          </ul>
+        </div>
+      </li>
+      <li class="site-nav__item site-nav__item--dd">
+        <button type="button" class="site-nav__trigger" aria-expanded="false" aria-controls="m-open-recursos">Recursos<span class="chev" aria-hidden="true"></span></button>
+        <div class="dropdown" id="m-open-recursos">
+          <ul class="dropdown__list">
+            <li><a class="dropdown__link" href="/recursos/explicadores/">Explicadores</a></li>
+            <li><a class="dropdown__link" href="/recursos/panorama/">Panorama por mercado</a></li>
+            <li><a class="dropdown__link" href="/recursos/comparativas/">Comparativas</a></li>
+            <li><a class="dropdown__link" href="/recursos/glosario-adtech/">Glosario</a></li>
+          </ul>
+        </div>
+      </li>
+        <li class="site-nav__cta"><a class="btn btn--primary" href="/demo/">Agenda una demo</a></li>
+      </ul>
+    </nav>
+    <button type="button" class="site-header__burger" aria-expanded="true" aria-controls="m-open-nav"><span class="burger__closed">Menú</span><span class="burger__open">Cerrar</span><span class="burger__icon" aria-hidden="true"></span></button>
+  </div>
+</header>
+  </div>
+</div>
+<div class="device">
+  <p class="device__label">Desplegado · Activo en Socios</p>
+  <div class="device__screen vp-sm">
+<header class="site-header is-menu-open" data-header>
+  <div class="site-header__bar">
+    <a class="wordmark" href="/" aria-label="Mediaudience, ir al inicio">medi<span class="wordmark__a">a</span>udience</a>
+    <nav class="site-nav" id="m-act-nav" aria-label="Navegación principal">
+      <ul class="site-nav__list">
+      <li class="site-nav__item">
+        <button type="button" class="site-nav__trigger" aria-expanded="false" aria-controls="m-act-soluciones">Soluciones<span class="chev" aria-hidden="true"></span></button>
+        <div class="mega" id="m-act-soluciones">
+          <div class="mega__inner">
+            <div class="mega__col">
+              <p class="mega__label">Por objetivo</p>
+              <ul class="mega__links">
+                <li><a class="mega__link" href="/soluciones/connected-tv/#alcance">Alcance y awareness</a></li>
+                <li><a class="mega__link" href="/soluciones/programmatic/#consideracion">Consideración</a></li>
+                <li><a class="mega__link" href="/soluciones/mobile-push/programatico/#conversion">Conversión</a></li>
+                <li><a class="mega__link" href="/soluciones/mobile-push/premium-video/#visitas-a-tienda">Visitas a tienda</a></li>
+              </ul>
+            </div>
+            <div class="mega__col">
+              <p class="mega__label">Por producto</p>
+              <ul class="mega__links">
+                <li><a class="mega__link" href="/soluciones/ssp/">SSP</a></li>
+                <li><a class="mega__link" href="/soluciones/representacion-de-medios/">Representación de medios</a></li>
+                <li><a class="mega__link" href="/soluciones/mobile-push/premium-claro/">Mobile Push Premium con Claro</a></li>
+                <li><a class="mega__link" href="/soluciones/mobile-push/premium-video/">Mobile Push Premium Video georreferenciado</a></li>
+                <li><a class="mega__link" href="/soluciones/mobile-push/programatico/">Mobile Push Programático</a></li>
+              </ul>
+            </div>
+            <div class="mega__col">
+              <p class="mega__label">Por canal</p>
+              <ul class="mega__links">
+                <li><a class="mega__link" href="/soluciones/connected-tv/">Connected TV</a></li>
+                <li><a class="mega__link" href="/soluciones/mobile-push/">Mobile Push</a></li>
+                <li><a class="mega__link" href="/soluciones/programmatic/">Display y video programático</a></li>
+              </ul>
+            </div>
+            <div class="mega__col">
+              <p class="mega__label">Por herramienta</p>
+              <ul class="mega__links">
+                <li><a class="mega__link" href="/soluciones/ssp/#consola">Consola de campañas</a></li>
+                <li><a class="mega__link" href="/soluciones/ssp/#segmentos">Segmentos de audiencia</a></li>
+                <li><a class="mega__link" href="/soluciones/representacion-de-medios/#medicion">Medición y reportes</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="mega__foot">
+            <p class="mega__note">Cuatro formas de llegar al mismo catálogo de soluciones</p>
+            <a class="mega__all" href="/soluciones/">Todas las soluciones de Mediaudience →</a>
+          </div>
+        </div>
+      </li>
+      <li class="site-nav__item site-nav__item--dd is-open">
+        <button type="button" class="site-nav__trigger is-current" aria-expanded="true" aria-controls="m-act-nosotros">Nosotros<span class="chev" aria-hidden="true"></span></button>
+        <div class="dropdown" id="m-act-nosotros">
+          <ul class="dropdown__list">
+            <li><a class="dropdown__link" href="/nosotros/">Qué es Mediaudience</a></li>
+            <li><a class="dropdown__link is-current" href="/nosotros/socios/" aria-current="page">Socios</a></li>
+            <li><a class="dropdown__link" href="/contacto/">Contacto</a></li>
+          </ul>
+        </div>
+      </li>
+      <li class="site-nav__item site-nav__item--dd">
+        <button type="button" class="site-nav__trigger" aria-expanded="false" aria-controls="m-act-recursos">Recursos<span class="chev" aria-hidden="true"></span></button>
+        <div class="dropdown" id="m-act-recursos">
+          <ul class="dropdown__list">
+            <li><a class="dropdown__link" href="/recursos/explicadores/">Explicadores</a></li>
+            <li><a class="dropdown__link" href="/recursos/panorama/">Panorama por mercado</a></li>
+            <li><a class="dropdown__link" href="/recursos/comparativas/">Comparativas</a></li>
+            <li><a class="dropdown__link" href="/recursos/glosario-adtech/">Glosario</a></li>
+          </ul>
+        </div>
+      </li>
+        <li class="site-nav__cta"><a class="btn btn--primary" href="/demo/">Agenda una demo</a></li>
+      </ul>
+    </nav>
+    <button type="button" class="site-header__burger" aria-expanded="true" aria-controls="m-act-nav"><span class="burger__closed">Menú</span><span class="burger__open">Cerrar</span><span class="burger__icon" aria-hidden="true"></span></button>
+  </div>
+</header>
+  </div>
+</div>
+    </div>
+  </div>
+</div>
+<div class="table-wrap note-table">
+  <table class="table">
+    <caption>Facetas que convergen en las mismas URLs</caption>
+    <thead><tr><th scope="col">Faceta</th><th scope="col">Ítem del menú</th><th scope="col">URL de destino</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">Por producto</th><td>Mobile Push Premium Video georreferenciado</td><td><code>/soluciones/mobile-push/premium-video/</code></td></tr>
+      <tr><th scope="row">Por objetivo</th><td>Visitas a tienda</td><td><code>/soluciones/mobile-push/premium-video/#visitas-a-tienda</code></td></tr>
+      <tr><th scope="row">Por producto</th><td>SSP</td><td><code>/soluciones/ssp/</code></td></tr>
+      <tr><th scope="row">Por herramienta</th><td>Segmentos de audiencia</td><td><code>/soluciones/ssp/#segmentos</code></td></tr>
+      <tr><th scope="row">Por canal</th><td>Connected TV</td><td><code>/soluciones/connected-tv/</code></td></tr>
+      <tr><th scope="row">Por objetivo</th><td>Alcance y awareness</td><td><code>/soluciones/connected-tv/#alcance</code></td></tr>
+    </tbody>
+  </table>
+</div>
+  </div>
+</section>
+
+<section class="spec" id="footer" aria-labelledby="footer-t">
+  <div class="container">
+    <header class="spec__head">
+      <div>
+        <p class="eyebrow">F — Footer global</p>
+        <h2 class="h1" id="footer-t">Mapa del sitio y bloque de entidad</h2>
+        <p class="spec__lead">El bloque de entidad es la misma oración en las 25 páginas: una señal de consistencia para los motores. Va en IBM Plex 16px en <code>text</code>, legible pero por debajo del contenido. La razón social aparece una sola vez por página, aquí.</p>
+        <dl class="spec__meta"><dt>Astro</dt><dd>&lt;SiteFooter /&gt;</dd><dt>Elemento</dt><dd>&lt;footer class="site-footer"&gt;</dd></dl>
+      </div>
+      <ul class="spec__rules">
+        <li>Cinco columnas: Objetivos, Productos, Canales, Herramientas, Compañía. Mismas URLs que el mega-menú.</li>
+        <li>Fondo <code>backgroundAlt</code>, hairline superior, encabezados en mono uppercase.</li>
+        <li>Contacto institucional, nunca un correo personal. <code>&lt;address&gt;</code> real.</li>
+        <li>La marca se escribe «Mediaudience» en todo texto; el wordmark decorativo lleva <code>aria-hidden</code> para no duplicar la entidad.</li>
+        <li>Colapsa a 3 columnas bajo 1100px y a 2 bajo 640px.</li>
+      </ul>
+    </header>
+<div class="specimen">
+  <div class="specimen__bar"><span><b>Desktop</b></span><span>backgroundAlt</span></div>
+  <div class="specimen__body specimen__body--flush">
+<footer class="site-footer">
+  <div class="site-footer__inner">
+    <nav class="site-footer__nav" aria-label="Mapa del sitio">
+      <div class="site-footer__col">
+        <p class="site-footer__heading">Objetivos</p>
+        <ul class="site-footer__links">
+          <li><a href="/soluciones/connected-tv/#alcance">Alcance y awareness</a></li>
+          <li><a href="/soluciones/programmatic/#consideracion">Consideración</a></li>
+          <li><a href="/soluciones/mobile-push/programatico/#conversion">Conversión</a></li>
+          <li><a href="/soluciones/mobile-push/premium-video/#visitas-a-tienda">Visitas a tienda</a></li>
+        </ul>
+      </div>
+      <div class="site-footer__col">
+        <p class="site-footer__heading">Productos</p>
+        <ul class="site-footer__links">
+          <li><a href="/soluciones/ssp/">SSP</a></li>
+          <li><a href="/soluciones/representacion-de-medios/">Representación de medios</a></li>
+          <li><a href="/soluciones/mobile-push/premium-claro/">Mobile Push Premium con Claro</a></li>
+          <li><a href="/soluciones/mobile-push/premium-video/">Mobile Push Premium Video georreferenciado</a></li>
+          <li><a href="/soluciones/mobile-push/programatico/">Mobile Push Programático</a></li>
+        </ul>
+      </div>
+      <div class="site-footer__col">
+        <p class="site-footer__heading">Canales</p>
+        <ul class="site-footer__links">
+          <li><a href="/soluciones/connected-tv/">Connected TV</a></li>
+          <li><a href="/soluciones/mobile-push/">Mobile Push</a></li>
+          <li><a href="/soluciones/programmatic/">Display y video programático</a></li>
+        </ul>
+      </div>
+      <div class="site-footer__col">
+        <p class="site-footer__heading">Herramientas</p>
+        <ul class="site-footer__links">
+          <li><a href="/soluciones/ssp/#consola">Consola de campañas</a></li>
+          <li><a href="/soluciones/ssp/#segmentos">Segmentos de audiencia</a></li>
+          <li><a href="/soluciones/representacion-de-medios/#medicion">Medición y reportes</a></li>
+        </ul>
+      </div>
+      <div class="site-footer__col">
+        <p class="site-footer__heading">Compañía</p>
+        <ul class="site-footer__links">
+          <li><a href="/nosotros/">Nosotros</a></li>
+          <li><a href="/nosotros/socios/">Socios</a></li>
+          <li><a href="/recursos/">Recursos</a></li>
+          <li><a href="/contacto/">Contacto</a></li>
+        </ul>
+      </div>
+    </nav>
+    <div class="entity">
+      <p class="entity__brand wordmark" aria-hidden="true">medi<span class="wordmark__a">a</span>udience</p>
+      <div class="entity__body">
+        <p class="entity__statement">Mediaudience, compañía multilatina de AdTech: SSP y representación de medios digitales en Perú, México, Ecuador y Chile.</p>
+        <address class="entity__meta">
+          <span>Mediaudience S.A.S.</span>
+          <span class="entity__sep" aria-hidden="true">·</span>
+          <span class="slot">[domicilio]</span>
+          <span class="entity__sep" aria-hidden="true">·</span>
+          <span class="slot">[correo institucional]</span>
+          <span class="entity__sep" aria-hidden="true">·</span>
+          <a href="/contacto/">Contacto de Mediaudience</a>
+        </address>
+      </div>
+    </div>
+    <div class="site-footer__legal">
+      <ul class="site-footer__legal-links">
+        <li><a href="/terminos/">Términos</a></li>
+        <li><a href="/privacidad/">Privacidad</a></li>
+        <li><a href="/cookies/">Cookies</a></li>
+      </ul>
+      <p class="site-footer__copy">© 2026 Mediaudience</p>
+    </div>
+  </div>
+</footer>
+  </div>
+</div>
+  </div>
+</section>
+
+</main>
+
+<script>
+(function(){
+  var live=document.querySelector('[data-header-live]');
+  if(live){var onScroll=function(){live.classList.toggle('is-scrolled',window.scrollY>8)};onScroll();window.addEventListener('scroll',onScroll,{passive:true});}
+  function closeAll(hd,except){hd.querySelectorAll('.site-nav__item.is-open').forEach(function(li){if(li!==except){li.classList.remove('is-open');li.querySelector('.site-nav__trigger').setAttribute('aria-expanded','false');}});}
+  document.querySelectorAll('[data-header]').forEach(function(hd){
+    var burger=hd.querySelector('.site-header__burger');
+    if(burger){burger.addEventListener('click',function(){var open=hd.classList.toggle('is-menu-open');burger.setAttribute('aria-expanded',String(open));});}
+    hd.querySelectorAll('.site-nav__trigger').forEach(function(t){
+      t.addEventListener('click',function(){var li=t.parentElement;var open=!li.classList.contains('is-open');closeAll(hd,li);li.classList.toggle('is-open',open);t.setAttribute('aria-expanded',String(open));});
+    });
+  });
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&live){closeAll(live);}});
+  document.addEventListener('click',function(e){if(live&&!live.contains(e.target)){closeAll(live);}});
+})();
+</script>
+</body>
+</html>
