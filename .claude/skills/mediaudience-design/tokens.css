@@ -1,0 +1,257 @@
+/* ============================================================
+   Mediaudience — Signal · tokens.css
+   GENERADO desde design/tokens.json v1.2.0
+   NO EDITAR A MANO. Ejecutar: node scripts/build-tokens.mjs
+   ============================================================ */
+
+/* PENDIENTE: fuentes desde Google Fonts, no auto-hospedadas.
+   Para SSR/SSG instalar @fontsource/space-grotesk, @fontsource/ibm-plex-sans,
+   @fontsource/jetbrains-mono, importarlas en el layout base (subset latin,
+   font-display: swap) y poner typography.fontSourceSelfHosted = true.
+   Un @import de terceros bloquea el render en cada página. */
+
+:root {
+  /* ---- color ---- */
+  --ma-primary: #58B0FF;
+  --ma-primary-hover: #70C0FF;
+  --ma-primary-active: #3496EF;
+  --ma-primary-disabled: #234566;
+  --ma-primary-subtle: rgba(88,176,255,0.10);
+  --ma-primary-border: rgba(88,176,255,0.35);
+  --ma-on-primary: #040B17;
+  --ma-secondary: #68D7A1;
+  --ma-secondary-hover: #7FE0B0;
+  --ma-on-secondary: #040B17;
+  --ma-accent: #58B0FF;
+  --ma-background: #0A0E17;
+  --ma-background-alt: #06090F;
+  --ma-surface: #121828;
+  --ma-surface-raised: #1A2135;
+  --ma-surface-hover: #1A2135;
+  --ma-surface-disabled: #121828;
+  --ma-text: #E9EDF6;
+  --ma-text-muted: #8A93A9;
+  --ma-text-tertiary: #565E76;
+  --ma-text-placeholder: #7782A3;
+  --ma-text-disabled: #565E76;
+  --ma-text-inverse: #0A0E17;
+  --ma-text-on-light: #0A0E17;
+  --ma-text-on-light-muted: #8A93A9;
+  --ma-border: rgba(255,255,255,0.09);
+  --ma-border-subtle: rgba(255,255,255,0.05);
+  --ma-border-strong: rgba(255,255,255,0.16);
+  --ma-border-focus: #58B0FF;
+  --ma-success: #68D7A1;
+  --ma-warning: #EDBC4A;
+  --ma-error: #E4665B;
+  --ma-success-subtle: rgba(104,215,161,0.10);
+  --ma-warning-subtle: rgba(237,188,74,0.10);
+  --ma-error-subtle: rgba(228,102,91,0.10);
+  --ma-white: #FFFFFF;
+  --ma-on-accent: #040B17;
+
+  /* ---- color: chart ---- */
+  --ma-chart-series1: #58B0FF;
+  --ma-chart-series2: #47D6CF;
+  --ma-chart-inert: #1A2135;
+  --ma-chart-axis: #7782A3;
+  --ma-chart-grid: rgba(255,255,255,0.05);
+
+  /* ---- color: form ---- */
+  --ma-form-background: #121828;
+  --ma-form-background-hover: #1A2135;
+  --ma-form-background-disabled: #0A0E17;
+  --ma-form-border: rgba(255,255,255,0.16);
+  --ma-form-border-hover: rgba(255,255,255,0.28);
+  --ma-form-border-focus: #58B0FF;
+  --ma-form-border-error: #E4665B;
+  --ma-form-text: #E9EDF6;
+  --ma-form-placeholder: #7782A3;
+  --ma-form-label: #8A93A9;
+  --ma-form-help-text: #8A93A9;
+  --ma-form-error-text: #E4665B;
+  --ma-form-text-disabled: #565E76;
+  --ma-form-focus-ring: 0 0 0 1px #58B0FF;
+  --ma-form-focus-ring-offset: 2px;
+  --ma-form-min-height: 44px;
+  --ma-form-radius: 6px;
+
+  /* ---- gradients ---- */
+  --ma-gradient-hero-bloom: radial-gradient(60% 80% at 85% 0%, rgba(88,176,255,0.12) 0%, rgba(88,176,255,0) 70%);
+  --ma-gradient-scanlines: repeating-linear-gradient(90deg, rgba(255,255,255,0.05) 0 1px, transparent 1px 80px);
+  --ma-gradient-data-grid: linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+
+  /* ---- type: families ---- */
+  --ma-font-display: 'Space Grotesk', system-ui, sans-serif;
+  --ma-font-body: 'IBM Plex Sans', system-ui, sans-serif;
+  --ma-font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  /* ---- type: weights ---- */
+  --ma-weight-regular: 400;
+  --ma-weight-medium: 500;
+  --ma-weight-semibold: 600;
+  --ma-weight-bold: 700;
+
+  /* ---- type: scale ---- */
+  --ma-display-size: 4rem;
+  --ma-display-line-height: 1.02;
+  --ma-display-weight: 600;
+  --ma-display-letter-spacing: -0.03em;
+  --ma-display-size-md: 3rem;
+  --ma-display-size-sm: 2.25rem;
+  --ma-h1-size: 2.375rem;
+  --ma-h1-line-height: 1.1;
+  --ma-h1-weight: 600;
+  --ma-h1-letter-spacing: -0.02em;
+  --ma-h1-size-sm: 1.875rem;
+  --ma-h2-size: 1.5rem;
+  --ma-h2-line-height: 1.25;
+  --ma-h2-weight: 500;
+  --ma-h2-letter-spacing: -0.02em;
+  --ma-h3-size: 1.25rem;
+  --ma-h3-line-height: 1.35;
+  --ma-h3-weight: 600;
+  --ma-h3-letter-spacing: -0.01em;
+  --ma-body-size: 1rem;
+  --ma-body-line-height: 1.5;
+  --ma-body-weight: 400;
+  --ma-body-letter-spacing: 0em;
+  --ma-body-large-size: 1.125rem;
+  --ma-body-large-line-height: 1.6;
+  --ma-body-large-weight: 400;
+  --ma-body-large-letter-spacing: 0em;
+  --ma-small-size: 0.875rem;
+  --ma-small-line-height: 1.55;
+  --ma-small-weight: 400;
+  --ma-small-letter-spacing: 0em;
+  --ma-caption-size: 0.75rem;
+  --ma-caption-line-height: 1.4;
+  --ma-caption-weight: 400;
+  --ma-caption-letter-spacing: 0.14em;
+  --ma-mono-size: 0.8125rem;
+  --ma-mono-line-height: 1.4;
+  --ma-mono-weight: 400;
+  --ma-mono-letter-spacing: 0.02em;
+  --ma-eyebrow-size: 0.75rem;
+  --ma-eyebrow-line-height: 1.2;
+  --ma-eyebrow-weight: 400;
+  --ma-eyebrow-letter-spacing: 0.24em;
+  --ma-label-size: 0.5625rem;
+  --ma-label-line-height: 1.2;
+  --ma-label-weight: 400;
+  --ma-label-letter-spacing: 0.14em;
+  --ma-kpi-size: 2.5rem;
+  --ma-kpi-line-height: 1;
+  --ma-kpi-weight: 600;
+  --ma-kpi-letter-spacing: -0.02em;
+  --ma-kpi-size-sm: 2rem;
+  --ma-kpi-small-size: 1.625rem;
+  --ma-kpi-small-line-height: 1;
+  --ma-kpi-small-weight: 600;
+  --ma-kpi-small-letter-spacing: -0.02em;
+
+  /* ---- space ---- */
+  --ma-space-base: 4px;
+  --ma-space-xs: 0.25rem;
+  --ma-space-sm: 0.5rem;
+  --ma-space-md: 0.75rem;
+  --ma-space-lg: 1rem;
+  --ma-space-xl: 1.5rem;
+  --ma-space-2xl: 2.25rem;
+  --ma-space-3xl: 4.5rem;
+  --ma-space-section-y: 4.5rem;
+  --ma-space-grid-gap: 0.75rem;
+  --ma-space-section-gap: 1rem;
+  --ma-space-content-padding: 1.5rem;
+
+  /* ---- radius ---- */
+  --ma-radius-sm: 4px;
+  --ma-radius-md: 6px;
+  --ma-radius-lg: 12px;
+  --ma-radius-full: 9999px;
+  --ma-radius-default: 6px;
+  --ma-radius-app-frame: 12px;
+
+  /* ---- shadow ---- */
+  --ma-shadow-sm: none;
+  --ma-shadow-md: none;
+  --ma-shadow-lg: 0 40px 80px -40px rgba(0,0,0,1);
+  --ma-shadow-focus-ring: 0 0 0 1px #58B0FF;
+
+  /* ---- layout ---- */
+  --ma-layout-max-width: 1200px;
+  --ma-layout-max-width-wide: 1440px;
+  --ma-layout-max-width-prose: 620px;
+  --ma-layout-gutter: 1.5rem;
+  --ma-layout-sidebar-width: 200px;
+  --ma-layout-topbar-height: 58px;
+
+  /* ---- border ---- */
+  --ma-border-width: 1px;
+  --ma-border-width-strong: 2px;
+  --ma-border-selected-rule: 2px solid #58B0FF;
+
+  /* ---- opacity ---- */
+  --ma-opacity-disabled: 0.4;
+  --ma-opacity-monochrome-secondary: 0.4;
+  --ma-opacity-accent-tint: 0.1;
+  --ma-opacity-grid-overlay: 0.05;
+
+  /* ---- duration ---- */
+  --ma-duration-fast: 120ms;
+  --ma-duration-base: 220ms;
+  --ma-duration-slow: 700ms;
+  --ma-duration-pulse: 1800ms;
+
+  /* ---- ease ---- */
+  --ma-ease-base: cubic-bezier(0.2, 0.7, 0.3, 1);
+  --ma-ease-linear: linear;
+
+  /* ---- icon ---- */
+  --ma-icon-sm: 16px;
+  --ma-icon-md: 20px;
+  --ma-icon-lg: 24px;
+  --ma-icon-stroke-width: 1.5;
+
+  /* ---- alias heredados de la skill mediaudience-design ----
+     Se conservan para no romper dashboards existentes.
+     En código nuevo usar los nombres --ma-*. */
+  --mau-ink: var(--ma-background);
+  --mau-ink-deep: var(--ma-background-alt);
+  --mau-surf: var(--ma-surface);
+  --mau-surf-2: var(--ma-surface-raised);
+  --mau-dim: var(--ma-text-tertiary);
+  --mau-muted: var(--ma-text-muted);
+  --mau-text: var(--ma-text);
+  --mau-white: var(--ma-white);
+  --mau-signal: var(--ma-primary);
+  --mau-data: var(--ma-secondary);
+  --mau-on-acc: var(--ma-on-accent);
+  --mau-pos: var(--ma-success);
+  --mau-warn: var(--ma-warning);
+  --mau-neg: var(--ma-error);
+  --mau-line: var(--ma-border);
+  --mau-line-2: var(--ma-border-subtle);
+  --mau-fd: var(--ma-font-display);
+  --mau-fb: var(--ma-font-body);
+  --mau-fm: var(--ma-font-mono);
+  --mau-r: var(--ma-radius-default);
+  --mau-r-app: var(--ma-radius-app-frame);
+  --mau-gap: var(--ma-space-grid-gap);
+  --mau-gap-l: var(--ma-space-section-gap);
+  --mau-pad: var(--ma-space-content-padding);
+  --mau-ease: var(--ma-ease-base);
+  --mau-dur: var(--ma-duration-base);
+}
+
+@keyframes mau-pulse { 0%,100% { opacity:1; transform:scale(1); } 50% { opacity:.3; transform:scale(.65); } }
+@keyframes mau-rise  { from { transform:scaleY(0); } to { transform:scaleY(1); } }
+@keyframes mau-bar   { from { transform:scaleX(0); } to { transform:scaleX(1); } }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
