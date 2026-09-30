@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Campaign Console — Mediaudience</title>
+<link rel="stylesheet" href="./tokens.css">
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--mau-ink-deep); color: var(--mau-text);
+         font-family: var(--mau-fb); padding: 28px; }
+  .lbl { font-family: var(--mau-fm); font-size: 9px; letter-spacing: .14em;
+         text-transform: uppercase; color: var(--mau-muted); }
+  .fig { font-family: var(--mau-fd); font-weight: 600; letter-spacing: -.02em; }
+  .card { background: var(--mau-surf); border: 1px solid var(--mau-line);
+          border-radius: var(--mau-r); padding: 18px; }
+  .nav { padding: 9px 20px; font-family: var(--mau-fm); font-size: 11px;
+         color: var(--mau-muted); border-left: 2px solid transparent; cursor: pointer;
+         transition: background var(--mau-dur) var(--mau-ease), color var(--mau-dur) var(--mau-ease); }
+  .nav:hover { background: var(--mau-surf-2); color: var(--mau-text); }
+  .nav[aria-current] { color: var(--mau-text); border-left-color: var(--mau-signal);
+                       background: rgba(79,217,222,.06); }
+  .ghost { font-family: var(--mau-fm); font-size: 11px; color: var(--mau-muted);
+           border: 1px solid var(--mau-line); border-radius: var(--mau-r);
+           padding: 6px 12px; background: transparent; cursor: pointer; }
+  .ghost:hover { background: var(--mau-surf-2); color: var(--mau-text); }
+  .solid { font-family: var(--mau-fm); font-size: 11px; color: var(--mau-on-acc);
+           background: var(--mau-signal); border: 0; border-radius: var(--mau-r);
+           padding: 7px 14px; cursor: pointer; }
+  .solid:hover { filter: brightness(1.08); }
+  .pill { font-family: var(--mau-fm); font-size: 9px; letter-spacing: .1em; text-transform: uppercase;
+          color: var(--mau-signal); background: rgba(79,217,222,.10);
+          border: 1px solid rgba(79,217,222,.35); border-radius: 4px; padding: 4px 8px; }
+  table { width: 100%; border-collapse: collapse; }
+  th { font-family: var(--mau-fm); font-size: 9px; letter-spacing: .14em; text-transform: uppercase;
+       color: var(--mau-muted); text-align: right; padding: 0 0 12px; border-bottom: 1px solid var(--mau-line); font-weight: 400; }
+  th:first-child, td:first-child { text-align: left; }
+  td { font-family: var(--mau-fm); font-size: 12px; text-align: right; padding: 13px 0;
+       border-bottom: 1px solid var(--mau-line-2); color: var(--mau-text); }
+  tr:hover td { background: var(--mau-surf-2); }
+  td:first-child { font-family: var(--mau-fd); font-weight: 500; font-size: 13px; }
+  .bar { border-radius: 3px 3px 0 0; transform-origin: bottom; animation: mau-rise .7s var(--mau-ease) both; }
+</style>
+<template id="__bundler_thumbnail" data-bg-color="#06090F">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1200" height="800" fill="#06090F"/>
+    <g transform="translate(600,400)">
+      <circle r="240" fill="none" stroke="#4FD9DE" stroke-opacity=".18" stroke-width="14"/>
+      <circle r="170" fill="none" stroke="#4FD9DE" stroke-opacity=".35" stroke-width="14"/>
+      <circle r="100" fill="none" stroke="#4FD9DE" stroke-opacity=".6" stroke-width="14"/>
+      <circle r="34" fill="#4FD9DE"/>
+    </g>
+  </svg>
+</template>
+</head>
+<body>
+
+<div style="max-width:1440px;margin:0 auto;border:1px solid var(--mau-line);border-radius:var(--mau-r-app);overflow:hidden;background:var(--mau-ink);">
+
+  <!-- TOPBAR -->
+  <header style="display:flex;align-items:center;justify-content:space-between;padding:15px 22px;background:var(--mau-surf);border-bottom:1px solid var(--mau-line);">
+    <div style="display:flex;align-items:center;gap:18px;">
+      <div style="font-family:var(--mau-fd);font-weight:600;font-size:18px;letter-spacing:-.02em;">medi<span style="color:var(--mau-signal);">a</span>udience</div>
+      <div style="width:1px;height:18px;background:var(--mau-line);"></div>
+      <div class="lbl" style="color:var(--mau-text);letter-spacing:.16em;">CLIENTE · NOMBRE DEL CLIENTE</div>
+    </div>
+    <div style="display:flex;align-items:center;gap:16px;">
+      <span style="display:flex;align-items:center;gap:7px;font-family:var(--mau-fm);font-size:11px;color:var(--mau-signal);">
+        <span style="width:6px;height:6px;border-radius:50%;background:var(--mau-signal);animation:mau-pulse 1.8s ease-in-out infinite;"></span>EN VIVO
+      </span>
+      <button class="ghost">01–31 OCT 2024</button>
+      <button class="solid">Exportar</button>
+      <span style="width:26px;height:26px;border-radius:50%;background:var(--mau-surf-2);"></span>
+    </div>
+  </header>
+
+  <div style="display:grid;grid-template-columns:200px 1fr;">
+
+    <!-- SIDEBAR -->
+    <nav style="background:var(--mau-surf);border-right:1px solid var(--mau-line);padding:20px 0;">
+      <div class="lbl" style="padding:0 20px 10px;color:var(--mau-dim);">CAMPAÑA</div>
+      <div class="nav" aria-current="page">Overview</div>
+      <div class="nav">Connected TV</div>
+      <div class="nav">Mobile Push</div>
+      <div class="nav">Programmatic</div>
+      <div class="nav">In-Game</div>
+      <div class="lbl" style="padding:22px 20px 10px;color:var(--mau-dim);">ANÁLISIS</div>
+      <div class="nav">Audiencias</div>
+      <div class="nav">Geografía</div>
+      <div class="nav">Reportes</div>
+    </nav>
+
+    <!-- MAIN -->
+    <main style="padding:var(--mau-pad);display:grid;gap:var(--mau-gap);align-content:start;">
+
+      <!-- KPI ROW -->
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:var(--mau-gap);">
+        <div class="card">
+          <div class="lbl">IMPRESIONES</div>
+          <div class="fig" style="font-size:26px;margin-top:6px;">294K</div>
+          <div style="font-family:var(--mau-fm);font-size:10px;color:var(--mau-pos);margin-top:8px;">▲ 18% vs. sep</div>
+        </div>
+        <div class="card">
+          <div class="lbl">VTR</div>
+          <div class="fig" style="font-size:26px;margin-top:6px;color:var(--mau-signal);">94.5%</div>
+          <div style="font-family:var(--mau-fm);font-size:10px;color:var(--mau-pos);margin-top:8px;">▲ 2.1 pts vs. sep</div>
+        </div>
+        <div class="card">
+          <div class="lbl">VIEWABILITY</div>
+          <div class="fig" style="font-size:26px;margin-top:6px;">100%</div>
+          <div style="font-family:var(--mau-fm);font-size:10px;color:var(--mau-dim);margin-top:8px;">— sin cambio</div>
+        </div>
+        <div class="card">
+          <div class="lbl">CPM</div>
+          <div class="fig" style="font-size:26px;margin-top:6px;">$6.2</div>
+          <div style="font-family:var(--mau-fm);font-size:10px;color:var(--mau-neg);margin-top:8px;">▼ 4% vs. sep</div>
+        </div>
+      </div>
+
+      <!-- CHART + SHARE -->
+      <div style="display:grid;grid-template-columns:2fr 1fr;gap:var(--mau-gap);">
+        <div class="card" style="padding:20px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <div class="lbl" style="letter-spacing:.12em;">DELIVERY · ÚLTIMOS 14 DÍAS</div>
+            <span class="pill">EN RITMO</span>
+          </div>
+          <div id="chart" style="display:flex;align-items:flex-end;gap:6px;height:150px;margin-top:18px;border-bottom:1px solid var(--mau-line);"></div>
+          <div style="display:flex;justify-content:space-between;font-family:var(--mau-fm);font-size:9px;color:var(--mau-dim);margin-top:9px;">
+            <span>18 OCT</span><span>24 OCT</span><span>31 OCT</span>
+          </div>
+        </div>
+
+        <div class="card" style="padding:20px;">
+          <div class="lbl" style="letter-spacing:.12em;">SHARE POR CANAL</div>
+          <div id="share" style="display:grid;gap:14px;margin-top:18px;"></div>
+        </div>
+      </div>
+
+      <!-- TABLE -->
+      <div class="card" style="padding:20px 20px 4px;">
+        <div class="lbl" style="letter-spacing:.12em;margin-bottom:16px;">PERFORMANCE POR CANAL</div>
+        <table>
+          <thead><tr><th>Canal</th><th>Impresiones</th><th>Clicks</th><th>CTR</th><th>VTR</th><th>CPM</th><th>Δ</th></tr></thead>
+          <tbody id="rows"></tbody>
+        </table>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<script>
+  const days = [40,55,48,68,60,78,72,88,82,95,74,86,91,99];
+  const hi = new Set([3,5,7,9,12,13]);
+  document.getElementById('chart').innerHTML = days.map((h,i)=>
+    `<div class="bar" style="flex:1;height:${h}%;background:${hi.has(i)?'var(--mau-signal)':'var(--mau-surf-2)'};animation-delay:${i*40}ms"></div>`).join('');
+
+  const share = [['CONNECTED TV',42],['PROGRAMMATIC',27],['MOBILE PUSH',19],['IN-GAME',12]];
+  document.getElementById('share').innerHTML = share.map(([n,v],i)=>`
+    <div>
+      <div style="display:flex;justify-content:space-between;font-family:var(--mau-fm);font-size:10px;letter-spacing:.1em;color:var(--mau-muted);">
+        <span>${n}</span><span style="color:var(--mau-text);">${v}%</span>
+      </div>
+      <div style="height:4px;background:var(--mau-surf-2);border-radius:2px;margin-top:8px;overflow:hidden;">
+        <div style="height:100%;width:${v}%;background:${i===0?'var(--mau-signal)':'var(--mau-data)'};transform-origin:left;animation:mau-bar .7s var(--mau-ease) ${i*60}ms both;"></div>
+      </div>
+    </div>`).join('');
+
+  const rows = [
+    ['Connected TV','124.8K','—','—','94.5%','$8.10','+18%',1],
+    ['Programmatic','81.2K','7.4K','9.1%','—','$4.90','+11%',1],
+    ['Mobile Push','56.4K','5.2K','9.3%','—','$3.20','+6%',1],
+    ['In-Game','31.9K','1.1K','3.4%','88.2%','$5.40','-4%',0],
+  ];
+  document.getElementById('rows').innerHTML = rows.map(r=>`
+    <tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td>
+    <td style="color:var(--mau-signal);">${r[4]}</td><td>${r[5]}</td>
+    <td style="color:${r[7]?'var(--mau-pos)':'var(--mau-neg)'};">${r[6]}</td></tr>`).join('');
+</script>
+</body>
+</html>
