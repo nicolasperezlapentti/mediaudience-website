@@ -1,0 +1,71 @@
+---
+/**
+ * Layout base. Todo lo que ve un crawler sin ejecutar JavaScript sale de acá y de la ruta:
+ * <html lang="es">, metadatos, JSON-LD en el <head> y el contenido en el <body>.
+ *
+ * Slots:
+ *   jsonld  → <script type="application/ld+json"> de la página
+ *   header  → vacío hasta Fase B (se arma desde src/lib/navegacion.ts)
+ *   default → contenido
+ *   footer  → vacío hasta Fase B (ídem)
+ */
+
+// Fuentes auto-hospedadas (tokens.json → typography.fontSourceSelfHosted). Subset latin
+// (incluye á, é, ñ, ¿, ¡), font-display: swap. Pesos según typography.weights.*Available.
+import '@fontsource/space-grotesk/latin-400.css';
+import '@fontsource/space-grotesk/latin-500.css';
+import '@fontsource/space-grotesk/latin-600.css';
+import '@fontsource/space-grotesk/latin-700.css';
+import '@fontsource/ibm-plex-sans/latin-400.css';
+import '@fontsource/ibm-plex-sans/latin-500.css';
+import '@fontsource/ibm-plex-sans/latin-600.css';
+import '@fontsource/jetbrains-mono/latin-400.css';
+import '@fontsource/jetbrains-mono/latin-500.css';
+import '@fontsource/jetbrains-mono/latin-700.css';
+import '../../design/tokens.css';
+import tokens from '../../design/tokens.json';
+import { MARCA } from '../lib/marca.ts';
+
+interface Props {
+  titulo: string;
+  descripcion: string;
+  canonica: string;
+}
+
+const { titulo, descripcion, canonica } = Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{titulo}</title>
+    <meta name="description" content={descripcion} />
+    <link rel="canonical" href={canonica} />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content={tokens.color.background} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={MARCA} />
+    <meta property="og:title" content={titulo} />
+    <meta property="og:description" content={descripcion} />
+    <meta property="og:url" content={canonica} />
+    <slot name="jsonld" />
+  </head>
+  <body>
+    <slot name="header" />
+    <slot />
+    <slot name="footer" />
+  </body>
+</html>
+
+<style is:global>
+  body {
+    margin: 0;
+    background: var(--ma-background);
+    color: var(--ma-text);
+    font-family: var(--ma-font-body);
+    font-size: var(--ma-body-size);
+    line-height: var(--ma-body-line-height);
+  }
+</style>

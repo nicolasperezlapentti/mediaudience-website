@@ -1,0 +1,57 @@
+{
+  "meta": {
+    "fuente": "factbook-mediaudience.md v1.2 §1.3 + Arquitectura-GEO-AEO-Mediaudience-v2.md §5",
+    "regla": "Datos del grafo JSON-LD de dos capas. La marca-entidad NO lleva foundingDate ni address (D-01): el schema lo rechaza. Un mercado solo genera nodo Organization cuando tiene legalName, foundingDate y address, y ninguna de sus dudas está abierta."
+  },
+  "marca": {
+    "description": "Compañía multilatina de tecnología publicitaria (AdTech) y representación de medios digitales, de origen peruano, que opera como empresa local en Perú, México, Ecuador y Chile.",
+    "foundingLocation": { "name": "Perú", "addressCountry": "PE" },
+    "areaServed": ["PE", "MX", "EC", "CL"],
+    "knowsAbout": [
+      "Connected TV",
+      "Publicidad programática",
+      "DV360",
+      "Mobile Push Premium",
+      "Inteligencia de audiencias",
+      "SSP"
+    ],
+    "sameAs": []
+  },
+  "mercados": [
+    {
+      "codigo": "PE",
+      "pais": "Perú",
+      "slug": "/mercados/peru/",
+      "bloqueadoPor": ["D-01", "D-30"]
+    },
+    {
+      "codigo": "MX",
+      "pais": "México",
+      "slug": "/mercados/mexico/",
+      "bloqueadoPor": ["D-29", "D-30"]
+    },
+    {
+      "codigo": "EC",
+      "pais": "Ecuador",
+      "slug": "/mercados/ecuador/",
+      "legalName": "Mediaudience S.A.S.",
+      "foundingDate": "2022-01-10",
+      "address": {
+        "streetAddress": "Av. Primera 212",
+        "addressLocality": "Samborondón",
+        "addressRegion": "Guayas",
+        "addressCountry": "EC"
+      },
+      "bloqueadoPor": []
+    },
+    {
+      "codigo": "CL",
+      "pais": "Chile",
+      "slug": "/mercados/chile/",
+      "bloqueadoPor": ["D-29", "D-30"]
+    }
+  ],
+  "llms": {
+    "resumen": "Compañía multilatina de AdTech y representación de medios digitales (SSP), de origen peruano, con empresa local en Perú, México, Ecuador y Chile. Ofrece Connected TV, Mobile Push (Premium con Claro, Premium Video y Programático), publicidad programática (DV360) y retargeting cruzado CTV–Mobile."
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "meta": { "nota": "Fixture." },
+  "dudas": {
+    "D-01": { "estado": "abierta", "titulo": "Duda de prueba que bloquea un mercado" },
+    "D-02": { "estado": "abierta", "titulo": "Duda de prueba que bloquea el Producto B" },
+    "D-03": { "estado": "cerrada", "titulo": "Duda de prueba ya cerrada", "cerradaEl": "2026-09-01" },
+    "D-13": { "estado": "abierta", "titulo": "Casos" },
+    "D-15": { "estado": "abierta", "titulo": "Partnership" },
+    "D-31": { "estado": "abierta", "titulo": "Socio local" }
+  }
+}

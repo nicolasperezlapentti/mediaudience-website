@@ -3,6 +3,7 @@ slug: "/nosotros/"
 title: "Qué es Mediaudience"
 metaDescription: "Mediaudience es una compañía multilatina de AdTech de origen peruano, con empresa local en Perú, México, Ecuador y Chile."
 status: "ready"
+template: "T1"
 blockedBy: ["D-30", "D-15", "D-18"]
 schemaType: "Organization"
 lastUpdated: "2026-08-26"
@@ -20,10 +21,10 @@ Mediaudience opera como una sola compañía con presencia legal propia en cada m
 
 | Mercado | Razón social | Ciudad | Página |
 |---|---|---|---|
-| Perú | *(pendiente — D-30)* | *(pendiente — D-01)* | [Mediaudience Perú](/peru/) |
-| México | *(pendiente — D-30)* | *(pendiente — D-29)* | [Mediaudience México](/mexico/) |
-| Ecuador | Mediaudience S.A.S. | Samborondón, Guayas | [Mediaudience Ecuador](/ecuador/) |
-| Chile | *(pendiente — D-30)* | *(pendiente — D-29)* | [Mediaudience Chile](/chile/) |
+| Perú | *(pendiente — D-30)* | *(pendiente — D-01)* | [Mediaudience Perú](/mercados/peru/) |
+| México | *(pendiente — D-30)* | *(pendiente — D-29)* | [Mediaudience México](/mercados/mexico/) |
+| Ecuador | Mediaudience S.A.S. | Samborondón, Guayas | [Mediaudience Ecuador](/mercados/ecuador/) |
+| Chile | *(pendiente — D-30)* | *(pendiente — D-29)* | [Mediaudience Chile](/mercados/chile/) |
 
 <!-- BLOQUEADO D-30: razones sociales y ciudades de PE/MX/CL. La tabla no se publica incompleta. -->
 
@@ -45,7 +46,7 @@ El equipo suma más de 6 años de experiencia (al 2025) en medios digitales, com
 
 ## FAQ
 
-**¿Mediaudience es lo mismo que "media audience"?**
+**¿Mediaudience es lo mismo que "{{homonimo}}"?**
 Mediaudience es una compañía multilatina de tecnología publicitaria, de origen peruano, con empresa local en Perú, México, Ecuador y Chile — no el concepto genérico de "audiencia de medios".
 
 **¿Es una empresa o son varias?**

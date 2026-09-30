@@ -30,7 +30,11 @@ De ahí salen las dos reglas que no se negocian:
 ## Estructura
 
 ```
-content/              Contenido en Markdown + sitemap.json (fuente de verdad del contenido)
+content/
+  paginas/            Un .md por página; la ruta del archivo es la URL canónica
+  sitemap.json        Páginas, status y navegación (fuente de verdad del contenido)
+  dudas.json          Registro de dudas D-XX y su estado (fact-book §11)
+  entidad.json        Datos del grafo JSON-LD de dos capas
 design/
   tokens.json         ← ÚNICA fuente de verdad visual
   tokens.css          ← GENERADO. No editar a mano.
@@ -38,11 +42,32 @@ design/
   referencia/         Especificación visual de Claude Design (no es código a portar)
 scripts/
   build-tokens.mjs    Genera tokens.css desde tokens.json
-  corregir-bloques.mjs
+  test-aceptacion.ts  curl sin JavaScript contra cada ruta ready
+  fase0.ts            robots.txt para desplegar antes que el sitio nuevo
+src/
+  content.config.ts   Colección `paginas` (solo páginas ready, schema por plantilla)
+  lib/                Marca, plantillas, schemas, parser de secciones, JSON-LD, navegación, Fase 0
+  lib/gates/          Gates de build: fuente.ts (antes de generar) y salida.ts (sobre dist/)
+  integraciones/      Conecta tokens --check y los gates a `astro build`
+  layouts/Base.astro  <html lang="es">, metadatos, fuentes, slots de JSON-LD, header y footer
+  pages/              [...ruta].astro + robots.txt, sitemap.xml, llms.txt
+tests/                Un caso que debe fallar por gate + fixture de sitio válido
 .claude/skills/       Skills de proyecto para Claude Code
 PLANTILLAS.md         Plantillas, bloques, mapa de URLs y gates de build
-src/                  Código de Astro
 ```
+
+## Comandos
+
+```bash
+npm run build             # tokens --check + gates de fuente + build + gates de salida
+npm test                  # un caso que debe fallar por cada gate (node:test)
+npm run test:aceptacion   # build + curl sin JavaScript contra cada ruta ready
+npm run test:fixtures     # lo mismo contra tests/fixtures/sitio-valido
+npm run fase0             # dist-fase0/robots.txt para el hosting actual
+```
+
+`astro build` falla con la lista completa de incumplimientos, archivo por archivo y sección
+por sección. No hay modo advertencia.
 
 ---
 
@@ -146,4 +171,4 @@ para aprobar la dirección visual. Ya cumplieron: el sitio se reconstruye desde 
 como componentes de Astro. Se eliminaron del árbol de trabajo; siguen disponibles en el historial de
 git si alguna vez hacen falta.
 
-`src/` es ahora el directorio de código de Astro.
+`src/` es ahora el directorio de código de Astro (Fase A: andamiaje, gates y archivos técnicos).

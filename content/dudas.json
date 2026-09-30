@@ -1,0 +1,40 @@
+{
+  "meta": {
+    "fuente": "factbook-mediaudience.md v1.2 §11 — Registro de dudas abiertas",
+    "regla": "Una sección con gate se renderiza solo si todas sus dudas están 'cerrada'. Un D-XX citado en contenido, plantillas o sitemap.json que no figure acá rompe el build. Al cerrar una duda con el cliente, cambiar 'estado' a 'cerrada' y anotar 'cerradaEl'."
+  },
+  "dudas": {
+    "D-01": { "estado": "abierta", "titulo": "Sociedad peruana de origen: razón social, RUC y fecha de constitución" },
+    "D-02": { "estado": "abierta", "titulo": "Erratas en el media kit vigente" },
+    "D-03": { "estado": "abierta", "titulo": "Desde cuándo opera en cada mercado" },
+    "D-04": { "estado": "abierta", "titulo": "Si Colombia es operación real" },
+    "D-05": { "estado": "abierta", "titulo": "Fuente y fecha de las cifras de audiencia de CTV Ecuador" },
+    "D-06": { "estado": "abierta", "titulo": "Qué mide cada universo de push y a qué país corresponde cada producto" },
+    "D-07": { "estado": "abierta", "titulo": "Mobile Gaming Premium sin contenido" },
+    "D-08": { "estado": "abierta", "titulo": "Si Performance On Site existe como servicio" },
+    "D-09": { "estado": "abierta", "titulo": "Cuáles son los 04 DSP" },
+    "D-10": { "estado": "abierta", "titulo": "CTR de Apuesta Total y ratio sesión/clic" },
+    "D-11": { "estado": "abierta", "titulo": "Duración real del caso CityMall" },
+    "D-12": { "estado": "abierta", "titulo": "Casos sin país ni fecha y cifras redondeadas" },
+    "D-13": { "estado": "abierta", "titulo": "Autorización escrita para nombrar clientes" },
+    "D-14": { "estado": "abierta", "titulo": "Restricciones de categoría por producto y país" },
+    "D-15": { "estado": "abierta", "titulo": "Alcance formal del partnership con Siprocal" },
+    "D-16": { "estado": "abierta", "titulo": "Relación formal con SQREEM" },
+    "D-17": { "estado": "abierta", "titulo": "Acceso al first-party data de Claro y permiso de mención" },
+    "D-18": { "estado": "abierta", "titulo": "Socios del grupo, dirección y contactos vigentes" },
+    "D-19": { "estado": "abierta", "titulo": "Corrección de grafía en canales de terceros" },
+    "D-20": { "estado": "abierta", "titulo": "Cantidad de empleados del grupo" },
+    "D-21": { "estado": "abierta", "titulo": "Qué se hace con Facebook" },
+    "D-22": { "estado": "abierta", "titulo": "Licencia para reproducir datos de Comscore" },
+    "D-23": { "estado": "abierta", "titulo": "Verificación de tercero de VTR y Viewability" },
+    "D-24": { "estado": "abierta", "titulo": "Vigencia de «sin montos mínimos» en CTV" },
+    "D-25": { "estado": "abierta", "titulo": "Distinción de ventanas de disparo (regla de redacción)" },
+    "D-26": { "estado": "abierta", "titulo": "Sitio actual invisible para las máquinas" },
+    "D-27": { "estado": "abierta", "titulo": "Creación del ítem de Wikidata" },
+    "D-28": { "estado": "abierta", "titulo": "Partners líderes mundiales sin nombre" },
+    "D-29": { "estado": "abierta", "titulo": "México y Chile sin documentación" },
+    "D-30": { "estado": "abierta", "titulo": "Sociedad local y socio local por mercado" },
+    "D-31": { "estado": "abierta", "titulo": "«Empresa local» vs «partner local»" },
+    "D-32": { "estado": "abierta", "titulo": "Único media kit es de Ecuador" }
+  }
+}

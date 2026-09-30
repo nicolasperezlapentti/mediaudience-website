@@ -1,11 +1,12 @@
 {
   "meta": {
-    "source": "Arquitectura-GEO-AEO-Mediaudience-v2.md",
+    "source": "Arquitectura-GEO-AEO-Mediaudience-v2.md + PLANTILLAS.md v1.2",
     "alignedWith": "Fact-Book Mediaudience v1.2 (5-ago-2026)",
-    "rule": "Si un dato no está en el fact-book, no se publica. Páginas con status='blocked' no se construyen hasta desbloquear la duda referenciada en blockedBy.",
+    "rule": "Si un dato no está en el fact-book, no se publica. Solo las páginas con status='ready' se generan, se enlazan y entran en sitemap.xml, llms.txt y menús.",
+    "contentFiles": "El archivo de cada página se deriva de su slug: content/paginas/{slug}.md, o {slug}/index.md si la página tiene hijos. / es content/paginas/index.md. No hay mapeo manual.",
     "legend": {
-      "type": "pilar (P) | cluster (C) | local (L) | utilitaria",
-      "status": "ready (Ecuador, único con datos completos) | blocked (falta desbloquear duda) | partial (publicable parcialmente)"
+      "type": "pilar | cluster | local | utilitaria",
+      "status": "ready (se publica) | partial (publicable parcialmente; hoy no se genera) | blocked (bloqueada por una duda D-XX, ver blockedBy) | draft (sin bloqueo, pero sin contenido escrito todavía)"
     }
   },
   "pages": [
@@ -15,8 +16,7 @@
       "type": "pilar",
       "phase": 1,
       "status": "ready",
-      "contentFile": "content/home.md",
-      "nav": { "label": "Inicio", "order": 1, "showInMenu": true },
+      "nav": { "label": "Inicio" },
       "children": []
     },
     {
@@ -26,8 +26,7 @@
       "phase": 1,
       "status": "ready",
       "notes": "Marca-entidad, capa 1. Gana bloque de estructura 'Mediaudience en la región' con tabla de sociedades locales.",
-      "contentFile": "content/nosotros.md",
-      "nav": { "label": "Nosotros", "order": 2, "showInMenu": true },
+      "nav": { "label": "Nosotros" },
       "children": [
         {
           "slug": "/nosotros/socios/",
@@ -36,29 +35,46 @@
           "phase": 1,
           "status": "blocked",
           "blockedBy": ["D-18"],
-          "contentFile": "content/nosotros-socios.md",
-          "nav": { "label": "Socios", "order": 1, "showInMenu": false },
+          "nav": { "label": "Socios" },
           "children": []
         }
       ]
     },
     {
       "slug": "/soluciones/",
-      "title": "Hub de soluciones",
+      "title": "Soluciones de Mediaudience",
       "type": "pilar",
       "phase": 2,
       "status": "ready",
-      "contentFile": "content/soluciones.md",
-      "nav": { "label": "Soluciones", "order": 3, "showInMenu": true },
+      "nav": { "label": "Soluciones" },
       "children": [
+        {
+          "slug": "/soluciones/ssp/",
+          "title": "SSP de Mediaudience",
+          "type": "pilar",
+          "phase": 2,
+          "status": "draft",
+          "notes": "Publicable según PLANTILLAS §1.1; falta escribir el contenido. Destino de las facetas Productos y Herramientas (#consola, #segmentos).",
+          "nav": { "label": "SSP" },
+          "children": []
+        },
+        {
+          "slug": "/soluciones/representacion-de-medios/",
+          "title": "Representación de medios digitales",
+          "type": "pilar",
+          "phase": 2,
+          "status": "draft",
+          "notes": "Publicable según PLANTILLAS §1.1; falta escribir el contenido. Destino de la faceta Herramientas (#medicion).",
+          "nav": { "label": "Representación de medios" },
+          "children": []
+        },
         {
           "slug": "/soluciones/connected-tv/",
           "title": "Connected TV",
           "type": "pilar",
           "phase": 2,
           "status": "ready",
-          "contentFile": "content/soluciones-connected-tv.md",
-          "nav": { "label": "Connected TV", "order": 1, "showInMenu": true },
+          "nav": { "label": "Connected TV" },
           "children": []
         },
         {
@@ -68,18 +84,16 @@
           "phase": 2,
           "status": "ready",
           "notes": "Hub de 3 productos distintos — no colapsar en uno.",
-          "contentFile": "content/soluciones-mobile-push.md",
-          "nav": { "label": "Mobile Push", "order": 2, "showInMenu": true },
+          "nav": { "label": "Mobile Push" },
           "children": [
             {
               "slug": "/soluciones/mobile-push/premium-claro/",
-              "title": "Push Premium Claro",
+              "title": "Push Premium con Claro",
               "type": "cluster",
               "phase": 2,
               "status": "ready",
               "notes": "4M EC · CPE · L-V",
-              "contentFile": "content/soluciones-mobile-push-premium-claro.md",
-              "nav": { "label": "Premium Claro", "order": 1, "showInMenu": false },
+              "nav": { "label": "Premium Claro" },
               "children": []
             },
             {
@@ -89,8 +103,7 @@
               "phase": 2,
               "status": "ready",
               "notes": "12M EC / 192M Latam",
-              "contentFile": "content/soluciones-mobile-push-premium-video.md",
-              "nav": { "label": "Premium Video", "order": 2, "showInMenu": false },
+              "nav": { "label": "Premium Video" },
               "children": []
             },
             {
@@ -100,32 +113,29 @@
               "phase": 2,
               "status": "ready",
               "notes": "CTR +1% · L-D",
-              "contentFile": "content/soluciones-mobile-push-programatico.md",
-              "nav": { "label": "Programático", "order": 3, "showInMenu": false },
+              "nav": { "label": "Programático" },
               "children": []
             }
           ]
         },
         {
           "slug": "/soluciones/programmatic/",
-          "title": "Programmatic Ads (DV360)",
+          "title": "Publicidad programática (DV360)",
           "type": "pilar",
           "phase": 2,
           "status": "ready",
-          "contentFile": "content/soluciones-programmatic.md",
-          "nav": { "label": "Programmatic", "order": 3, "showInMenu": true },
+          "nav": { "label": "Programmatic" },
           "children": []
         },
         {
-          "slug": "/soluciones/one-by-sqreem/",
+          "slug": "/soluciones/inteligencia-de-audiencias/",
           "title": "ONE by SQREEM — Inteligencia de audiencias",
           "type": "pilar",
           "phase": 2,
           "status": "blocked",
           "blockedBy": ["D-16"],
-          "notes": "Bloqueado: las marcas de prueba (Disney/Samsung) son de SQREEM, no de Mediaudience; solo publicable con encuadre correcto.",
-          "contentFile": "content/soluciones-one-by-sqreem.md",
-          "nav": { "label": "ONE by SQREEM", "order": 4, "showInMenu": true },
+          "notes": "Slug según PLANTILLAS §1.1 (antes /soluciones/one-by-sqreem/). Bloqueado: las marcas de prueba (Disney/Samsung) son de SQREEM, no de Mediaudience; solo publicable con encuadre correcto.",
+          "nav": { "label": "Inteligencia de audiencias" },
           "children": []
         },
         {
@@ -134,8 +144,7 @@
           "type": "cluster",
           "phase": 2,
           "status": "ready",
-          "contentFile": "content/soluciones-retargeting-ctv-mobile.md",
-          "nav": { "label": "Retargeting", "order": 5, "showInMenu": true },
+          "nav": { "label": "Retargeting" },
           "children": []
         },
         {
@@ -146,8 +155,7 @@
           "status": "blocked",
           "blockedBy": ["D-07"],
           "notes": "No publicable — el único dato disponible es '+85%', insuficiente para construir la página.",
-          "contentFile": null,
-          "nav": { "label": "Mobile Gaming", "order": 6, "showInMenu": false },
+          "nav": { "label": "Mobile Gaming" },
           "children": []
         }
       ]
@@ -159,8 +167,7 @@
       "phase": 2,
       "status": "partial",
       "blockedBy": ["D-15"],
-      "contentFile": "content/partners-siprocal.md",
-      "nav": { "label": "Partners", "order": 4, "showInMenu": true },
+      "nav": { "label": "Partners" },
       "children": []
     },
     {
@@ -171,110 +178,115 @@
       "status": "blocked",
       "blockedBy": ["D-13"],
       "notes": "Ningún caso publicable hasta resolver derechos de uso. Varios además requieren corrección de KPI.",
-      "contentFile": "content/casos.md",
-      "nav": { "label": "Casos", "order": 5, "showInMenu": true },
+      "nav": { "label": "Casos" },
       "children": [
-        { "slug": "/casos/raspaditas/", "title": "Raspaditas", "type": "cluster", "status": "blocked", "blockedBy": ["D-13"], "contentFile": "content/casos-raspaditas.md", "children": [] },
-        { "slug": "/casos/tia/", "title": "TIA", "type": "cluster", "status": "blocked", "blockedBy": ["D-13"], "contentFile": "content/casos-tia.md", "children": [] },
-        { "slug": "/casos/movistar/", "title": "Movistar", "type": "cluster", "status": "blocked", "blockedBy": ["D-13"], "notes": "Enlaza a Push Premium Video", "contentFile": "content/casos-movistar.md", "children": [] },
-        { "slug": "/casos/disney/", "title": "Disney+", "type": "cluster", "status": "blocked", "blockedBy": ["D-13"], "notes": "Enlaza a Push Premium Video", "contentFile": "content/casos-disney.md", "children": [] },
-        { "slug": "/casos/directv/", "title": "DirecTV", "type": "cluster", "status": "blocked", "blockedBy": ["D-13"], "notes": "Enlaza a Push Premium Video", "contentFile": "content/casos-directv.md", "children": [] },
-        { "slug": "/casos/citymall/", "title": "CityMall", "type": "cluster", "status": "blocked", "blockedBy": ["D-13"], "contentFile": "content/casos-citymall.md", "children": [] },
-        { "slug": "/casos/chevrolet/", "title": "Chevrolet", "type": "cluster", "status": "blocked", "blockedBy": ["D-13"], "contentFile": "content/casos-chevrolet.md", "children": [] },
-        { "slug": "/casos/scotiabank/", "title": "Scotiabank", "type": "cluster", "status": "blocked", "blockedBy": ["D-13"], "contentFile": "content/casos-scotiabank.md", "children": [] },
-        { "slug": "/casos/bet593/", "title": "BET593", "type": "cluster", "status": "blocked", "blockedBy": ["D-13"], "notes": "Enlaza a Push Programático", "contentFile": "content/casos-bet593.md", "children": [] },
-        { "slug": "/casos/la-ganga/", "title": "La Ganga", "type": "cluster", "status": "blocked", "blockedBy": ["D-13"], "notes": "Enlaza a Push Programático", "contentFile": "content/casos-la-ganga.md", "children": [] },
-        { "slug": "/casos/apuesta-total/", "title": "Apuesta Total", "type": "cluster", "status": "blocked", "blockedBy": ["D-13"], "notes": "Enlaza a Programmatic Pop Under", "contentFile": "content/casos-apuesta-total.md", "children": [] }
+        { "slug": "/casos/raspaditas/", "title": "Raspaditas", "type": "cluster", "status": "blocked", "blockedBy": ["D-13"], "children": [] },
+        { "slug": "/casos/tia/", "title": "TIA", "type": "cluster", "status": "blocked", "blockedBy": ["D-13"], "children": [] },
+        { "slug": "/casos/movistar/", "title": "Movistar", "type": "cluster", "status": "blocked", "blockedBy": ["D-13"], "notes": "Enlaza a Push Premium Video", "children": [] },
+        { "slug": "/casos/disney/", "title": "Disney+", "type": "cluster", "status": "blocked", "blockedBy": ["D-13"], "notes": "Enlaza a Push Premium Video", "children": [] },
+        { "slug": "/casos/directv/", "title": "DirecTV", "type": "cluster", "status": "blocked", "blockedBy": ["D-13"], "notes": "Enlaza a Push Premium Video", "children": [] },
+        { "slug": "/casos/citymall/", "title": "CityMall", "type": "cluster", "status": "blocked", "blockedBy": ["D-13"], "children": [] },
+        { "slug": "/casos/chevrolet/", "title": "Chevrolet", "type": "cluster", "status": "blocked", "blockedBy": ["D-13"], "children": [] },
+        { "slug": "/casos/scotiabank/", "title": "Scotiabank", "type": "cluster", "status": "blocked", "blockedBy": ["D-13"], "children": [] },
+        { "slug": "/casos/bet593/", "title": "BET593", "type": "cluster", "status": "blocked", "blockedBy": ["D-13"], "notes": "Enlaza a Push Programático", "children": [] },
+        { "slug": "/casos/la-ganga/", "title": "La Ganga", "type": "cluster", "status": "blocked", "blockedBy": ["D-13"], "notes": "Enlaza a Push Programático", "children": [] },
+        { "slug": "/casos/apuesta-total/", "title": "Apuesta Total", "type": "cluster", "status": "blocked", "blockedBy": ["D-13"], "notes": "Enlaza a Programmatic Pop Under", "children": [] }
       ]
     },
     {
       "slug": "/recursos/",
-      "title": "Hub editorial citable",
+      "title": "Recursos",
       "type": "pilar",
       "phase": 3,
-      "status": "ready",
-      "contentFile": "content/recursos.md",
-      "nav": { "label": "Recursos", "order": 6, "showInMenu": true },
+      "status": "draft",
+      "notes": "Estaba 'ready' sin archivo de contenido.",
+      "nav": { "label": "Recursos" },
       "children": [
-        { "slug": "/recursos/que-es-ctv/", "title": "Qué es CTV", "type": "cluster", "phase": 3, "status": "ready", "contentFile": "content/recursos-que-es-ctv.md", "children": [] },
-        { "slug": "/recursos/que-es-push/", "title": "Qué es Push", "type": "cluster", "phase": 3, "status": "ready", "notes": "Explica los 3 productos de push por separado.", "contentFile": "content/recursos-que-es-push.md", "children": [] },
-        { "slug": "/recursos/publicidad-sin-cookies/", "title": "Publicidad sin cookies", "type": "cluster", "phase": 3, "status": "ready", "contentFile": "content/recursos-publicidad-sin-cookies.md", "children": [] },
-        { "slug": "/recursos/inteligencia-de-audiencias-ia/", "title": "Inteligencia de audiencias con IA", "type": "cluster", "phase": 3, "status": "partial", "blockedBy": ["D-16"], "contentFile": "content/recursos-inteligencia-de-audiencias-ia.md", "children": [] },
-        { "slug": "/recursos/publicidad-programatica-peru/", "title": "Panorama: Publicidad programática en Perú", "type": "pilar", "phase": 3, "status": "ready", "contentFile": "content/recursos-publicidad-programatica-peru.md", "children": [] },
-        { "slug": "/recursos/publicidad-programatica-ecuador/", "title": "Panorama: Publicidad programática en Ecuador", "type": "pilar", "phase": 3, "status": "ready", "contentFile": "content/recursos-publicidad-programatica-ecuador.md", "children": [] },
-        { "slug": "/recursos/glosario-adtech/", "title": "Glosario AdTech", "type": "cluster", "phase": 3, "status": "ready", "contentFile": "content/recursos-glosario-adtech.md", "children": [] },
+        { "slug": "/recursos/que-es-ctv/", "title": "Qué es CTV", "type": "cluster", "phase": 3, "status": "draft", "children": [] },
+        { "slug": "/recursos/que-es-push/", "title": "Qué es Push", "type": "cluster", "phase": 3, "status": "draft", "notes": "Explica los 3 productos de push por separado.", "children": [] },
+        { "slug": "/recursos/publicidad-sin-cookies/", "title": "Publicidad sin cookies", "type": "cluster", "phase": 3, "status": "draft", "children": [] },
+        { "slug": "/recursos/inteligencia-de-audiencias-ia/", "title": "Inteligencia de audiencias con IA", "type": "cluster", "phase": 3, "status": "partial", "blockedBy": ["D-16"], "children": [] },
+        { "slug": "/recursos/publicidad-programatica-peru/", "title": "Panorama: Publicidad programática en Perú", "type": "pilar", "phase": 3, "status": "draft", "children": [] },
+        { "slug": "/recursos/publicidad-programatica-ecuador/", "title": "Panorama: Publicidad programática en Ecuador", "type": "pilar", "phase": 3, "status": "draft", "children": [] },
+        { "slug": "/recursos/glosario-adtech/", "title": "Glosario AdTech", "type": "cluster", "phase": 3, "status": "draft", "children": [] },
         {
           "slug": "/recursos/comparativas/",
           "title": "Comparativas",
           "type": "cluster",
           "phase": 3,
-          "status": "ready",
-          "contentFile": "content/recursos-comparativas.md",
+          "status": "draft",
           "children": [
-            { "slug": "/recursos/comparativas/ctv-ecuador/", "title": "CTV en Ecuador", "type": "cluster", "phase": 3, "status": "ready", "contentFile": "content/recursos-comparativas-ctv-ecuador.md", "children": [] },
-            { "slug": "/recursos/comparativas/ctv-peru/", "title": "CTV en Perú", "type": "cluster", "phase": 3, "status": "ready", "contentFile": "content/recursos-comparativas-ctv-peru.md", "children": [] }
+            { "slug": "/recursos/comparativas/ctv-ecuador/", "title": "CTV en Ecuador", "type": "cluster", "phase": 3, "status": "draft", "children": [] },
+            { "slug": "/recursos/comparativas/ctv-peru/", "title": "CTV en Perú", "type": "cluster", "phase": 3, "status": "draft", "children": [] }
           ]
         }
       ]
     },
     {
-      "slug": "/peru/",
-      "title": "Mediaudience Perú",
-      "type": "local",
+      "slug": "/mercados/",
+      "title": "Mercados de Mediaudience",
+      "type": "pilar",
       "phase": "1b",
       "status": "blocked",
-      "blockedBy": ["D-01", "D-30"],
-      "notes": "Nodo Organization local. Falta fecha de constitución de la sociedad peruana (grupo) y socio local.",
-      "contentFile": "content/peru.md",
-      "nav": { "label": "Perú", "order": 7, "showInMenu": true },
-      "children": []
-    },
-    {
-      "slug": "/mexico/",
-      "title": "Mediaudience México",
-      "type": "local",
-      "phase": "1b",
-      "status": "blocked",
-      "blockedBy": ["D-29", "D-30"],
-      "notes": "Nodo Organization local. Falta razón social/domicilio y socio local.",
-      "contentFile": "content/mexico.md",
-      "nav": { "label": "México", "order": 8, "showInMenu": true },
-      "children": []
-    },
-    {
-      "slug": "/ecuador/",
-      "title": "Mediaudience Ecuador",
-      "type": "local",
-      "phase": "1b",
-      "status": "ready",
-      "notes": "Única sociedad local con datos completos hoy. foundingDate 2022-01-10 va aquí, nunca en la marca-entidad.",
-      "contentFile": "content/ecuador.md",
-      "nav": { "label": "Ecuador", "order": 9, "showInMenu": true },
-      "children": []
-    },
-    {
-      "slug": "/chile/",
-      "title": "Mediaudience Chile",
-      "type": "local",
-      "phase": "1b",
-      "status": "blocked",
-      "blockedBy": ["D-29", "D-30"],
-      "notes": "Nodo Organization local. Falta razón social/domicilio y socio local.",
-      "contentFile": "content/chile.md",
-      "nav": { "label": "Chile", "order": 10, "showInMenu": true },
-      "children": []
-    },
-    {
-      "slug": "/colombia/",
-      "title": "Mediaudience Colombia",
-      "type": "local",
-      "phase": null,
-      "status": "blocked",
-      "blockedBy": ["D-04"],
-      "notes": "Fuera del árbol hasta que D-04 confirme si hay operación real en Colombia.",
-      "contentFile": null,
-      "nav": { "label": "Colombia", "order": 11, "showInMenu": false },
-      "children": []
+      "blockedBy": ["D-01", "D-29", "D-30"],
+      "notes": "Hub T6. Se publica cuando haya al menos dos mercados ready (PLANTILLAS T6). Mientras tanto, los países publicables se enlazan desde /nosotros/ y el footer.",
+      "nav": { "label": "Mercados" },
+      "children": [
+        {
+          "slug": "/mercados/peru/",
+          "title": "Mediaudience Perú",
+          "type": "local",
+          "phase": "1b",
+          "status": "blocked",
+          "blockedBy": ["D-01", "D-30"],
+          "notes": "Nodo Organization local. Falta fecha de constitución de la sociedad peruana (grupo) y socio local.",
+          "nav": { "label": "Perú" },
+          "children": []
+        },
+        {
+          "slug": "/mercados/mexico/",
+          "title": "Mediaudience México",
+          "type": "local",
+          "phase": "1b",
+          "status": "blocked",
+          "blockedBy": ["D-29", "D-30"],
+          "notes": "Nodo Organization local. Falta razón social/domicilio y socio local.",
+          "nav": { "label": "México" },
+          "children": []
+        },
+        {
+          "slug": "/mercados/ecuador/",
+          "title": "Mediaudience Ecuador",
+          "type": "local",
+          "phase": "1b",
+          "status": "ready",
+          "notes": "Única sociedad local con datos completos hoy. foundingDate 2022-01-10 va aquí, nunca en la marca-entidad.",
+          "nav": { "label": "Ecuador" },
+          "children": []
+        },
+        {
+          "slug": "/mercados/chile/",
+          "title": "Mediaudience Chile",
+          "type": "local",
+          "phase": "1b",
+          "status": "blocked",
+          "blockedBy": ["D-29", "D-30"],
+          "notes": "Nodo Organization local. Falta razón social/domicilio y socio local.",
+          "nav": { "label": "Chile" },
+          "children": []
+        },
+        {
+          "slug": "/mercados/colombia/",
+          "title": "Mediaudience Colombia",
+          "type": "local",
+          "phase": null,
+          "status": "blocked",
+          "blockedBy": ["D-04"],
+          "notes": "Fuera del árbol hasta que D-04 confirme si hay operación real en Colombia.",
+          "nav": { "label": "Colombia" },
+          "children": []
+        }
+      ]
     },
     {
       "slug": "/contacto/",
@@ -282,19 +294,113 @@
       "type": "cluster",
       "phase": 1,
       "status": "ready",
-      "contentFile": "content/contacto.md",
-      "nav": { "label": "Contacto", "order": 12, "showInMenu": true },
+      "nav": { "label": "Contacto" },
       "children": []
     },
     {
-      "slug": "/legal/privacidad/",
-      "title": "Política de privacidad",
+      "slug": "/legal/",
+      "title": "Legal",
       "type": "utilitaria",
       "phase": 1,
-      "status": "ready",
-      "contentFile": "content/legal-privacidad.md",
-      "nav": { "label": "Privacidad", "order": 13, "showInMenu": false },
-      "children": []
+      "status": "draft",
+      "notes": "Contenedor de las páginas legales. Sin página propia prevista.",
+      "nav": { "label": "Legal" },
+      "children": [
+        { "slug": "/legal/privacidad/", "title": "Política de privacidad", "type": "utilitaria", "phase": 1, "status": "draft", "notes": "Estaba 'ready' sin archivo de contenido.", "nav": { "label": "Privacidad" }, "children": [] },
+        { "slug": "/legal/terminos/", "title": "Términos de uso", "type": "utilitaria", "phase": 1, "status": "draft", "notes": "Previsto en la barra legal del footer (PLANTILLAS §1.4).", "nav": { "label": "Términos" }, "children": [] },
+        { "slug": "/legal/cookies/", "title": "Política de cookies", "type": "utilitaria", "phase": 1, "status": "draft", "notes": "Previsto en la barra legal del footer (PLANTILLAS §1.4).", "nav": { "label": "Cookies" }, "children": [] }
+      ]
     }
-  ]
+  ],
+  "navegacion": {
+    "notes": "Header y footer se generan desde acá (PLANTILLAS §1.2–1.4). Solo se muestran ítems cuyo destino está 'ready'; un grupo sin ítems visibles no se muestra. 'anchor' es el texto del enlace: descriptivo, con marca o tema. Los fragmentos deben existir como id en la página destino o el build falla.",
+    "grupos": {
+      "objetivos": {
+        "label": "Objetivos",
+        "items": [
+          { "label": "Alcance y awareness", "anchor": "Connected TV de Mediaudience", "href": "/soluciones/connected-tv/#alcance" },
+          { "label": "Consideración", "anchor": "Display y video programático", "href": "/soluciones/programmatic/#consideracion" },
+          { "label": "Conversión", "anchor": "Mobile Push Programático", "href": "/soluciones/mobile-push/programatico/#conversion" },
+          { "label": "Visitas a tienda", "anchor": "Push Premium Video georreferenciado", "href": "/soluciones/mobile-push/premium-video/#visitas-a-tienda" }
+        ]
+      },
+      "productos": {
+        "label": "Productos",
+        "items": [
+          { "label": "SSP", "anchor": "SSP de Mediaudience", "href": "/soluciones/ssp/" },
+          { "label": "Representación de medios", "anchor": "Representación de medios digitales", "href": "/soluciones/representacion-de-medios/" },
+          { "label": "Mobile Push Premium con Claro", "anchor": "Push Premium con first-party data de Claro", "href": "/soluciones/mobile-push/premium-claro/" },
+          { "label": "Mobile Push Premium Video", "anchor": "Push Premium Video georreferenciado", "href": "/soluciones/mobile-push/premium-video/" },
+          { "label": "Mobile Push Programático", "anchor": "Mobile Push Programático de Mediaudience", "href": "/soluciones/mobile-push/programatico/" }
+        ]
+      },
+      "canales": {
+        "label": "Canales",
+        "items": [
+          { "label": "Connected TV", "anchor": "CTV e inventario premium de streaming", "href": "/soluciones/connected-tv/" },
+          { "label": "Mobile Push", "anchor": "Mobile Push de Mediaudience", "href": "/soluciones/mobile-push/" },
+          { "label": "Display y video programático", "anchor": "Programmatic sobre DV360", "href": "/soluciones/programmatic/" }
+        ]
+      },
+      "herramientas": {
+        "label": "Herramientas",
+        "items": [
+          { "label": "Consola de campañas", "anchor": "Consola de campañas de Mediaudience", "href": "/soluciones/ssp/#consola" },
+          { "label": "Segmentos de audiencia", "anchor": "Segmentos de audiencia", "href": "/soluciones/ssp/#segmentos" },
+          { "label": "Medición y reportes", "anchor": "Medición y reportes", "href": "/soluciones/representacion-de-medios/#medicion" }
+        ]
+      },
+      "nosotros": {
+        "label": "Nosotros",
+        "items": [
+          { "label": "Qué es Mediaudience", "anchor": "Qué es Mediaudience", "href": "/nosotros/" },
+          { "label": "Socios", "anchor": "Socios del grupo Mediaudience", "href": "/nosotros/socios/" },
+          { "label": "Contacto", "anchor": "Contacto de Mediaudience", "href": "/contacto/" }
+        ]
+      },
+      "recursos": {
+        "label": "Recursos",
+        "items": [
+          { "label": "Qué es CTV", "anchor": "Qué es Connected TV", "href": "/recursos/que-es-ctv/" },
+          { "label": "Qué es Push", "anchor": "Qué es Mobile Push", "href": "/recursos/que-es-push/" },
+          { "label": "Publicidad sin cookies", "anchor": "Publicidad sin cookies", "href": "/recursos/publicidad-sin-cookies/" },
+          { "label": "Panorama Perú", "anchor": "Publicidad programática en Perú", "href": "/recursos/publicidad-programatica-peru/" },
+          { "label": "Panorama Ecuador", "anchor": "Publicidad programática en Ecuador", "href": "/recursos/publicidad-programatica-ecuador/" },
+          { "label": "Comparativas", "anchor": "Comparativas de Connected TV", "href": "/recursos/comparativas/" },
+          { "label": "Glosario", "anchor": "Glosario AdTech de Mediaudience", "href": "/recursos/glosario-adtech/" }
+        ]
+      },
+      "compania": {
+        "label": "Compañía",
+        "items": [
+          { "label": "Nosotros", "anchor": "Qué es Mediaudience", "href": "/nosotros/" },
+          { "label": "Socios", "anchor": "Socios del grupo Mediaudience", "href": "/nosotros/socios/" },
+          { "label": "Recursos", "anchor": "Recursos de Mediaudience", "href": "/recursos/" },
+          { "label": "Contacto", "anchor": "Contacto de Mediaudience", "href": "/contacto/" }
+        ]
+      },
+      "mercados": {
+        "label": "Mercados",
+        "items": [
+          { "label": "Perú", "anchor": "Mediaudience Perú", "href": "/mercados/peru/" },
+          { "label": "México", "anchor": "Mediaudience México", "href": "/mercados/mexico/" },
+          { "label": "Ecuador", "anchor": "Mediaudience Ecuador", "href": "/mercados/ecuador/" },
+          { "label": "Chile", "anchor": "Mediaudience Chile", "href": "/mercados/chile/" }
+        ]
+      },
+      "legal": {
+        "label": "Legal",
+        "items": [
+          { "label": "Términos", "anchor": "Términos de uso", "href": "/legal/terminos/" },
+          { "label": "Privacidad", "anchor": "Política de privacidad", "href": "/legal/privacidad/" },
+          { "label": "Cookies", "anchor": "Política de cookies", "href": "/legal/cookies/" }
+        ]
+      }
+    },
+    "header": ["objetivos", "productos", "canales", "herramientas", "nosotros", "recursos"],
+    "headerCta": { "label": "Agenda una demo", "anchor": "Agenda una demo", "href": "/contacto/" },
+    "footer": ["objetivos", "productos", "canales", "herramientas", "compania"],
+    "footerMercados": "mercados",
+    "footerLegal": "legal"
+  }
 }

@@ -1,0 +1,20 @@
+{
+  "meta": { "nota": "Fixture." },
+  "marca": {
+    "description": "Entidad de prueba del andamiaje.",
+    "foundingLocation": { "name": "País Dos", "addressCountry": "PE" },
+    "areaServed": ["PE", "EC"],
+    "knowsAbout": ["Prueba"],
+    "sameAs": []
+  },
+  "mercados": [
+    { "codigo": "PE", "pais": "País Dos", "slug": "/mercados/pais-dos/", "bloqueadoPor": ["D-01"] },
+    {
+      "codigo": "EC", "pais": "País Uno", "slug": "/mercados/pais-uno/",
+      "legalName": "Sociedad de Prueba S.A.S.", "foundingDate": "2020-01-01",
+      "address": { "streetAddress": "Calle de Prueba 1", "addressLocality": "Ciudad Uno", "addressRegion": "Región Uno", "addressCountry": "EC" },
+      "bloqueadoPor": []
+    }
+  ],
+  "llms": { "resumen": "Sitio de prueba del andamiaje." }
+}

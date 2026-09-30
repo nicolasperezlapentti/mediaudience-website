@@ -4,11 +4,7 @@
    NO EDITAR A MANO. Ejecutar: node scripts/build-tokens.mjs
    ============================================================ */
 
-/* PENDIENTE: fuentes desde Google Fonts, no auto-hospedadas.
-   Para SSR/SSG instalar @fontsource/space-grotesk, @fontsource/ibm-plex-sans,
-   @fontsource/jetbrains-mono, importarlas en el layout base (subset latin,
-   font-display: swap) y poner typography.fontSourceSelfHosted = true.
-   Un @import de terceros bloquea el render en cada página. */
+/* Fuentes auto-hospedadas vía @fontsource. */
 
 :root {
   /* ---- color ---- */

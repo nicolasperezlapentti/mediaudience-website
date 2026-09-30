@@ -3,6 +3,7 @@ slug: "/soluciones/programmatic/"
 title: "Publicidad programática (DV360)"
 metaDescription: "Compra programática sobre DV360 para agencias y anunciantes en Perú, México, Ecuador y Chile."
 status: "ready"
+template: "T2"
 blockedBy: ["D-09", "D-13"]
 schemaType: "Service"
 lastUpdated: "2026-08-26"

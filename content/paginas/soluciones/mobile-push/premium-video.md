@@ -3,6 +3,7 @@ slug: "/soluciones/mobile-push/premium-video/"
 title: "Push Premium Video georreferenciado"
 metaDescription: "Publicidad móvil georreferenciada e hipersegmentada por seis drivers de comportamiento. 12 millones de usuarios en Ecuador."
 status: "ready"
+template: "T2"
 blockedBy: ["D-06", "D-14"]
 schemaType: "Service"
 lastUpdated: "2026-08-26"
@@ -22,7 +23,9 @@ El Push Premium Video de Mediaudience es publicidad móvil georreferenciada e hi
 - Modelo de compra: CPE (costo por engagement)
 - Secuencia creativa: Rich Notification → Video Notification
 
-## Los seis drivers de segmentación
+## Desarrollo
+
+### Los seis drivers de segmentación
 
 En orden de precisión:
 
@@ -33,11 +36,11 @@ En orden de precisión:
 5. **Forma de pago** — comportamiento transaccional
 6. **Demográfico** — variables de perfil
 
-## Formato
+### Formato
 
 Secuencia de Rich Notification seguida de Video Notification, lo que permite construir una narrativa en dos tiempos sobre la misma audiencia.
 
-## Restricciones de categoría
+### Restricciones de categoría
 
 Alcohol, tabaco, gambling y política *(alcance exacto pendiente — D-14)*.
 

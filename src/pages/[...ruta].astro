@@ -1,0 +1,62 @@
+---
+/**
+ * Una ruta por página ready. Fase A: HTML semántico sin componentes visuales, para que el
+ * pipeline completo (contenido → gates → HTML de servidor → test de aceptación) corra de
+ * punta a punta. Fase B reemplaza el cuerpo por los bloques de design/referencia/.
+ */
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import { modeloPagina } from '../lib/render.ts';
+import { cargarSitio } from '../lib/sitio.ts';
+
+export async function getStaticPaths() {
+  const entradas = await getCollection('paginas');
+  return entradas.map((e) => ({
+    params: { ruta: e.id === '/' ? undefined : e.id.slice(1, -1) },
+    props: { id: e.id },
+  }));
+}
+
+const { id } = Astro.props;
+const p = modeloPagina(cargarSitio(), id);
+---
+
+<Base titulo={p.titulo} descripcion={p.descripcion} canonica={p.canonica}>
+  <script type="application/ld+json" slot="jsonld" set:html={p.jsonld} />
+  <main id="contenido">
+    <h1>{p.h1}</h1>
+    <p data-answer-target set:html={p.answerTargetHtml} />
+    {
+      p.secciones.map((s) => (
+        <section id={s.id}>
+          {s.titulo && <h2>{s.titulo}</h2>}
+          <Fragment set:html={s.html} />
+        </section>
+      ))
+    }
+    {
+      p.hijos.length > 0 && (
+        <section id="indice">
+          <ul>
+            {p.hijos.map((h) => (
+              <li>
+                <a href={h.href}>{h.texto}</a>
+                <p>{h.descripcion}</p>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )
+    }
+    {
+      p.entidad && (
+        <section id="entidad">
+          {p.entidad.descriptor && <p>{p.entidad.descriptor}</p>}
+          <p>
+            <a href={p.entidad.enlace.href}>{p.entidad.enlace.texto}</a>
+          </p>
+        </section>
+      )
+    }
+  </main>
+</Base>

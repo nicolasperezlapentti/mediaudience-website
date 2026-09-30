@@ -3,9 +3,12 @@ slug: "/contacto/"
 title: "Contacto"
 metaDescription: "Contactá al equipo de Mediaudience en Perú, México, Ecuador o Chile."
 status: "ready"
+template: "contacto"
 blockedBy: ["D-18", "D-30"]
 schemaType: "ContactPage"
 lastUpdated: "2026-08-26"
+gates:
+  "Contacto por mercado": ["D-18", "D-30"]
 ---
 
 # Contacto

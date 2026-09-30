@@ -3,6 +3,7 @@ slug: "/soluciones/connected-tv/"
 title: "Connected TV (CTV)"
 metaDescription: "Inventario premium de streaming con segmentación contextual y video non-skippable, como SSP de primera línea de compra."
 status: "ready"
+template: "T2"
 blockedBy: ["D-05", "D-13", "D-15", "D-22", "D-23"]
 schemaType: "Service"
 lastUpdated: "2026-08-26"
@@ -22,11 +23,13 @@ Según datos de la plataforma, la solución de Connected TV de Mediaudience ofre
 - Modelo de compra: CPM, objetivo de alcance
 - Sin montos mínimos de inversión *(según datos de la compañía — D-24)*
 
-## Qué es Connected TV
+## Desarrollo
+
+### Qué es Connected TV
 
 Publicidad de video en dispositivos conectados a internet con acceso a servicios de streaming: Smart TV, devices de streaming, consolas de videojuegos y dispositivos OTT (desktop, smartphone, tablet). Cubre plataformas de streaming de pago y gratuitas.
 
-## Segmentación contextual
+### Segmentación contextual
 
 Siete ejes de segmentación:
 
@@ -40,13 +43,13 @@ Siete ejes de segmentación:
 | Dispositivo | Tipo, marca, modelo |
 | Customizable | Paquetes personalizados |
 
-## Formato
+### Formato
 
 Video non-skippable, que puede salir como pre-roll, mid-roll o post-roll. El límite técnico es de 120 segundos, con recomendación comercial de no exceder los 30 segundos.
 
 **Formatos interactivos disponibles:** expandible con galería de productos + código QR, expandible con galería de videos, y canvas carrusel.
 
-## Contexto de consumo
+### Contexto de consumo
 
 Según Comscore Custom Solutions, *"CTV OTT & Addressable Advertising in Latin America"* (2024) *(D-22)*:
 
@@ -54,7 +57,7 @@ Según Comscore Custom Solutions, *"CTV OTT & Addressable Advertising in Latin A
 - 56% considera que la sala de estar es la mejor opción para ver películas y series en CTV.
 - 83% practica coviewing: ve contenido de streaming acompañado.
 
-## Especificaciones técnicas
+### Especificaciones técnicas
 
 | Parámetro | Requisito |
 |---|---|
@@ -68,7 +71,7 @@ Según Comscore Custom Solutions, *"CTV OTT & Addressable Advertising in Latin A
 
 **Recomendación de material.** Usar anuncios de televisión o de YouTube. No adaptar un display a video sin sonido.
 
-## Reporting
+### Reporting
 
 Dashboard personalizado o reporte en Excel, con optimización constante.
 

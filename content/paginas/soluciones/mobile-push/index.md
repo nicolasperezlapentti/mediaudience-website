@@ -3,6 +3,7 @@ slug: "/soluciones/mobile-push/"
 title: "Mobile Push"
 metaDescription: "Tres productos de Mobile Push con universos, CTR y ventanas de disparo distintos: Premium con Claro, Premium Video georreferenciado y Programático."
 status: "ready"
+template: "T2-hub"
 blockedBy: ["D-06", "D-14"]
 schemaType: "Service"
 lastUpdated: "2026-08-26"
@@ -14,7 +15,9 @@ lastUpdated: "2026-08-26"
 
 Mediaudience comercializa tres productos distintos de Mobile Push: Push Premium con Claro (notificación vía apps nativas de Claro con first-party data), Push Premium Video georreferenciado (hipersegmentado por seis drivers de comportamiento) y Push Programático (notificación al dispositivo aunque el usuario no esté navegando). Cada uno tiene universo, CTR de referencia y ventana de disparo propios.
 
-## Por qué son tres productos y no uno
+## Los tres productos
+
+### Por qué son tres productos y no uno
 
 No es una distinción de formato: son tres universos de usuarios diferentes, tres rangos de CTR de referencia y dos ventanas de disparo distintas. Presentarlos como un solo producto lleva a expectativas equivocadas de alcance y de rendimiento.
 
@@ -26,7 +29,9 @@ No es una distinción de formato: son tres universos de usuarios diferentes, tre
 
 *Cifras según datos de la compañía, sin fecha de corte (D-06).*
 
-## Restricciones de categoría
+## Desarrollo
+
+### Restricciones de categoría
 
 Los tres productos tienen restricciones para alcohol, tabaco, gambling y política *(alcance exacto pendiente — D-14)*.
 

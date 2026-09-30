@@ -2,7 +2,7 @@
 
 Reglas de aplicación para el sitio web. Los valores viven en `tokens.json`; este archivo dice **cómo** usarlos. Toda regla aquí es obligatoria salvo que diga "preferido".
 
-Compañía: Mediaudience, AdTech multilatina. Audiencia del sitio: CMOs, directores de medios, agencias. Canales de producto: Connected TV, Mobile Push, Programmatic Display/Video, In-Game, Retail Media.
+Compañía: Mediaudience, AdTech multilatina. Audiencia del sitio: CMOs, directores de medios, agencias. Canales de producto: Connected TV, Mobile Push, Programmatic Display/Video.
 
 **Principio rector:** la pantalla se lee como un panel de instrumentos. Fondo ink, hairlines finos, un solo acento cian usado como señal, y las cifras como protagonistas. No es "SaaS amigable": sin sombras suaves, sin degradados pastel, sin pills redondeadas por todas partes.
 

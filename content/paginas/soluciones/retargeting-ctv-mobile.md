@@ -3,6 +3,7 @@ slug: "/soluciones/retargeting-ctv-mobile/"
 title: "Retargeting cruzado CTV + Mobile"
 metaDescription: "Doble impacto sobre la misma audiencia: impacto en Connected TV y refuerzo en móvil por reconocimiento de IP."
 status: "ready"
+template: "T2"
 blockedBy: ["D-13"]
 schemaType: "Service"
 lastUpdated: "2026-08-26"
@@ -20,7 +21,9 @@ El retargeting cruzado de Mediaudience impacta a la misma audiencia dos veces: p
 - Canales combinados: Connected TV + Mobile Push
 - Tipo: capacidad transversal sobre productos existentes
 
-## Por qué importa
+## Desarrollo
+
+### Por qué importa
 
 Connected TV construye alcance y recuerdo, pero no admite click. El refuerzo en móvil resuelve esa limitación: el mismo hogar que vio el anuncio en la TV recibe después una notificación en el dispositivo, donde sí hay una acción posible.
 

@@ -3,6 +3,7 @@ slug: "/"
 title: "Mediaudience — Compañía multilatina de AdTech"
 metaDescription: "Mediaudience, compañía multilatina de AdTech: SSP y representación de medios digitales en Perú, México, Ecuador y Chile."
 status: "ready"
+template: "home"
 blockedBy: ["D-15"]
 schemaType: "Organization"
 lastUpdated: "2026-08-26"
@@ -43,7 +44,7 @@ La operación es local en cada mercado. Cada país cuenta con sociedad constitui
 
 ## FAQ
 
-**¿Mediaudience es lo mismo que "media audience"?**
+**¿Mediaudience es lo mismo que "{{homonimo}}"?**
 Mediaudience es una compañía multilatina de tecnología publicitaria, de origen peruano, con empresa local en Perú, México, Ecuador y Chile — no el concepto genérico de "audiencia de medios".
 
 **¿En qué países opera Mediaudience?**

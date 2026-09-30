@@ -3,6 +3,7 @@ slug: "/soluciones/mobile-push/programatico/"
 title: "Push Programático"
 metaDescription: "Notificación en imagen o video entregada al dispositivo aunque el usuario no esté navegando. Disparo de lunes a domingo."
 status: "ready"
+template: "T2"
 blockedBy: ["D-14"]
 schemaType: "Service"
 lastUpdated: "2026-08-26"
@@ -25,7 +26,9 @@ El Push Programático de Mediaudience entrega notificaciones en imagen o video d
 
 A diferencia de un formato display que depende de que el usuario esté en una página, la notificación programática se entrega al dispositivo. Eso amplía las ventanas de contacto disponibles, incluyendo fines de semana.
 
-## Restricciones de categoría
+## Desarrollo
+
+### Restricciones de categoría
 
 Alcohol, tabaco, gambling y política *(alcance exacto pendiente — D-14)*.
 

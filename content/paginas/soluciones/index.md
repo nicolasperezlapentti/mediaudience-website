@@ -3,6 +3,7 @@ slug: "/soluciones/"
 title: "Soluciones de Mediaudience"
 metaDescription: "Connected TV, Mobile Push en tres productos, programmatic sobre DV360 y retargeting cruzado, como SSP de primera línea de compra."
 status: "ready"
+template: "T6"
 blockedBy: ["D-07", "D-16"]
 schemaType: "Service"
 lastUpdated: "2026-08-26"
@@ -14,7 +15,7 @@ lastUpdated: "2026-08-26"
 
 Mediaudience ofrece, según su portafolio, Connected TV con inventario premium de streaming, tres productos de Mobile Push (Premium con Claro, Premium Video georreferenciado y Programático), publicidad programática sobre DV360 y retargeting cruzado CTV–Mobile, como SSP de primera línea de compra en Perú, México, Ecuador y Chile.
 
-## Portafolio
+## Desarrollo
 
 ### [Connected TV de Mediaudience](/soluciones/connected-tv/)
 Video non-skippable en inventario premium de streaming, con segmentación contextual por siete ejes. Modelo CPM, objetivo de alcance.
@@ -35,7 +36,7 @@ Capacidad transversal: doble impacto sobre la misma audiencia por reconocimiento
 <!-- BLOQUEADO D-16: ONE by SQREEM no se lista hasta definir encuadre correcto de las marcas de referencia. -->
 <!-- NO INCLUIR: "Performance On Site" (no documentado — D-08) ni "04 DSP" sin nombrarlos (D-09). -->
 
-## Restricciones por producto
+### Restricciones por producto
 
 Los productos de Mobile Push tienen restricciones de categoría: alcohol, tabaco, gambling y política *(alcance exacto pendiente — D-14)*.
 

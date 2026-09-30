@@ -1,8 +1,9 @@
 ---
-slug: "/ecuador/"
+slug: "/mercados/ecuador/"
 title: "Mediaudience Ecuador"
 metaDescription: "Mediaudience Ecuador es la operación local en Ecuador de Mediaudience, compañía multilatina de AdTech de origen peruano."
 status: "ready"
+template: "T3"
 blockedBy: ["D-18"]
 schemaType: "Organization"
 lastUpdated: "2026-08-26"
@@ -22,7 +23,7 @@ Mediaudience Ecuador es la operación local de Mediaudience, compañía multilat
 - Universo Push Premium con Claro: 4 millones *(según datos de la compañía — D-06)*
 - Universo Push Premium Video: 12 millones *(según datos de la compañía — D-06)*
 
-## Soluciones disponibles en Ecuador
+## Soluciones disponibles
 
 - [Connected TV de Mediaudience](/soluciones/connected-tv/)
 - [Push Premium con Claro](/soluciones/mobile-push/premium-claro/)
@@ -40,7 +41,7 @@ Mediaudience Ecuador es la operación local de Mediaudience, compañía multilat
 | Domicilio | Av. Primera 212, Samborondón, Guayas, Ecuador |
 | Actividad (CIIU) | M7310.04 |
 
-## Contacto
+## Contacto local
 
 <!-- D-18: confirmar vigencia del contacto de Rodolfo Peralta antes de publicar. -->
 

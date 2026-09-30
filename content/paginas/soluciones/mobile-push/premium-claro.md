@@ -3,6 +3,7 @@ slug: "/soluciones/mobile-push/premium-claro/"
 title: "Push Premium con Claro"
 metaDescription: "Notificaciones vía apps nativas de Claro, integradas por SDK para obtener first-party data. Modelo CPE, disparo de lunes a viernes."
 status: "ready"
+template: "T2"
 blockedBy: ["D-06", "D-14"]
 schemaType: "Service"
 lastUpdated: "2026-08-26"
@@ -26,7 +27,9 @@ El Push Premium con Claro de Mediaudience envía notificaciones a través de las
 
 La notificación se entrega a través de las aplicaciones nativas de Claro. La integración por SDK permite acceder a first-party data del operador, lo que diferencia a este producto de un push genérico basado en señales de terceros.
 
-## Restricciones de categoría
+## Desarrollo
+
+### Restricciones de categoría
 
 Alcohol, tabaco, gambling y política *(alcance exacto pendiente — D-14)*.
 

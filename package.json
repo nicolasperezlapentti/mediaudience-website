@@ -1,0 +1,40 @@
+{
+  "name": "mediaudience-website",
+  "private": true,
+  "type": "module",
+  "version": "0.1.0",
+  "engines": {
+    "node": ">=22.18"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check",
+    "tokens": "node scripts/build-tokens.mjs",
+    "tokens:check": "node scripts/build-tokens.mjs --check",
+    "test": "node --test \"tests/**/*.test.ts\"",
+    "test:aceptacion": "node scripts/test-aceptacion.ts",
+    "test:fixtures": "MA_CONTENIDO=tests/fixtures/sitio-valido MA_DIST=dist-fixture node scripts/test-aceptacion.ts",
+    "fase0": "node scripts/fase0.ts"
+  },
+  "dependencies": {
+    "@fontsource/ibm-plex-sans": "^5.3.0",
+    "@fontsource/jetbrains-mono": "^5.3.0",
+    "@fontsource/space-grotesk": "^5.3.0",
+    "astro": "^7.3.5",
+    "hast-util-to-html": "^9.0.5",
+    "mdast-util-to-hast": "^13.2.1",
+    "mdast-util-to-string": "^4.0.0",
+    "node-html-parser": "^9.0.4",
+    "remark-gfm": "^4.0.1",
+    "remark-parse": "^11.0.0",
+    "unified": "^11.0.5",
+    "yaml": "^2.9.1"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.10",
+    "@types/node": "^26.6.3",
+    "typescript": "^6.0.3"
+  }
+}

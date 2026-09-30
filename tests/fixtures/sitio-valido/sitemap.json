@@ -1,0 +1,49 @@
+{
+  "meta": { "nota": "Fixture del andamiaje: sitio mínimo que cumple todos los gates. Texto sintético, no es contenido publicable." },
+  "pages": [
+    { "slug": "/", "title": "Inicio", "type": "pilar", "status": "ready", "nav": { "label": "Inicio" }, "children": [] },
+    { "slug": "/nosotros/", "title": "Entidad de prueba", "type": "pilar", "status": "ready", "nav": { "label": "Nosotros" }, "children": [] },
+    {
+      "slug": "/soluciones/", "title": "Soluciones de prueba", "type": "pilar", "status": "ready", "nav": { "label": "Soluciones" },
+      "children": [
+        { "slug": "/soluciones/producto-a/", "title": "Producto A", "type": "pilar", "status": "ready", "nav": { "label": "Producto A" }, "children": [] },
+        { "slug": "/soluciones/producto-b/", "title": "Producto B", "type": "pilar", "status": "blocked", "blockedBy": ["D-02"], "nav": { "label": "Producto B" }, "children": [] },
+        { "slug": "/soluciones/producto-c/", "title": "Producto C", "type": "pilar", "status": "draft", "nav": { "label": "Producto C" }, "children": [] }
+      ]
+    },
+    {
+      "slug": "/mercados/", "title": "Mercados", "type": "pilar", "status": "blocked", "blockedBy": ["D-01"], "nav": { "label": "Mercados" },
+      "children": [
+        { "slug": "/mercados/pais-uno/", "title": "País Uno", "type": "local", "status": "ready", "nav": { "label": "País Uno" }, "children": [] },
+        { "slug": "/mercados/pais-dos/", "title": "País Dos", "type": "local", "status": "blocked", "blockedBy": ["D-01"], "nav": { "label": "País Dos" }, "children": [] }
+      ]
+    },
+    { "slug": "/contacto/", "title": "Contacto", "type": "cluster", "status": "ready", "nav": { "label": "Contacto" }, "children": [] }
+  ],
+  "navegacion": {
+    "grupos": {
+      "objetivos": { "label": "Objetivos", "items": [
+        { "label": "Alcance", "anchor": "Alcance con el Producto A", "href": "/soluciones/producto-a/#alcance" },
+        { "label": "Otro", "anchor": "Producto B de prueba", "href": "/soluciones/producto-b/" }
+      ] },
+      "productos": { "label": "Productos", "items": [
+        { "label": "Producto A", "anchor": "Producto A de prueba", "href": "/soluciones/producto-a/" },
+        { "label": "Producto C", "anchor": "Producto C de prueba", "href": "/soluciones/producto-c/" }
+      ] },
+      "compania": { "label": "Compañía", "items": [
+        { "label": "Nosotros", "anchor": "Entidad de prueba", "href": "/nosotros/" },
+        { "label": "Contacto", "anchor": "Contacto de prueba", "href": "/contacto/" }
+      ] },
+      "mercados": { "label": "Mercados", "items": [
+        { "label": "País Uno", "anchor": "Operación de prueba en País Uno", "href": "/mercados/pais-uno/" },
+        { "label": "País Dos", "anchor": "Operación de prueba en País Dos", "href": "/mercados/pais-dos/" }
+      ] },
+      "legal": { "label": "Legal", "items": [] }
+    },
+    "header": ["objetivos", "productos", "compania"],
+    "headerCta": { "label": "Agenda una demo", "anchor": "Agenda una demo", "href": "/contacto/" },
+    "footer": ["objetivos", "productos", "compania"],
+    "footerMercados": "mercados",
+    "footerLegal": "legal"
+  }
+}
