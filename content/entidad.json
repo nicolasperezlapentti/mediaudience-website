@@ -1,7 +1,7 @@
 {
   "meta": {
     "fuente": "factbook-mediaudience.md v1.2 §1.3 + Arquitectura-GEO-AEO-Mediaudience-v2.md §5",
-    "regla": "Datos del grafo JSON-LD de dos capas. La marca-entidad NO lleva foundingDate ni address (D-01): el schema lo rechaza. Un mercado solo genera nodo Organization cuando tiene legalName, foundingDate y address, y ninguna de sus dudas está abierta."
+    "regla": "Datos del grafo JSON-LD de dos capas, de la tabla de sociedades locales (B-03) y del bloque legal de cada página país (B-04). identificacionFiscal ({ tipo: RUC|RFC|RUT, valor }) y ciiu son opcionales: sin dato, el bloque legal no los muestra. La marca-entidad NO lleva foundingDate ni address (D-01): el schema lo rechaza. Un mercado solo genera nodo Organization cuando tiene legalName, foundingDate y address, y ninguna de sus dudas está abierta."
   },
   "marca": {
     "description": "Compañía multilatina de tecnología publicitaria (AdTech) y representación de medios digitales, de origen peruano, que opera como empresa local en Perú, México, Ecuador y Chile.",
@@ -36,6 +36,7 @@
       "slug": "/mercados/ecuador/",
       "legalName": "Mediaudience S.A.S.",
       "foundingDate": "2022-01-10",
+      "ciiu": "M7310.04",
       "address": {
         "streetAddress": "Av. Primera 212",
         "addressLocality": "Samborondón",

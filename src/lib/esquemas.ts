@@ -11,7 +11,7 @@
  */
 import { z } from 'astro/zod';
 import { aplanar, cargarDudas, cargarSitemap, idDuda, slugCanonico, STATUS, type Dudas, type Sitemap } from './datos.ts';
-import { defSeccion, IDS_PLANTILLA, PLANTILLAS, type DefSeccion, type IdPlantilla } from './plantillas.ts';
+import { defSeccion, IDS_PLANTILLA, PLANTILLAS, type DefPlantilla, type DefSeccion, type IdPlantilla } from './plantillas.ts';
 import { GATES } from './problemas.ts';
 
 const enlace = z.object({ url: z.string(), texto: z.string() });
@@ -39,11 +39,14 @@ function esquemaSeccion(def: DefSeccion) {
 
 function esquemaSecciones(id: IdPlantilla) {
   const defs = PLANTILLAS[id].secciones as readonly DefSeccion[];
+  const def: DefPlantilla = PLANTILLAS[id];
+  const generados = def.generadosNoEscritos ?? {};
   const permitidos = defs.map((d) => `«${d.nombre}»`).join(', ');
+  const motivo = (k: string) => (generados[k] ? `«${k}» no se escribe: ${generados[k]}` : `«${k}»`);
   return z.strictObject(Object.fromEntries(defs.map((d) => [d.nombre, esquemaSeccion(d)])), {
     error: (iss) =>
       iss.code === 'unrecognized_keys'
-        ? `H2 no permitido en ${id}: ${iss.keys.map((k) => `«${k}»`).join(', ')}. Permitidos: ${permitidos}`
+        ? `H2 no permitido en ${id}: ${iss.keys.map(motivo).join(', ')}. Permitidos: ${permitidos}`
         : undefined,
   });
 }

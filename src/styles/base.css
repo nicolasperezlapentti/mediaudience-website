@@ -1,0 +1,123 @@
+/*
+ * Base global. Todo valor sale de las custom properties --ma-* de design/tokens.css;
+ * verificarPlantillas() rechaza cualquier color, tamaño, espaciado o duración literal.
+ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--ma-background);
+  color: var(--ma-text);
+  font-family: var(--ma-font-body);
+  font-size: var(--ma-body-size);
+  line-height: var(--ma-body-line-height);
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: var(--ma-primary);
+  text-decoration: none;
+  text-underline-offset: var(--ma-space-xs);
+  transition: color var(--ma-duration-fast) var(--ma-ease-base);
+}
+
+a:hover {
+  color: var(--ma-primary-hover);
+  text-decoration: underline;
+}
+
+:focus-visible {
+  outline: var(--ma-border-width) solid var(--ma-border-focus);
+  outline-offset: var(--ma-form-focus-ring-offset);
+}
+
+/* Saltar al contenido: fuera de pantalla hasta recibir foco. */
+.saltar {
+  position: absolute;
+  top: 0;
+  left: var(--ma-layout-gutter);
+  z-index: 100;
+  padding: var(--ma-space-sm) var(--ma-space-lg);
+  background: var(--ma-primary);
+  color: var(--ma-on-primary);
+  font-family: var(--ma-font-mono);
+  font-size: var(--ma-caption-size);
+  letter-spacing: var(--ma-caption-letter-spacing);
+  text-transform: uppercase;
+  transform: translateY(-100%);
+}
+
+.saltar:focus {
+  transform: none;
+  color: var(--ma-on-primary);
+}
+
+/* ---------- Botones (GUIA-DE-USO §6) ---------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ma-space-sm);
+  height: var(--ma-layout-button-height);
+  padding: 0 var(--ma-space-lg);
+  border: var(--ma-border-width) solid transparent;
+  border-radius: var(--ma-radius-md);
+  font-family: var(--ma-font-mono);
+  font-size: var(--ma-caption-size);
+  font-weight: var(--ma-weight-medium);
+  letter-spacing: var(--ma-caption-letter-spacing);
+  line-height: 1;
+  text-transform: uppercase;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background-color var(--ma-duration-base) var(--ma-ease-base),
+    color var(--ma-duration-base) var(--ma-ease-base),
+    border-color var(--ma-duration-base) var(--ma-ease-base);
+}
+
+.btn:hover {
+  text-decoration: none;
+}
+
+.btn:active {
+  transform: translateY(var(--ma-border-width));
+}
+
+.btn--primario {
+  background: var(--ma-primary);
+  color: var(--ma-on-primary);
+}
+
+.btn--primario:hover {
+  background: var(--ma-primary-hover);
+  color: var(--ma-on-primary);
+}
+
+/* ---------- Contenedor de página (layout.maxWidth + gutter, GUIA-DE-USO §8) ---------- */
+
+.contenedor {
+  max-width: var(--ma-layout-max-width);
+  margin: 0 auto;
+  padding: 0 var(--ma-layout-gutter);
+}
+
+.btn--secundario {
+  background: transparent;
+  border-color: var(--ma-border);
+  color: var(--ma-text);
+}
+
+.btn--secundario:hover {
+  background: var(--ma-surface-hover);
+  color: var(--ma-text);
+}

@@ -1,0 +1,122 @@
+---
+/**
+ * Hero de la home (design/referencia/home-fuente-design.html, traducido). H1 en escala display
+ * —el descriptor de entidad, no un eslogan (PLANTILLAS §1.5)—, el answer target (B-01) y, al
+ * costado, «Datos clave» de la home con su línea B-02 en lugar del panel «KPIs por país»: los
+ * otros tres mercados no tienen datos. Sin botones: la conversión es el CTA del header.
+ */
+import AnswerTarget from './bloques/AnswerTarget.astro';
+import type { Cabecera, SeccionRender } from '../lib/render.ts';
+
+interface Props {
+  cabecera: Cabecera;
+  datosClave: SeccionRender | null;
+}
+
+const { cabecera, datosClave } = Astro.props;
+---
+
+<div class="hero" id={cabecera.id}>
+  <div class="contenedor hero__grilla">
+    <div class="hero__texto">
+      <h1 class="hero__h1">{cabecera.h1}</h1>
+      <AnswerTarget html={cabecera.answerTargetHtml} />
+      {cabecera.continuacionHtml && <div class="hero__continuacion" set:html={cabecera.continuacionHtml} />}
+    </div>
+    {
+      datosClave && (
+        <section class="hero__datos" id={datosClave.id} aria-labelledby={`${datosClave.id}-t`}>
+          <h2 class="hero__datos-titulo" id={`${datosClave.id}-t`}>
+            {datosClave.titulo}
+          </h2>
+          <div class="hero__datos-cuerpo" set:html={datosClave.html} />
+        </section>
+      )
+    }
+  </div>
+</div>
+
+<style>
+  .hero {
+    padding: var(--ma-space-3xl) 0;
+    background: var(--ma-gradient-hero-bloom), var(--ma-gradient-scanlines);
+  }
+
+  .hero__grilla {
+    display: grid;
+    grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+    align-items: start;
+    gap: var(--ma-space-2xl);
+  }
+
+  .hero__h1 {
+    margin: 0 0 var(--ma-space-xl);
+    font-family: var(--ma-font-display);
+    font-size: var(--ma-display-size);
+    font-weight: var(--ma-display-weight);
+    line-height: var(--ma-display-line-height);
+    letter-spacing: var(--ma-display-letter-spacing);
+    text-wrap: pretty;
+  }
+
+  .hero__continuacion {
+    max-width: var(--ma-layout-max-width-prose);
+    color: var(--ma-text-muted);
+  }
+
+  .hero__continuacion :global(p) {
+    margin: 0 0 var(--ma-space-lg);
+  }
+
+  .hero__datos {
+    padding: var(--ma-space-xl);
+    background: var(--ma-surface);
+    border: var(--ma-border-width) solid var(--ma-border);
+    border-radius: var(--ma-radius-md);
+  }
+
+  .hero__datos-titulo {
+    margin: 0 0 var(--ma-space-md);
+    font-family: var(--ma-font-mono);
+    font-size: var(--ma-caption-size);
+    font-weight: var(--ma-weight-regular);
+    letter-spacing: var(--ma-caption-letter-spacing);
+    text-transform: uppercase;
+    color: var(--ma-text-muted);
+  }
+
+  .hero__datos-cuerpo :global(ul) {
+    display: grid;
+    gap: var(--ma-space-md);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .hero__datos-cuerpo :global(li) {
+    padding-bottom: var(--ma-space-md);
+    border-bottom: var(--ma-border-width) solid var(--ma-border-subtle);
+    font-size: var(--ma-small-size);
+    color: var(--ma-text);
+  }
+
+  @media (width < 900px) {
+    .hero__grilla {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .hero__h1 {
+      font-size: var(--ma-display-size-md);
+    }
+  }
+
+  @media (width < 640px) {
+    .hero {
+      padding: var(--ma-space-2xl) 0;
+    }
+
+    .hero__h1 {
+      font-size: var(--ma-display-size-sm);
+    }
+  }
+</style>

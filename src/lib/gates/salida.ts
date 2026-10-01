@@ -90,6 +90,7 @@ export function verificarSalida(dir: string, sitio: Sitio): Problema[] {
     ids.set(ruta, new Set(raiz.querySelectorAll('[id]').map((e) => e.getAttribute('id')!)));
   }
 
+  const grafos = new Map<string, Nodo[]>();
   for (const [ruta, abs] of paginas) {
     const html = readFileSync(abs, 'utf8');
     const raiz = dom.get(ruta)!;
@@ -101,6 +102,14 @@ export function verificarSalida(dir: string, sitio: Sitio): Problema[] {
     if (/fonts\.googleapis\.com|fonts\.gstatic\.com/.test(html)) add(GATES.tokens, archivo, 'carga fuentes de Google: bloquean el render; van auto-hospedadas');
     const canonica = raiz.querySelector('link[rel="canonical"]')?.getAttribute('href');
     if (canonica !== `${SITIO}${ruta}`) add(GATES.estructura, archivo, `canonical «${canonica}» ≠ ${SITIO}${ruta}`);
+
+    /* tablas reales (B-03, B-07): caption, thead/tbody y encabezados con scope */
+    for (const t of raiz.querySelectorAll('table')) {
+      const donde = t.querySelector('caption')?.text.trim() || t.querySelector('th')?.text.trim() || 'tabla';
+      if (!t.querySelector('caption')) add(GATES.estructura, archivo, `tabla «${donde}» sin <caption>`);
+      if (!t.querySelector('thead th[scope="col"]')) add(GATES.estructura, archivo, `tabla «${donde}» sin encabezados th[scope=col]`);
+      if (t.querySelectorAll('tbody tr').some((tr) => !tr.querySelector('th[scope="row"]'))) add(GATES.estructura, archivo, `tabla «${donde}»: cada fila abre con th[scope=row]`);
+    }
 
     /* gate 4 */
     for (const a of raiz.querySelectorAll('a[href]')) {
@@ -132,7 +141,7 @@ export function verificarSalida(dir: string, sitio: Sitio): Problema[] {
     for (const { patron, motivo } of TERMINOS_PROHIBIDOS) for (const m of visible.matchAll(patron)) add(GATES.g5, archivo, `«${m[0]}» en el HTML generado: ${motivo}`);
     for (const m of visible.matchAll(/\bD-\d{2}\b/g)) add(GATES.g3, archivo, `código interno ${m[0]} visible en el HTML`);
 
-    /* JSON-LD */
+    /* JSON-LD de la página: parsea, tiene marca y nodo de página, sin D-XX ni grafías prohibidas */
     const bloques = raiz.querySelectorAll('script[type="application/ld+json"]');
     if (!bloques.length) add(GATES.jsonld, archivo, 'no tiene bloque JSON-LD');
     for (const b of bloques) {
@@ -144,16 +153,13 @@ export function verificarSalida(dir: string, sitio: Sitio): Problema[] {
         continue;
       }
       const nodos = grafo['@graph'] ?? [];
-      const porId = new Map(nodos.map((n) => [n['@id'] as string, n]));
-      const marca = porId.get(ID_MARCA);
+      grafos.set(ruta, nodos);
+      const marca = nodos.find((n) => n['@id'] === ID_MARCA);
       if (!marca) add(GATES.jsonld, archivo, 'falta el nodo de la marca-entidad');
       else {
         for (const campo of ['foundingDate', 'address']) {
           if (campo in marca) add(GATES.jsonld, archivo, `la marca-entidad tiene ${campo}: va solo en el nodo local (D-01)`);
         }
-        const subs = ((marca.subOrganization ?? []) as Nodo[]).map((s) => s['@id'] as string);
-        const locales = nodos.filter((n) => (n.parentOrganization as Nodo | undefined)?.['@id'] === ID_MARCA).map((n) => n['@id'] as string);
-        if (subs.sort().join() !== locales.sort().join()) add(GATES.jsonld, archivo, 'subOrganization y parentOrganization no son recíprocos');
       }
       if (!nodos.some((n) => (n['@id'] as string)?.endsWith('#webpage') && n.url === `${SITIO}${ruta}`)) {
         add(GATES.jsonld, archivo, 'falta el nodo de la página con su URL canónica');
@@ -167,5 +173,64 @@ export function verificarSalida(dir: string, sitio: Sitio): Problema[] {
     }
   }
 
+  problemas.push(...verificarGrafoDelSitio(grafos, sitio));
+  return problemas;
+}
+
+/**
+ * Verificaciones sobre la unión de los grafos de todas las páginas (fact-book §1.3):
+ *   - la marca-entidad es la misma en todas las páginas;
+ *   - subOrganization ↔ parentOrganization recíprocos;
+ *   - toda referencia { "@id" } apunta a un nodo definido en algún grafo del sitio;
+ *   - un nodo local se define solo en su página país y en la página T1.
+ */
+function verificarGrafoDelSitio(grafos: Map<string, Nodo[]>, sitio: Sitio): Problema[] {
+  const problemas: Problema[] = [];
+  const add = (mensaje: string, archivo = 'dist (JSON-LD del sitio)') => problemas.push({ gate: GATES.jsonld, archivo, mensaje });
+  const fuente = (ruta: string) => sitio.publicadas.get(ruta)?.archivo ?? `dist${ruta}`;
+
+  const definidos = new Map<string, { nodo: Nodo; rutas: string[] }>();
+  for (const [ruta, nodos] of grafos) {
+    for (const n of nodos) {
+      const id = n['@id'] as string | undefined;
+      if (!id) continue;
+      const d = definidos.get(id) ?? { nodo: n, rutas: [] };
+      d.rutas.push(ruta);
+      definidos.set(id, d);
+    }
+  }
+
+  const marcas = [...grafos].map(([ruta, nodos]) => [ruta, JSON.stringify(nodos.find((n) => n['@id'] === ID_MARCA) ?? null)] as const);
+  const canonica = marcas[0]?.[1];
+  for (const [ruta, m] of marcas) if (m !== canonica) add('la marca-entidad no es idéntica en todas las páginas', fuente(ruta));
+
+  const marca = definidos.get(ID_MARCA)?.nodo;
+  const subs = new Set(((marca?.subOrganization ?? []) as Nodo[]).map((s) => s['@id'] as string));
+  const conPadre = [...definidos].filter(([, d]) => (d.nodo.parentOrganization as Nodo | undefined)?.['@id'] === ID_MARCA).map(([id]) => id);
+  for (const id of subs) if (!conPadre.includes(id)) add(`subOrganization ${id} no está definido con parentOrganization → la marca`);
+  for (const id of conPadre) if (!subs.has(id)) add(`${id} declara parentOrganization pero la marca no lo lista en subOrganization`);
+
+  const referencias = (v: unknown): string[] => {
+    if (Array.isArray(v)) return v.flatMap(referencias);
+    if (v && typeof v === 'object') {
+      const o = v as Nodo;
+      if (Object.keys(o).length === 1 && typeof o['@id'] === 'string') return [o['@id'] as string];
+      return Object.values(o).flatMap(referencias);
+    }
+    return [];
+  };
+  for (const [ruta, nodos] of grafos) {
+    for (const id of new Set(nodos.flatMap((n) => Object.values(n).flatMap(referencias)))) {
+      if (!definidos.has(id)) add(`referencia a ${id}, que no está definido en ningún grafo del sitio`, fuente(ruta));
+    }
+  }
+
+  for (const id of conPadre) {
+    for (const ruta of definidos.get(id)!.rutas) {
+      const p = sitio.publicadas.get(ruta);
+      const propio = (definidos.get(id)!.nodo.url as string | undefined) === `${SITIO}${ruta}` || id.startsWith(`${SITIO}${ruta}#`);
+      if (p?.plantilla !== 'T1' && !propio) add(`el nodo local ${id} se define en ${ruta}: va solo en su página país y en la T1`, fuente(ruta));
+    }
+  }
   return problemas;
 }

@@ -11,7 +11,9 @@ lastUpdated: "2026-09-01"
 
 ## Respuesta directa
 
-Esta es la respuesta directa de la home de prueba *(según datos de la compañía — D-02)*. Una segunda oración.
+Esta es la respuesta directa de la home de prueba (según datos de la compañía — D-02).
+
+Una segunda oración.
 
 ## Datos clave
 

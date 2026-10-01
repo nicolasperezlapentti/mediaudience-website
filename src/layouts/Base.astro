@@ -5,9 +5,9 @@
  *
  * Slots:
  *   jsonld  → <script type="application/ld+json"> de la página
- *   header  → vacío hasta Fase B (se arma desde src/lib/navegacion.ts)
- *   default → contenido
- *   footer  → vacío hasta Fase B (ídem)
+ *   header  → <SiteHeader />, desde src/lib/navegacion.ts
+ *   default → contenido; el <main> lleva id="contenido" (destino del enlace «Saltar al contenido»)
+ *   footer  → <SiteFooter />
  */
 
 // Fuentes auto-hospedadas (tokens.json → typography.fontSourceSelfHosted). Subset latin
@@ -23,8 +23,12 @@ import '@fontsource/jetbrains-mono/latin-400.css';
 import '@fontsource/jetbrains-mono/latin-500.css';
 import '@fontsource/jetbrains-mono/latin-700.css';
 import '../../design/tokens.css';
+import '../styles/base.css';
+import '../styles/contenido.css';
 import tokens from '../../design/tokens.json';
 import { MARCA } from '../lib/marca.ts';
+
+const ID_CONTENIDO = 'contenido';
 
 interface Props {
   titulo: string;
@@ -53,19 +57,9 @@ const { titulo, descripcion, canonica } = Astro.props;
     <slot name="jsonld" />
   </head>
   <body>
+    <a class="saltar" href={`#${ID_CONTENIDO}`}>Saltar al contenido</a>
     <slot name="header" />
     <slot />
     <slot name="footer" />
   </body>
 </html>
-
-<style is:global>
-  body {
-    margin: 0;
-    background: var(--ma-background);
-    color: var(--ma-text);
-    font-family: var(--ma-font-body);
-    font-size: var(--ma-body-size);
-    line-height: var(--ma-body-line-height);
-  }
-</style>

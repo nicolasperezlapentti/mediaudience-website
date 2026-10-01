@@ -1,0 +1,44 @@
+---
+/**
+ * Enlace a la entidad única (PLANTILLAS §1.5, T3 y T6). En la home lleva además el answer
+ * target de la página T1: una oración que no repite el H1 ni el descriptor del footer.
+ */
+import Seccion from './Seccion.astro';
+import type { ModeloPagina } from '../lib/render.ts';
+
+interface Props {
+  entidad: NonNullable<ModeloPagina['entidad']>;
+}
+
+const { entidad } = Astro.props;
+---
+
+<Seccion id="entidad">
+  <div class="entidad">
+    {entidad.textoHtml && <p class="entidad__texto" set:html={entidad.textoHtml} />}
+    <a class="entidad__enlace" href={entidad.enlace.href}>{entidad.enlace.texto} <span aria-hidden="true">→</span></a>
+  </div>
+</Seccion>
+
+<style>
+  .entidad {
+    display: grid;
+    gap: var(--ma-space-md);
+    max-width: var(--ma-layout-max-width-prose);
+    padding: var(--ma-space-xl);
+    background: var(--ma-surface);
+    border: var(--ma-border-width) solid var(--ma-border);
+    border-left: var(--ma-border-width-strong) solid var(--ma-primary);
+    border-radius: var(--ma-radius-md);
+  }
+
+  .entidad__texto {
+    margin: 0;
+    color: var(--ma-text);
+    text-wrap: pretty;
+  }
+
+  .entidad__enlace {
+    font-size: var(--ma-small-size);
+  }
+</style>

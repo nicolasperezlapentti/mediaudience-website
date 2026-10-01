@@ -313,7 +313,7 @@
     }
   ],
   "navegacion": {
-    "notes": "Header y footer se generan desde acá (PLANTILLAS §1.2–1.4). Solo se muestran ítems cuyo destino está 'ready'; un grupo sin ítems visibles no se muestra. 'anchor' es el texto del enlace: descriptivo, con marca o tema. Los fragmentos deben existir como id en la página destino o el build falla.",
+    "notes": "Header y footer se generan desde acá (PLANTILLAS §1.2–1.4). El header agrupa las cuatro facetas en el mega-menú «Soluciones» (design/referencia/navegacion.html); el footer las muestra como columnas. Solo se muestran ítems cuyo destino está 'ready'; un grupo sin ítems visibles no se muestra. 'anchor' es el texto del enlace: descriptivo, con marca o tema. Los fragmentos deben existir como id en la página destino o el build falla.",
     "grupos": {
       "objetivos": {
         "label": "Objetivos",
@@ -397,9 +397,25 @@
         ]
       }
     },
-    "header": ["objetivos", "productos", "canales", "herramientas", "nosotros", "recursos"],
+    "header": [
+      {
+        "tipo": "mega",
+        "label": "Soluciones",
+        "columnas": [
+          { "grupo": "objetivos", "label": "Por objetivo" },
+          { "grupo": "productos", "label": "Por producto" },
+          { "grupo": "canales", "label": "Por canal" },
+          { "grupo": "herramientas", "label": "Por herramienta" }
+        ],
+        "nota": "Cuatro formas de llegar al mismo catálogo de soluciones",
+        "todas": { "label": "Todas las soluciones", "anchor": "Todas las soluciones de Mediaudience", "href": "/soluciones/" }
+      },
+      { "tipo": "dropdown", "grupo": "nosotros" },
+      { "tipo": "dropdown", "grupo": "recursos" }
+    ],
     "headerCta": { "label": "Agenda una demo", "anchor": "Agenda una demo", "href": "/contacto/" },
     "footer": ["objetivos", "productos", "canales", "herramientas", "compania"],
+    "footerContacto": { "label": "Contacto", "anchor": "Contacto de Mediaudience", "href": "/contacto/" },
     "footerMercados": "mercados",
     "footerLegal": "legal"
   }

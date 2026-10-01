@@ -50,15 +50,29 @@ const itemNav = z.strictObject({
 });
 export type ItemNavDatos = z.infer<typeof itemNav>;
 
+/** Header (PLANTILLAS §1.3): un mega-menú con las cuatro facetas como columnas, y desplegables. */
+const entradaHeader = z.discriminatedUnion('tipo', [
+  z.strictObject({
+    tipo: z.literal('mega'),
+    label: z.string().min(1),
+    columnas: z.array(z.strictObject({ grupo: z.string(), label: z.string().min(1) })).min(1),
+    nota: z.string().min(1),
+    todas: itemNav,
+  }),
+  z.strictObject({ tipo: z.literal('dropdown'), grupo: z.string() }),
+]);
+export type EntradaHeaderDatos = z.infer<typeof entradaHeader>;
+
 const sitemapSchema = z.strictObject({
   meta: z.record(z.string(), z.unknown()),
   pages: z.array(paginaSitemap),
   navegacion: z.strictObject({
     notes: z.string().optional(),
     grupos: z.record(z.string(), z.strictObject({ label: z.string().min(1), items: z.array(itemNav) })),
-    header: z.array(z.string()),
+    header: z.array(entradaHeader),
     headerCta: itemNav,
     footer: z.array(z.string()),
+    footerContacto: itemNav,
     footerMercados: z.string(),
     footerLegal: z.string(),
   }),
@@ -75,6 +89,8 @@ const dudasSchema = z.strictObject({
       estado: z.enum(['abierta', 'cerrada']),
       titulo: z.string().min(1),
       cerradaEl: z.iso.date().optional(),
+      /** Abierta, oculta cada bloque (párrafo, ítem, fila) que la cita: el dato no se puede publicar todavía. */
+      bloqueaPublicacion: z.boolean().optional(),
     }),
   ),
 });
@@ -110,6 +126,18 @@ const entidadSchema = z.strictObject({
       legalName: z.string().optional(),
       foundingDate: z.iso.date().optional(),
       address: direccion.optional(),
+      identificacionFiscal: z.strictObject({ tipo: z.enum(['RUC', 'RFC', 'RUT']), valor: z.string().min(1) }).optional(),
+      /** B-10 · contacto comercial del mercado. Institucional, nunca un correo personal (PLANTILLAS §1.5). */
+      contacto: z
+        .strictObject({
+          correo: z.email().optional(),
+          telefono: z.string().regex(/^\+\d[\d ]{6,}$/, { error: 'teléfono en formato internacional: +593 4 …' }).optional(),
+          oficina: z.string().min(1).optional(),
+          horario: z.strictObject({ texto: z.string().min(1), zona: z.string().regex(/^(GMT|UTC)[+-]\d{1,2}$/, { error: 'zona horaria explícita: GMT-5' }) }).optional(),
+          bloqueadoPor: z.array(idDuda).default([]),
+        })
+        .optional(),
+      ciiu: z.string().min(1).optional(),
       bloqueadoPor: z.array(idDuda),
     }),
   ),
@@ -145,4 +173,8 @@ export function aplanar(paginas: readonly PaginaSitemap[], padre: string | null 
 
 export function estaAbierta(dudas: Dudas, id: string): boolean {
   return dudas[id]?.estado !== 'cerrada';
+}
+
+export function bloqueaPublicacion(dudas: Dudas, id: string): boolean {
+  return Boolean(dudas[id]?.bloqueaPublicacion) && estaAbierta(dudas, id);
 }

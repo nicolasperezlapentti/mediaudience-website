@@ -11,7 +11,8 @@
     { "codigo": "PE", "pais": "País Dos", "slug": "/mercados/pais-dos/", "bloqueadoPor": ["D-01"] },
     {
       "codigo": "EC", "pais": "País Uno", "slug": "/mercados/pais-uno/",
-      "legalName": "Sociedad de Prueba S.A.S.", "foundingDate": "2020-01-01",
+      "legalName": "Sociedad de Prueba S.A.S.", "foundingDate": "2020-01-01", "ciiu": "X0000.00", "identificacionFiscal": { "tipo": "RUC", "valor": "0000000000001" },
+      "contacto": { "correo": "comercial@ejemplo.com", "telefono": "+000 0 000 0000", "horario": { "texto": "Lunes a viernes, 09:00–18:00", "zona": "GMT-5" } },
       "address": { "streetAddress": "Calle de Prueba 1", "addressLocality": "Ciudad Uno", "addressRegion": "Región Uno", "addressCountry": "EC" },
       "bloqueadoPor": []
     }

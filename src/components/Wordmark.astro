@@ -1,0 +1,39 @@
+---
+/**
+ * Logotipo en tipografía viva (GUIA-DE-USO §1). Las letras salen de WORDMARK (marca.ts).
+ * Decorativo: quien lo usa pone el nombre accesible (aria-label del enlace, o aria-hidden).
+ */
+import { WORDMARK } from '../lib/marca.ts';
+
+interface Props {
+  /** header: 1.375rem (token wordmark) · footer: tamaño h3 */
+  tamano?: 'header' | 'footer';
+}
+
+const { tamano = 'header' } = Astro.props;
+---
+
+<span class:list={['wordmark', `wordmark--${tamano}`]}>{WORDMARK.antes}<span class="acento">{WORDMARK.acento}</span>{WORDMARK.despues}</span>
+
+<style>
+  .wordmark {
+    font-family: var(--ma-font-display);
+    font-weight: var(--ma-wordmark-weight);
+    line-height: var(--ma-wordmark-line-height);
+    letter-spacing: var(--ma-wordmark-letter-spacing);
+    color: var(--ma-text);
+    white-space: nowrap;
+  }
+
+  .wordmark--header {
+    font-size: var(--ma-wordmark-size);
+  }
+
+  .wordmark--footer {
+    font-size: var(--ma-h3-size);
+  }
+
+  .acento {
+    color: var(--ma-primary);
+  }
+</style>

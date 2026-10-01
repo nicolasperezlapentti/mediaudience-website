@@ -19,7 +19,11 @@ if (modo === 'fuente') {
     JSON.stringify({
       rutas: [...sitio.publicadas.keys()],
       visibles: Object.fromEntries([...sitio.publicadas].map(([r, p]) => [r, p.visibles.map((v) => v.def.nombre)])),
-      nav: [...nav.header, ...nav.footer, ...[nav.mercados ?? []].flat()].flatMap((g) => g.items.map((i) => i.href)),
+      nav: [
+        ...nav.header.flatMap((e) => (e.tipo === 'mega' ? e.columnas : [e.grupo])),
+        ...nav.footer,
+        ...[nav.mercados ?? []].flat(),
+      ].flatMap((g) => g.items.map((i) => i.href)),
       sitemapXml: sitemapXml(sitio),
       llms: llmsTxt(sitio),
     }),

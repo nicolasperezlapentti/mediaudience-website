@@ -1,0 +1,76 @@
+---
+/**
+ * Cabecera de página: eyebrow + H1 + B-01 + continuación de «Respuesta directa».
+ * (design/referencia/bloques.html, specimen de B-01 «en contexto de cabecera de página»).
+ *
+ * El eyebrow son las etiquetas de navegación de la cadena de ancestros en sitemap.json.
+ * Fondo: heroBloom + scanlines en todas las cabeceras (GUIA-DE-USO §2, «Fondos gráficos»).
+ */
+import AnswerTarget from './bloques/AnswerTarget.astro';
+import type { Cabecera } from '../lib/render.ts';
+
+interface Props {
+  cabecera: Cabecera;
+}
+
+const { cabecera } = Astro.props;
+---
+
+<div class="page-head" id={cabecera.id}>
+  <div class="contenedor">
+    {cabecera.eyebrow.length > 0 && <p class="eyebrow">{cabecera.eyebrow.join(' · ')}</p>}
+    <h1 class="h1">{cabecera.h1}</h1>
+    <AnswerTarget html={cabecera.answerTargetHtml} />
+    {cabecera.continuacionHtml && <div class="continuacion" set:html={cabecera.continuacionHtml} />}
+  </div>
+</div>
+
+<style>
+  .page-head {
+    padding: var(--ma-space-3xl) 0 var(--ma-space-2xl);
+    background: var(--ma-gradient-hero-bloom), var(--ma-gradient-scanlines);
+  }
+
+  .eyebrow {
+    margin: 0 0 var(--ma-space-md);
+    font-family: var(--ma-font-mono);
+    font-size: var(--ma-eyebrow-size);
+    line-height: var(--ma-eyebrow-line-height);
+    letter-spacing: var(--ma-eyebrow-letter-spacing);
+    text-transform: uppercase;
+    color: var(--ma-primary);
+  }
+
+  .h1 {
+    margin: 0 0 var(--ma-space-lg);
+    font-family: var(--ma-font-display);
+    font-size: var(--ma-h1-size);
+    font-weight: var(--ma-h1-weight);
+    line-height: var(--ma-h1-line-height);
+    letter-spacing: var(--ma-h1-letter-spacing);
+    text-wrap: pretty;
+  }
+
+  .continuacion {
+    max-width: var(--ma-layout-max-width-prose);
+    color: var(--ma-text-muted);
+  }
+
+  .continuacion :global(p) {
+    margin: 0 0 var(--ma-space-lg);
+  }
+
+  .continuacion :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  @media (width < 640px) {
+    .page-head {
+      padding: var(--ma-space-2xl) 0 var(--ma-space-xl);
+    }
+
+    .h1 {
+      font-size: var(--ma-h1-size-sm);
+    }
+  }
+</style>

@@ -1,0 +1,119 @@
+---
+/**
+ * B-06 · KPI en texto, variante card (design/referencia/bloques.html).
+ *
+ * Todo es texto seleccionable: nunca imagen, SVG con texto ni count-up. Cada cifra lleva
+ * <data value> con el valor máquina; el mes va en <time>. Debajo, la línea de encuadre B-02
+ * con la misma fecha, como <figcaption>. Las reglas (denominador, mercado, mes) las aplica
+ * modeloKpi(): un KPI incompleto rompe el build.
+ */
+import { modeloKpi, type DatosKpi } from '../../lib/kpi.ts';
+
+interface Props {
+  kpi: DatosKpi;
+}
+
+const m = modeloKpi(Astro.props.kpi);
+---
+
+<figure class="kpi-card">
+  <p class="kpi-card__cuerpo">
+    <span class="kpi-card__etiqueta">{m.etiqueta}</span>
+    <span class:list={['kpi-card__cifra', m.acento && 'kpi-card__cifra--acento']}>
+      {m.unidad === 'USD' && <span class="kpi-card__unidad kpi-card__unidad--antes">USD</span>}
+      <data value={m.cifra.maquina}>{m.cifra.texto}</data>
+      {m.unidad === '%' && <span class="kpi-card__unidad">%</span>}
+    </span>
+    <span class="kpi-card__relacion">
+      {
+        m.numerador ? (
+          <>
+            <data value={m.numerador.maquina}>{m.numerador.texto}</data> <span class="kpi-card__palabra">{m.numerador.unidad} sobre</span>
+          </>
+        ) : (
+          <span class="kpi-card__palabra">{m.lectura} sobre</span>
+        )
+      }
+      <data value={m.denominador.maquina}>{m.denominador.texto}</data> <span class="kpi-card__palabra">{m.denominador.unidad}</span>
+    </span>
+    <span class="kpi-card__contexto">{m.mercado} · <time datetime={m.fecha.maquina}>{m.fecha.texto}</time></span>
+  </p>
+  <figcaption>
+    <p class="framing">Según {m.fuente}, corte <time datetime={m.fecha.maquina}>{m.fecha.texto}</time></p>
+  </figcaption>
+</figure>
+
+<style>
+  .kpi-card {
+    margin: 0;
+    padding: var(--ma-space-xl);
+    background: var(--ma-surface);
+    border: var(--ma-border-width) solid var(--ma-border);
+    border-radius: var(--ma-radius-md);
+  }
+
+  .kpi-card__cuerpo {
+    display: grid;
+    gap: var(--ma-space-sm);
+    margin: 0;
+  }
+
+  .kpi-card__etiqueta,
+  .kpi-card__contexto {
+    font-family: var(--ma-font-mono);
+    font-size: var(--ma-caption-size);
+    letter-spacing: var(--ma-caption-letter-spacing);
+    text-transform: uppercase;
+    color: var(--ma-text-muted);
+  }
+
+  .kpi-card__cifra {
+    font-family: var(--ma-font-display);
+    font-size: var(--ma-kpi-size);
+    font-weight: var(--ma-kpi-weight);
+    line-height: var(--ma-kpi-line-height);
+    letter-spacing: var(--ma-kpi-letter-spacing);
+    font-variant-numeric: tabular-nums;
+    color: var(--ma-text);
+  }
+
+  .kpi-card__cifra--acento {
+    color: var(--ma-primary);
+  }
+
+  /* Sufijo de unidad a la mitad del tamaño de la cifra, en textMuted (GUIA-DE-USO §3). */
+  .kpi-card__unidad {
+    margin-left: var(--ma-space-xs);
+    font-size: 50%;
+    letter-spacing: 0;
+    color: var(--ma-text-muted);
+  }
+
+  .kpi-card__unidad--antes {
+    margin: 0 var(--ma-space-xs) 0 0;
+  }
+
+  .kpi-card__relacion {
+    font-family: var(--ma-font-display);
+    font-size: var(--ma-h3-size);
+    font-weight: var(--ma-weight-medium);
+    line-height: var(--ma-h3-line-height);
+    letter-spacing: var(--ma-h3-letter-spacing);
+    color: var(--ma-text);
+  }
+
+  .kpi-card__palabra {
+    color: var(--ma-text-muted);
+  }
+
+  .kpi-card .framing {
+    padding-top: var(--ma-space-md);
+    border-top: var(--ma-border-width) solid var(--ma-border-subtle);
+  }
+
+  @media (width < 640px) {
+    .kpi-card__cifra {
+      font-size: var(--ma-kpi-size-sm);
+    }
+  }
+</style>

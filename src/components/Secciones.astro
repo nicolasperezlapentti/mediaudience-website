@@ -1,0 +1,42 @@
+---
+/**
+ * Las secciones de una página, en el orden de su plantilla (src/lib/plantillas.ts), cada una
+ * con el bloque que le corresponde. Qué secciones hay lo decide el modelo de render; acá solo
+ * se elige el componente.
+ */
+import Seccion from './Seccion.astro';
+import ContactoLocal from './bloques/ContactoLocal.astro';
+import Faq from './bloques/Faq.astro';
+import Glosario from './bloques/Glosario.astro';
+import GlosarioRelacionado from './bloques/GlosarioRelacionado.astro';
+import SelectorProductos from './bloques/SelectorProductos.astro';
+import SociedadesLocales from './bloques/SociedadesLocales.astro';
+import type { SeccionRender } from '../lib/render.ts';
+
+interface Props {
+  secciones: SeccionRender[];
+}
+
+const { secciones } = Astro.props;
+---
+
+{
+  secciones.map((s) => (
+    <Seccion id={s.id} titulo={s.titulo}>
+      {s.faq ? (
+        <Faq {...s.faq} />
+      ) : s.glosario ? (
+        <Glosario {...s.glosario} />
+      ) : s.contacto ? (
+        <ContactoLocal sociedad={s.contacto} introHtml={s.html} />
+      ) : s.trio ? (
+        <SelectorProductos {...s.trio} />
+      ) : s.glosarioRelacionado ? (
+        <GlosarioRelacionado referencias={s.glosarioRelacionado} />
+      ) : (
+        <Fragment set:html={s.html} />
+      )}
+      {s.sociedades && <SociedadesLocales filas={s.sociedades} />}
+    </Seccion>
+  ))
+}

@@ -1,0 +1,29 @@
+---
+/**
+ * B-01 · Answer target (design/referencia/bloques.html).
+ *
+ * Un <p> corriente, en el flujo del documento: sin icono, borde, comillas ni fondo. Se
+ * distingue por color (text frente a textMuted del cuerpo) y tamaño (bodyLarge). Es el
+ * primer párrafo de «Respuesta directa», una sola oración: el test de aceptación compara su
+ * texto exacto contra el Markdown. Sin contenido no se renderiza (B-11).
+ */
+interface Props {
+  html: string;
+}
+
+const { html } = Astro.props;
+---
+
+{html && <p class="answer-target" data-answer-target set:html={html} />}
+
+<style>
+  .answer-target {
+    max-width: var(--ma-layout-max-width-prose);
+    margin: 0 0 var(--ma-space-lg);
+    font-family: var(--ma-font-body);
+    font-size: var(--ma-body-large-size);
+    line-height: var(--ma-body-large-line-height);
+    color: var(--ma-text);
+    text-wrap: pretty;
+  }
+</style>

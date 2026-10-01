@@ -1,0 +1,24 @@
+---
+/**
+ * T3 · página país. Secciones de la plantilla (con el contacto local, B-10, en su lugar),
+ * enlace a la entidad única y, al pie, el bloque legal (B-04).
+ */
+import BloqueEntidad from '../BloqueEntidad.astro';
+import PageHead from '../PageHead.astro';
+import Secciones from '../Secciones.astro';
+import BloqueLegal from '../bloques/BloqueLegal.astro';
+import type { ModeloPagina } from '../../lib/render.ts';
+
+interface Props {
+  p: ModeloPagina;
+}
+
+const { p } = Astro.props;
+---
+
+<PageHead cabecera={p.cabecera} />
+<div class="contenedor">
+  <Secciones secciones={p.secciones} />
+  {p.entidad && <BloqueEntidad entidad={p.entidad} />}
+  {p.legal && <BloqueLegal sociedad={p.legal} />}
+</div>

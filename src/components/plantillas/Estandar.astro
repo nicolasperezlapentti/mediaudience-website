@@ -1,0 +1,21 @@
+---
+/**
+ * Plantillas que solo componen bloques: T1, T2, T2-hub, T4, T4-glosario, T5, contacto y
+ * utilitaria. Cabecera (B-01) + secciones en el orden de su esquema; cada sección trae su
+ * bloque (src/components/Secciones.astro). No redeclaran nada de src/lib/plantillas.ts.
+ */
+import PageHead from '../PageHead.astro';
+import Secciones from '../Secciones.astro';
+import type { ModeloPagina } from '../../lib/render.ts';
+
+interface Props {
+  p: ModeloPagina;
+}
+
+const { p } = Astro.props;
+---
+
+<PageHead cabecera={p.cabecera} />
+<div class="contenedor">
+  <Secciones secciones={p.secciones} />
+</div>

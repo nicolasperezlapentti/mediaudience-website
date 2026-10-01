@@ -1,0 +1,113 @@
+---
+/**
+ * Los cuatro ejes en la home (PLANTILLAS §1.5): un grupo de tarjetas por eje, que enlazan a las
+ * mismas URLs canónicas del mega-menú. Estáticos, sin pestañas ni filtros. El texto del enlace
+ * es el anchor de §1.2; la etiqueta del ítem va arriba solo si el anchor no la repite.
+ */
+import Seccion from './Seccion.astro';
+import type { ejesHome } from '../lib/navegacion.ts';
+
+interface Props {
+  datos: NonNullable<ReturnType<typeof ejesHome>>;
+}
+
+const { datos } = Astro.props;
+---
+
+<Seccion id="ejes" titulo={datos.titulo}>
+  <p class="ejes__nota">{datos.nota}</p>
+  <div class="ejes">
+    {
+      datos.ejes.map((e) => (
+        <section class="eje" aria-labelledby={`eje-${e.clave}`}>
+          <h3 class="eje__titulo" id={`eje-${e.clave}`}>
+            <span class="eje__n">{e.numero}</span> · {e.label}
+          </h3>
+          <ul class="eje__items">
+            {e.items.map((i) => (
+              <li>
+                {i.etiqueta && <span class="eje__etiqueta">{i.etiqueta}</span>}
+                <a href={i.href}>{i.anchor}</a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))
+    }
+  </div>
+</Seccion>
+
+<style>
+  .ejes__nota {
+    margin: 0 0 var(--ma-space-xl);
+    font-family: var(--ma-font-mono);
+    font-size: var(--ma-caption-size);
+    letter-spacing: var(--ma-caption-letter-spacing);
+    text-transform: uppercase;
+    color: var(--ma-text-muted);
+  }
+
+  .ejes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--ma-layout-kpi-min-width)), 1fr));
+    gap: var(--ma-space-grid-gap);
+  }
+
+  .eje {
+    padding: var(--ma-space-xl);
+    background: var(--ma-surface);
+    border: var(--ma-border-width) solid var(--ma-border);
+    border-radius: var(--ma-radius-md);
+  }
+
+  .eje__titulo {
+    margin: 0 0 var(--ma-space-lg);
+    font-family: var(--ma-font-mono);
+    font-size: var(--ma-eyebrow-size);
+    font-weight: var(--ma-weight-regular);
+    letter-spacing: var(--ma-eyebrow-letter-spacing);
+    text-transform: uppercase;
+    color: var(--ma-primary);
+  }
+
+  .eje__n {
+    color: var(--ma-primary);
+  }
+
+  .eje__items {
+    display: grid;
+    gap: var(--ma-space-md);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .eje__items li {
+    display: grid;
+    gap: var(--ma-space-xs);
+    padding-top: var(--ma-space-md);
+    border-top: var(--ma-border-width) solid var(--ma-border-subtle);
+  }
+
+  .eje__items li:first-child {
+    padding-top: 0;
+    border-top: 0;
+  }
+
+  .eje__etiqueta {
+    font-family: var(--ma-font-mono);
+    font-size: var(--ma-caption-size);
+    letter-spacing: var(--ma-caption-letter-spacing);
+    text-transform: uppercase;
+    color: var(--ma-text-placeholder);
+  }
+
+  .eje__items a {
+    font-size: var(--ma-small-size);
+    color: var(--ma-text);
+  }
+
+  .eje__items a:hover {
+    color: var(--ma-primary);
+  }
+</style>

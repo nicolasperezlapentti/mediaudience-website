@@ -1,0 +1,83 @@
+---
+/**
+ * B-08 · entrada de glosario: un par <dt>/<dd> con ancla propia, citable sola.
+ * El término y su expansión van separados por «·», para que el texto se lea igual sin CSS.
+ */
+import type { TerminoRender } from '../../lib/glosario.ts';
+
+interface Props {
+  termino: TerminoRender;
+  /** card: entrada suelta (Glosario relacionado), sin ancla propia; la canónica vive en el glosario. */
+  card?: { href: string; glosario: string };
+}
+
+const { termino: t, card } = Astro.props;
+const Contenedor = card ? 'dl' : 'div';
+---
+
+<Contenedor class:list={['term', card && 'term--card']} id={card ? undefined : t.id}>
+  <dt>
+    <span class="term__nombre">{t.termino}</span>
+    {t.expansion && <span class="term__expansion">· {t.expansion}</span>}
+  </dt>
+  <dd class="term__definicion" set:html={t.definicionHtml} />
+  {t.enlace && <dd class="term__mas"><a href={t.enlace.href}>{t.enlace.texto}</a></dd>}
+  {card && <dd class="term__mas"><a href={card.href}>{t.termino} en el {card.glosario}</a></dd>}
+</Contenedor>
+
+<style>
+  .term {
+    padding: var(--ma-space-xl) 0;
+    border-top: var(--ma-border-width) solid var(--ma-border-subtle);
+  }
+
+  .term:first-child {
+    padding-top: 0;
+    border-top: 0;
+  }
+
+  dt {
+    font-family: var(--ma-font-display);
+    font-size: var(--ma-h3-size);
+    font-weight: var(--ma-h3-weight);
+    line-height: var(--ma-h3-line-height);
+    letter-spacing: var(--ma-h3-letter-spacing);
+    color: var(--ma-text);
+  }
+
+  .term__expansion {
+    margin-left: var(--ma-space-sm);
+    font-family: var(--ma-font-body);
+    font-size: var(--ma-small-size);
+    font-weight: var(--ma-weight-regular);
+    letter-spacing: 0;
+    color: var(--ma-text-muted);
+  }
+
+  dd {
+    max-width: var(--ma-layout-max-width-prose);
+    margin: var(--ma-space-sm) 0 0;
+    color: var(--ma-text-muted);
+  }
+
+  dd :global(p) {
+    margin: 0;
+  }
+
+  .term__mas {
+    font-size: var(--ma-small-size);
+  }
+
+  .term--card {
+    margin: 0;
+    padding: var(--ma-space-xl);
+    background: var(--ma-surface);
+    border: var(--ma-border-width) solid var(--ma-border);
+    border-radius: var(--ma-radius-md);
+  }
+
+  .term--card:first-child {
+    padding-top: var(--ma-space-xl);
+    border: var(--ma-border-width) solid var(--ma-border);
+  }
+</style>

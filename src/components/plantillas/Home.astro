@@ -1,0 +1,30 @@
+---
+/**
+ * Home (PLANTILLAS §1.5): hero con «Datos clave», las secciones de la plantilla `home`, los
+ * resúmenes de los cuatro ejes y el bloque de entidad. Ninguna ancla #seccion como navegación:
+ * los ejes enlazan a URLs canónicas.
+ */
+import BloqueEntidad from '../BloqueEntidad.astro';
+import EjesHome from '../EjesHome.astro';
+import HeroHome from '../HeroHome.astro';
+import Secciones from '../Secciones.astro';
+import type { ModeloPagina } from '../../lib/render.ts';
+
+interface Props {
+  p: ModeloPagina;
+}
+
+const { p } = Astro.props;
+const [antes, despues] = [
+  p.secciones.filter((s) => s.id === 'desarrollo'),
+  p.secciones.filter((s) => s.id !== 'desarrollo'),
+];
+---
+
+<HeroHome cabecera={p.cabecera} datosClave={p.home?.datosClave ?? null} />
+<div class="contenedor">
+  <Secciones secciones={antes} />
+  {p.home?.ejes && <EjesHome datos={p.home.ejes} />}
+  {p.entidad && <BloqueEntidad entidad={p.entidad} />}
+  <Secciones secciones={despues} />
+</div>

@@ -68,8 +68,8 @@ test('gate 2 · sección obligatoria vacía rompe el build, con archivo y secci�
 });
 
 test('gate 2 · sección obligatoria ausente rompe el build', () => {
-  const dir = sitioTemporal((d) => editar(d, 'paginas/mercados/pais-uno.md', (t) => t.replace(/## Contacto local[\s\S]*$/, '')));
-  hay(problemas(dir), { gate: 'gate 2', archivo: 'pais-uno.md', seccion: 'Contacto local', mensaje: /ausente/ });
+  const dir = sitioTemporal((d) => editar(d, 'paginas/mercados/pais-uno.md', (t) => t.replace(/## Soluciones disponibles[\s\S]*?(?=## Socio local)/, '')));
+  hay(problemas(dir), { gate: 'gate 2', archivo: 'pais-uno.md', seccion: 'Soluciones disponibles', mensaje: /ausente/ });
 });
 
 test('gate 2 · un H2 fuera de la plantilla rompe el build', () => {
@@ -80,6 +80,133 @@ test('gate 2 · un H2 fuera de la plantilla rompe el build', () => {
 test('gate 2 · T1 sin test de homónimo en el FAQ rompe el build', () => {
   const dir = sitioTemporal((d) => editar(d, 'paginas/nosotros.md', (t) => t.replace('"{{homonimo}}"', '"otra cosa"')));
   hay(problemas(dir), { gate: 'gate 2', archivo: 'nosotros.md', seccion: 'FAQ', mensaje: /test de homónimo/ });
+});
+
+test('B-01 · un answer target con más de una oración rompe el build', () => {
+  const dir = sitioTemporal((d) => editar(d, 'paginas/soluciones/producto-a.md', (t) => t.replace('con CTR de 9,3%.', 'con CTR de 9,3%. Y hace otra cosa.')));
+  hay(problemas(dir), { archivo: 'producto-a.md', mensaje: /una sola oración \(B-01\) y tiene 2/ });
+});
+
+test('B-02 · una atribución en itálica rompe el build', () => {
+  const dir = sitioTemporal((d) => editar(d, 'paginas/soluciones/producto-a.md', (t) => t.replace('- 1.305.200 impresiones de prueba (D-02)', '- 1.305.200 impresiones de prueba *(según datos de la compañía — D-02)*')));
+  hay(problemas(dir), { archivo: 'producto-a.md', mensaje: /atribución en itálica/ });
+});
+
+test('una duda que bloquea la publicación oculta el ítem que la cita; al cerrarla, aparece', () => {
+  const abierta = sitioTemporal();
+  const r = publicadas(abierta);
+  assert.ok(r.visibles['/soluciones/producto-a/'].includes('Datos clave'));
+  const html = (dir: string) => spawnSync(process.execPath, ['--input-type=module', '-e', `
+    import { cargarSitio } from './src/lib/sitio.ts'; import { modeloPagina } from './src/lib/render.ts';
+    console.log(modeloPagina(cargarSitio(), '/soluciones/producto-a/').secciones.map((s) => s.html).join(''));`], { env: { ...process.env, MA_CONTENIDO: dir }, encoding: 'utf8' }).stdout;
+  assert.doesNotMatch(html(abierta), /sin licencia/);
+  const cerrada = sitioTemporal((d) => editar(d, 'dudas.json', (t) => t.replace('"D-40": { "estado": "abierta"', '"D-40": { "estado": "cerrada"')));
+  assert.match(html(cerrada), /Dato de prueba sin licencia de publicación/);
+});
+
+test('B-03 · la tabla de sociedades locales no se escribe en el Markdown', () => {
+  const dir = sitioTemporal((d) => editar(d, 'paginas/nosotros.md', (t) => t.replace('Texto de prueba sobre la estructura regional.', 'Texto.\n\n| Mercado | Razón social |\n|---|---|\n| País Uno | Sociedad de Prueba S.A.S. |')));
+  hay(problemas(dir), { archivo: 'nosotros.md', mensaje: /se genera desde content\/entidad\.json/ });
+});
+
+test('B-03 · una fila por mercado publicable, con la misma regla que el JSON-LD', () => {
+  const salida = (dir: string) => JSON.parse(spawnSync(process.execPath, ['--input-type=module', '-e', `
+    import { cargarSitio } from './src/lib/sitio.ts'; import { modeloPagina } from './src/lib/render.ts';
+    const m = modeloPagina(cargarSitio(), '/nosotros/');
+    const grafo = JSON.parse(m.jsonld)['@graph'];
+    console.log(JSON.stringify({ filas: m.secciones.flatMap((s) => s.sociedades ?? []).map((f) => [f.codigo, f.legalName, f.ciudad, f.pagina?.href ?? null]), nodos: grafo.filter((n) => n.parentOrganization).map((n) => n.legalName) }));`], { env: { ...process.env, MA_CONTENIDO: dir }, encoding: 'utf8' }).stdout);
+  const hoy = salida(FIXTURE);
+  assert.deepEqual(hoy.filas, [['EC', 'Sociedad de Prueba S.A.S.', 'Ciudad Uno, Región Uno', '/mercados/pais-uno/']]);
+  assert.deepEqual(hoy.nodos, ['Sociedad de Prueba S.A.S.']);
+  const sinDatos = sitioTemporal((d) => editar(d, 'entidad.json', (t) => t.replace('"bloqueadoPor": []', '"bloqueadoPor": ["D-01"]')));
+  assert.deepEqual(salida(sinDatos), { filas: [], nodos: [] }, 'con su duda abierta, el mercado sale de la tabla y del grafo a la vez');
+});
+
+test('B-04 · «Información legal» no se escribe en una página país: se genera', () => {
+  const dir = sitioTemporal((d) => editar(d, 'paginas/mercados/pais-uno.md', (t) => t.replace('## Contacto local', '## Información legal\n\nRazón social de prueba.\n\n## Contacto local')));
+  hay(problemas(dir), { archivo: 'pais-uno.md', mensaje: /«Información legal» no se escribe: el bloque legal \(B-04\) se genera desde content\/entidad\.json/ });
+});
+
+test('B-04 · una página país ready sin su sociedad publicable rompe el build', () => {
+  const dir = sitioTemporal((d) => editar(d, 'entidad.json', (t) => t.replace('"legalName": "Sociedad de Prueba S.A.S.", ', '')));
+  hay(problemas(dir), { gate: 'gate 2', archivo: 'pais-uno.md', mensaje: /T3 exige la sociedad local publicable/ });
+});
+
+test('B-07 · una tabla sin caption rompe el build', () => {
+  const dir = sitioTemporal((d) => editar(d, 'paginas/soluciones/producto-a.md', (t) => t.replace('Tabla: Parámetros de prueba.\n\n', '')));
+  hay(problemas(dir), { archivo: 'producto-a.md', mensaje: /tabla sin caption/ });
+});
+
+test('B-08 · una definición de más de dos oraciones rompe el build', () => {
+  const dir = sitioTemporal((d) => editar(d, 'paginas/recursos/glosario-de-prueba.md', (t) => t.replace('Solo existe para las pruebas.', 'Solo existe para las pruebas. Y para nada más.')));
+  hay(problemas(dir), { archivo: 'glosario-de-prueba.md', mensaje: /una o dos oraciones y tiene 3/ });
+});
+
+test('B-08 · una definición que abre con «Es cuando…» rompe el build', () => {
+  const dir = sitioTemporal((d) => editar(d, 'paginas/recursos/glosario-de-prueba.md', (t) => t.replace('Término sintético que prueba', 'Es cuando se prueba')));
+  hay(problemas(dir), { archivo: 'glosario-de-prueba.md', mensaje: /empieza por el concepto/ });
+});
+
+test('B-08 · «Glosario relacionado» solo admite referencias a términos existentes del glosario', () => {
+  const aOtra = sitioTemporal((d) => editar(d, 'paginas/recursos/explicador-de-prueba.md', (t) => t.replace('(/recursos/glosario-de-prueba/#formato-a)', '(/soluciones/producto-a/#alcance)')));
+  hay(problemas(aOtra), { gate: 'gate 4', archivo: 'explicador-de-prueba.md', mensaje: /no apunta a una página de glosario/ });
+  const sinTermino = sitioTemporal((d) => editar(d, 'paginas/recursos/explicador-de-prueba.md', (t) => t.replace('#formato-a)', '#no-existe)')));
+  hay(problemas(sinTermino), { gate: 'gate 4', archivo: 'explicador-de-prueba.md', mensaje: /no tiene el término #no-existe/ });
+  const texto = sitioTemporal((d) => editar(d, 'paginas/recursos/explicador-de-prueba.md', (t) => t.replace('- [Formato A]', 'Un párrafo.\n\n- [Formato A]')));
+  hay(problemas(texto), { archivo: 'explicador-de-prueba.md', mensaje: /solo admite una lista de enlaces/ });
+});
+
+test('B-08 · el índice lista solo las letras con términos, en orden español', () => {
+  const r = spawnSync(process.execPath, ['--input-type=module', '-e', `
+    import { cargarSitio } from './src/lib/sitio.ts'; import { gruposPorLetra } from './src/lib/glosario.ts';
+    console.log(JSON.stringify(gruposPorLetra(cargarSitio().publicadas.get('/recursos/glosario-de-prueba/')).map((g) => [g.letra, g.id, g.terminos.map((t) => t.id)])));`], { env: { ...process.env, MA_CONTENIDO: FIXTURE }, encoding: 'utf8' });
+  assert.deepEqual(JSON.parse(r.stdout), [['F', 'letra-f', ['formato-a']], ['M', 'letra-m', ['metrica-b']], ['Ñ', 'letra-enie', ['nandu-de-prueba']]]);
+});
+
+test('B-09 · cada fila del selector enlaza a una hija publicada del hub, y están todas', () => {
+  const ajena = sitioTemporal((d) => editar(d, 'paginas/soluciones/familia/index.md', (t) => t.replace('[Dos](/soluciones/familia/dos/)', '[Dos](/soluciones/producto-a/)')));
+  hay(problemas(ajena), { gate: 'gate 2', archivo: 'familia/index.md', seccion: 'Los tres productos', mensaje: /tiene que enlazar a una página hija publicada/ });
+  hay(problemas(ajena), { gate: 'gate 2', archivo: 'familia/index.md', mensaje: /falta la fila del producto \/soluciones\/familia\/dos\// });
+});
+
+test('B-09 · las cards salen de la tabla y de las páginas hijas; una celda «—» no se muestra', () => {
+  const r = spawnSync(process.execPath, ['--input-type=module', '-e', `
+    import { cargarSitio } from './src/lib/sitio.ts'; import { modeloPagina } from './src/lib/render.ts';
+    const s = modeloPagina(cargarSitio(), '/soluciones/familia/').secciones.find((x) => x.trio);
+    console.log(JSON.stringify(s.trio.productos));`], { env: { ...process.env, MA_CONTENIDO: FIXTURE }, encoding: 'utf8' });
+  assert.deepEqual(JSON.parse(r.stdout), [
+    { id: 'uno', nombre: 'Producto Uno de prueba', descripcion: 'Producto Uno: descripción sintética del fixture.', href: '/soluciones/familia/uno/', datos: [{ rotulo: 'Universo', valor: '1 millón' }, { rotulo: 'Ventana', valor: 'Lunes a viernes' }] },
+    { id: 'dos', nombre: 'Producto Dos de prueba', descripcion: 'Producto Dos: descripción sintética del fixture.', href: '/soluciones/familia/dos/', datos: [{ rotulo: 'Ventana', valor: 'Lunes a domingo' }] },
+  ]);
+});
+
+test('B-10 · una página país sin contacto publicable rompe el build', () => {
+  const sin = sitioTemporal((d) => editar(d, 'entidad.json', (t) => t.replace(/"contacto": \{[^}]*\{[^}]*\} \},/, '')));
+  hay(problemas(sin), { gate: 'gate 2', archivo: 'pais-uno.md', seccion: 'Contacto local (B-10)', mensaje: /exige el contacto comercial/ });
+  const bloqueado = sitioTemporal((d) => editar(d, 'entidad.json', (t) => t.replace('"contacto": { "correo"', '"contacto": { "bloqueadoPor": ["D-31"], "correo"')));
+  hay(problemas(bloqueado), { gate: 'gate 2', archivo: 'pais-uno.md', mensaje: /exige el contacto comercial/ });
+});
+
+test('B-10 · contacto con los campos que existen, horario con zona y contactPoint en el JSON-LD', { timeout: 60_000 }, () => {
+  const r = spawnSync(process.execPath, ['--input-type=module', '-e', `
+    import { cargarSitio } from './src/lib/sitio.ts'; import { modeloPagina } from './src/lib/render.ts';
+    const m = modeloPagina(cargarSitio(), '/mercados/pais-uno/');
+    const grafo = JSON.parse(m.jsonld)['@graph'];
+    console.log(JSON.stringify({ ids: m.secciones.map((s) => s.id), contacto: m.secciones.find((s) => s.contacto)?.contacto.contacto, punto: grafo.find((n) => n.contactPoint)?.contactPoint }));`], { env: { ...process.env, MA_CONTENIDO: FIXTURE }, encoding: 'utf8' });
+  const o = JSON.parse(r.stdout);
+  assert.deepEqual(o.ids, ['soluciones-disponibles', 'contacto-local'], 'en el lugar de «Contacto local», antes del FAQ y el CTA');
+  assert.deepEqual(o.contacto, { correo: 'comercial@ejemplo.com', telefono: '+000 0 000 0000', oficina: null, horario: { texto: 'Lunes a viernes, 09:00–18:00', zona: 'GMT-5' } });
+  assert.deepEqual(o.punto, { '@type': 'ContactPoint', contactType: 'sales', areaServed: 'EC', availableLanguage: 'es', email: 'comercial@ejemplo.com', telephone: '+000 0 000 0000' });
+  const html = spawnSync(process.execPath, ['tests/ayuda/renderizar.ts', '/src/components/bloques/ContactoLocal.astro', JSON.stringify({ sociedad: { codigo: 'EC', pais: 'País Uno', nombre: 'Marca País Uno', contacto: o.contacto }, introHtml: '<p>Intro.</p>' })], { env: { ...process.env, MA_CONTENIDO: FIXTURE }, encoding: 'utf8' }).stdout.replace(/ data-astro-cid-[a-z0-9]+/g, '');
+  assert.match(html, /<dt>Teléfono<\/dt><dd><a href="tel:\+00000000000">\+000 0 000 0000<\/a><\/dd>/);
+  assert.match(html, /Lunes a viernes, 09:00–18:00 \(GMT-5\)/);
+  assert.doesNotMatch(html, /Oficina/, 'sin dato, el campo no aparece');
+  assert.match(html, /class="btn btn--secundario" href="\/contacto\/"/);
+});
+
+test('home · «Soluciones» ya no se escribe: los ejes se generan desde la navegación', () => {
+  const dir = sitioTemporal((d) => editar(d, 'paginas/index.md', (t) => t.replace('## FAQ', '## Soluciones\n\n- Texto.\n\n## FAQ')));
+  hay(problemas(dir), { archivo: 'paginas/index.md', mensaje: /«Soluciones» no se escribe: los resúmenes de los cuatro ejes se generan/ });
 });
 
 /* ---------------- gate 3 ---------------- */
@@ -175,6 +302,14 @@ test('tokens · un color, tamaño o duración escritos a mano rompen el build', 
   escribir(src, 'components/Card.astro', '<div class="c"></div>\n<style>\n  .c { color: #FFFFFF; padding: 16px; transition: opacity 220ms; }\n  .d { color: var(--ma-text); padding: var(--ma-space-lg); margin: 0; }\n</style>\n');
   const lista = problemas(FIXTURE, { MA_SRC: src }).filter((p) => p.gate === 'tokens');
   assert.equal(lista.length, 3, JSON.stringify(lista, null, 2));
+});
+
+test('tokens · en @media solo se admiten los breakpoints de tokens.json', () => {
+  const src = mkdtempSync(join(tmpdir(), 'ma-src-'));
+  escribir(src, 'components/Grid.astro', '<style>\n  @media (width < 900px) { .g { gap: var(--ma-space-sm); } }\n  @media (hover: hover) and (width >= 1100px) { .g { gap: var(--ma-space-md); } }\n  @media (max-width: 899px) { .g { gap: var(--ma-space-lg); } }\n</style>\n');
+  const lista = problemas(FIXTURE, { MA_SRC: src }).filter((p) => p.gate === 'tokens');
+  assert.equal(lista.length, 1, JSON.stringify(lista, null, 2));
+  assert.match(lista[0].mensaje, /899px no es un breakpoint/);
 });
 
 test('tokens · los alias --mau-* no se usan en código nuevo', () => {

@@ -13,15 +13,19 @@ lastUpdated: "2026-08-26"
 
 ## Respuesta directa
 
-El Push Premium Video de Mediaudience es publicidad móvil georreferenciada e hipersegmentada por seis drivers de comportamiento (punto de venta, apps, uso de celular, zona vital, forma de pago y demográfico). Según datos de la compañía alcanza 12 millones de usuarios en Ecuador y 192 millones en Latinoamérica *(sin fecha de corte — D-06)*, con modelo CPE.
+El Push Premium Video de Mediaudience es publicidad móvil georreferenciada e hipersegmentada por seis drivers de comportamiento (punto de venta, apps, uso de celular, zona vital, forma de pago y demográfico).
+
+Según datos de la compañía alcanza 12 millones de usuarios en Ecuador y 192 millones en Latinoamérica (sin fecha de corte — D-06), con modelo CPE.
 
 ## Datos clave
 
-- Universo Ecuador: 12 millones *(según datos de la compañía — D-06)*
-- Universo Latinoamérica: 192 millones *(según datos de la compañía — D-06)*
+- Universo Ecuador: 12 millones (D-06)
+- Universo Latinoamérica: 192 millones (D-06)
 - CTR de referencia: 8%+
 - Modelo de compra: CPE (costo por engagement)
 - Secuencia creativa: Rich Notification → Video Notification
+
+Según datos de la compañía.
 
 ## Desarrollo
 

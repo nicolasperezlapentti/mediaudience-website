@@ -35,3 +35,20 @@ export function formatoPorcentaje(puntos: number, { min = 0, max = 1 }: Opciones
 export function formatoUSD(valor: number, opciones: OpcionesDecimales = {}): string {
   return `USD ${formatoNumero(valor, opciones)}`;
 }
+
+/** «2022-01-10» → «10 de enero de 2022». Se interpreta en UTC: una fecha, no un instante. */
+export function formatoFechaLarga(iso: string): string {
+  const fecha = new Date(`${iso}T00:00:00Z`);
+  if (Number.isNaN(fecha.getTime())) throw new RangeError(`formatoFechaLarga: «${iso}» no es una fecha AAAA-MM-DD`);
+  return new Intl.DateTimeFormat(LOCALE, { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' }).format(fecha);
+}
+
+const MESES = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+
+/** «2025-03» → «marzo 2025». Fecha de corte (B-02) y mes de un KPI (B-06). */
+export function formatoMes(aaaaMm: string): string {
+  const m = aaaaMm.match(/^(\d{4})-(\d{2})$/);
+  const mes = m ? Number(m[2]) : 0;
+  if (!m || mes < 1 || mes > 12) throw new RangeError(`formatoMes: «${aaaaMm}» no es un mes AAAA-MM`);
+  return `${MESES[mes - 1]} ${m[1]}`;
+}

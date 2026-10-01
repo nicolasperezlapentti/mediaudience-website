@@ -1,6 +1,6 @@
 /* ============================================================
    Mediaudience — Signal · tokens.css
-   GENERADO desde design/tokens.json v1.2.0
+   GENERADO desde design/tokens.json v1.3.5
    NO EDITAR A MANO. Ejecutar: node scripts/build-tokens.mjs
    ============================================================ */
 
@@ -25,6 +25,7 @@
   --ma-surface-raised: #1A2135;
   --ma-surface-hover: #1A2135;
   --ma-surface-disabled: #121828;
+  --ma-surface-translucent: rgba(18,24,40,0.86);
   --ma-text: #E9EDF6;
   --ma-text-muted: #8A93A9;
   --ma-text-tertiary: #565E76;
@@ -95,6 +96,10 @@
   --ma-display-letter-spacing: -0.03em;
   --ma-display-size-md: 3rem;
   --ma-display-size-sm: 2.25rem;
+  --ma-wordmark-size: 1.375rem;
+  --ma-wordmark-line-height: 1;
+  --ma-wordmark-weight: 600;
+  --ma-wordmark-letter-spacing: -0.02em;
   --ma-h1-size: 2.375rem;
   --ma-h1-line-height: 1.1;
   --ma-h1-weight: 600;
@@ -181,6 +186,13 @@
   --ma-layout-gutter: 1.5rem;
   --ma-layout-sidebar-width: 200px;
   --ma-layout-topbar-height: 58px;
+  --ma-layout-header-blur: 12px;
+  --ma-layout-button-height: 40px;
+  --ma-layout-dropdown-min-width: 240px;
+  --ma-layout-table-stack-label: 96px;
+  --ma-layout-kpi-min-width: 260px;
+  --ma-layout-compare-min-width: 760px;
+  --ma-layout-card-min-width: 300px;
 
   /* ---- border ---- */
   --ma-border-width: 1px;
@@ -204,6 +216,7 @@
   --ma-ease-linear: linear;
 
   /* ---- icon ---- */
+  --ma-icon-glyph: 6px;
   --ma-icon-sm: 16px;
   --ma-icon-md: 20px;
   --ma-icon-lg: 24px;

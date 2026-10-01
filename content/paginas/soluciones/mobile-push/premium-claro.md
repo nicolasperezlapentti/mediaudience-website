@@ -13,15 +13,19 @@ lastUpdated: "2026-08-26"
 
 ## Respuesta directa
 
-El Push Premium con Claro de Mediaudience envía notificaciones a través de las apps nativas de Claro, integradas por SDK para obtener first-party data. Según datos de la compañía alcanza un universo de 4 millones en Ecuador *(sin fecha de corte — D-06)*, con formatos Rich Notification y estándar, modelo CPE y disparo de lunes a viernes.
+El Push Premium con Claro de Mediaudience envía notificaciones a través de las apps nativas de Claro, integradas por SDK para obtener first-party data.
+
+Según datos de la compañía alcanza un universo de 4 millones en Ecuador (sin fecha de corte — D-06), con formatos Rich Notification y estándar, modelo CPE y disparo de lunes a viernes.
 
 ## Datos clave
 
-- Universo Ecuador: 4 millones *(según datos de la compañía — D-06)*
+- Universo Ecuador: 4 millones (D-06)
 - CTR de referencia: +3% *(retargeting: +2%)*
 - Modelo de compra: CPE (costo por engagement)
 - Ventana de disparo: lunes a viernes
 - Formatos: Rich Notification y notificación estándar
+
+Según datos de la compañía.
 
 ## Cómo funciona
 

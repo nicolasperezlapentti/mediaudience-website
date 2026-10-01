@@ -13,7 +13,9 @@ lastUpdated: "2026-08-26"
 
 ## Respuesta directa
 
-El retargeting cruzado de Mediaudience impacta a la misma audiencia dos veces: primero en Connected TV y luego en móvil, identificando al usuario por reconocimiento de IP. Es una capacidad transversal, no un producto independiente: se activa sobre campañas de CTV y Mobile Push existentes.
+El retargeting cruzado de Mediaudience impacta a la misma audiencia dos veces: primero en Connected TV y luego en móvil, identificando al usuario por reconocimiento de IP.
+
+Es una capacidad transversal, no un producto independiente: se activa sobre campañas de CTV y Mobile Push existentes.
 
 ## Datos clave
 

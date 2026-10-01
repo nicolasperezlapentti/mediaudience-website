@@ -1,0 +1,41 @@
+---
+/**
+ * B-11 · sección de página (design/referencia/bloques.html: «Si falta el dato, falta la
+ * sección»). El espaciado y la hairline viven en la sección, no en márgenes entre hermanos:
+ * quitar una no deja hueco. Sin contenido no renderiza nada —ni el título—: el condicional
+ * envuelve la sección completa. Qué secciones tienen datos lo decide seccionesVisibles().
+ */
+interface Props {
+  id: string;
+  titulo?: string | null;
+}
+
+const { id, titulo } = Astro.props;
+const contenido = Astro.slots.has('default') ? (await Astro.slots.render('default')).trim() : '';
+---
+
+{
+  contenido && (
+    <section class="page-section" id={id}>
+      {titulo && <h2 class="page-section__titulo">{titulo}</h2>}
+      <Fragment set:html={contenido} />
+    </section>
+  )
+}
+
+<style>
+  .page-section {
+    padding: var(--ma-space-2xl) 0;
+    border-top: var(--ma-border-width) solid var(--ma-border);
+  }
+
+  .page-section__titulo {
+    margin: 0 0 var(--ma-space-xl);
+    font-family: var(--ma-font-display);
+    font-size: var(--ma-h2-size);
+    font-weight: var(--ma-h2-weight);
+    line-height: var(--ma-h2-line-height);
+    letter-spacing: var(--ma-h2-letter-spacing);
+    text-wrap: pretty;
+  }
+</style>

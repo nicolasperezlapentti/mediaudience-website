@@ -13,15 +13,17 @@ lastUpdated: "2026-08-26"
 
 ## Respuesta directa
 
-Según datos de la plataforma, la solución de Connected TV de Mediaudience ofrece inventario premium de streaming con cerca de 80 millones de oportunidades mensuales en Ecuador *(dato de la compañía, sin fecha de corte — D-05)*, segmentación contextual por horario, publisher, contenido, temporada, geolocalización y dispositivo, y video non-skippable con formatos interactivos.
+Según datos de la plataforma, la solución de Connected TV de Mediaudience ofrece inventario premium de streaming con cerca de 80 millones de oportunidades mensuales en Ecuador (dato de la compañía, sin fecha de corte — D-05), segmentación contextual por horario, publisher, contenido, temporada, geolocalización y dispositivo, y video non-skippable con formatos interactivos.
 
 ## Datos clave
 
-- 80 millones de oportunidades mensuales en Ecuador *(según datos de la compañía — D-05)*
-- 3,5 millones de usuarios únicos de TV en Ecuador *(según datos de la compañía — D-05)*
-- 7,5 millones de usuarios únicos mobile en Ecuador *(según datos de la compañía — D-05)*
+- 80 millones de oportunidades mensuales en Ecuador (D-05)
+- 3,5 millones de usuarios únicos de TV en Ecuador (D-05)
+- 7,5 millones de usuarios únicos mobile en Ecuador (D-05)
 - Modelo de compra: CPM, objetivo de alcance
-- Sin montos mínimos de inversión *(según datos de la compañía — D-24)*
+- Sin montos mínimos de inversión (D-24)
+
+Según datos de la compañía.
 
 ## Desarrollo
 
@@ -32,6 +34,8 @@ Publicidad de video en dispositivos conectados a internet con acceso a servicios
 ### Segmentación contextual
 
 Siete ejes de segmentación:
+
+Tabla: Segmentación contextual.
 
 | Eje | Detalle |
 |---|---|
@@ -53,11 +57,13 @@ Video non-skippable, que puede salir como pre-roll, mid-roll o post-roll. El lí
 
 Según Comscore Custom Solutions, *"CTV OTT & Addressable Advertising in Latin America"* (2024) *(D-22)*:
 
-- 4,3 horas promedio de consumo de CTV por día, con el prime time (7:00 pm – 12:00 am) como bloque de mayor consumo.
-- 56% considera que la sala de estar es la mejor opción para ver películas y series en CTV.
-- 83% practica coviewing: ve contenido de streaming acompañado.
+- 4,3 horas promedio de consumo de CTV por día, con el prime time (7:00 pm – 12:00 am) como bloque de mayor consumo. (D-22)
+- 56% considera que la sala de estar es la mejor opción para ver películas y series en CTV. (D-22)
+- 83% practica coviewing: ve contenido de streaming acompañado. (D-22)
 
 ### Especificaciones técnicas
+
+Tabla: Especificaciones técnicas.
 
 | Parámetro | Requisito |
 |---|---|

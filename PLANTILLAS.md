@@ -81,8 +81,16 @@ refuerza el tema sin fragmentar autoridad. Lo que nunca se hace es darle URL pro
 ### 1.3 Header final
 
 ```
-Objetivos ▾ · Productos ▾ · Canales ▾ · Herramientas ▾ · Nosotros ▾ · Recursos ▾ · [Agenda una demo]
+Soluciones ▾ · Nosotros ▾ · Recursos ▾ · [Agenda una demo]
+   └ mega-menú: Por objetivo | Por producto | Por canal | Por herramienta
 ```
+
+- **Soluciones ▾** agrupa las cuatro facetas como columnas de un mismo mega-menú
+  (`design/referencia/navegacion.html`, decidido en Fase B). Navegan el mismo conjunto de URLs
+  de §1.2; en el footer siguen siendo columnas propias (§1.4).
+- **Texto de cada enlace:** el «Anchor» de §1.2. El «Ítem del menú» va como etiqueta aparte,
+  solo cuando el anchor no lo contiene.
+- **Agenda una demo** → `/contacto/`.
 
 - **Nosotros ▾** → `/nosotros/` · `/nosotros/socios/` · `/contacto/`
 - **Recursos ▾** → explicadores · panorama por mercado · comparativas · glosario
@@ -103,12 +111,14 @@ Objetivos | Productos | Canales | Herramientas | Compañía
 BLOQUE DE ENTIDAD (texto real, en las ~25 páginas)
   Mediaudience, compañía multilatina de AdTech: SSP y representación
   de medios digitales en Perú, México, Ecuador y Chile.
-  Mediaudience S.A.S. · [domicilio] · [contacto]
+  [operaciones locales publicadas] · Contacto de Mediaudience
 ─────────────────────────────────────────────────────────────
 Términos · Privacidad · Cookies · © Mediaudience
 ```
 
 El bloque de entidad usa el **descriptor de una línea** (liberado en el fact-book). La razón social aparece **una sola vez por activo**, acá. Nunca abre párrafo ni va en `<title>`.
+
+**Sin razón social por ahora** (decidido en Fase B): la del grupo está pendiente (D-01) y Mediaudience S.A.S. es la sociedad de Ecuador; ponerla acá le atribuiría al grupo los datos de una sociedad local. Domicilio y correo institucional entran cuando estén en el fact-book.
 
 ---
 
@@ -245,10 +255,15 @@ Leyenda de estado: **OBL** obligatoria · **OPC** opcional · **GATE** condicion
 | 2 | Answer target local | OBL | B-01 |
 | 3 | Productos disponibles en ese mercado | OBL | — |
 | 4 | Datos locales con fuente | OPC | B-02 |
-| 5 | Bloque legal | OBL | B-04 |
-| 6 | Socio local | GATE D-31 | — |
-| 7 | Contacto local | OBL | B-10 |
+| 5 | Socio local | GATE D-31 | — |
+| 6 | Contacto local (desde `entidad.json`; el Markdown es su introducción) | OBL | B-10 |
+| 7 | Casos del mercado (decidido en Fase B, desde la referencia B-11) | GATE D-13 | B-06 |
 | 8 | Enlace a `/nosotros/` (entidad única) | OBL | — |
+| 9 | Bloque legal, al pie, antes del footer | OBL | B-04 |
+
+**Contacto local (decidido en Fase B):** sale de `content/entidad.json → mercados[].contacto` (correo institucional, teléfono, oficina, horario con zona horaria). Nunca un correo personal (§1.5). Una página país `ready` sin al menos correo o teléfono publicable rompe el build.
+
+**Bloque legal (decidido en Fase B):** va al pie, como en la referencia y en el fact-book §1.3, y se genera desde `content/entidad.json`; no se escribe en el Markdown. Muestra razón social, identificación fiscal (cuando exista), domicilio, fecha de constitución y actividad CIIU. Una página país `ready` sin su sociedad publicable en `entidad.json` rompe el build.
 
 **Patrón de H1:** «Mediaudience [PAÍS] es la operación local de Mediaudience, compañía multilatina de AdTech de origen peruano, en [PAÍS]. Con sociedad constituida en [CIUDAD], ofrece [productos disponibles] a agencias y anunciantes locales, con contratación y facturación en el país.»
 

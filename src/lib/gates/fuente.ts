@@ -21,6 +21,9 @@ import { parsearCta } from '../markdown.ts';
 import { ANCLAS_VACIAS, partirHref, validarNavegacion } from '../navegacion.ts';
 import { GATES, type Problema } from '../problemas.ts';
 import { cargarSitio, paginaEntidad, type Sitio } from '../sitio.ts';
+import { sociedadesLocales } from '../sociedades.ts';
+import { resolverReferencias } from '../glosario.ts';
+import { construirTrio } from '../trio.ts';
 
 const rel = (abs: string) => relative(RAIZ, abs).split(sep).join('/');
 
@@ -76,6 +79,27 @@ function verificarArchivos(sitio: Sitio, leidas: PaginaLeida[]): Problema[] {
     }
   }
 
+  const sociedades = new Set(sociedadesLocales(sitio).map((s) => s.slug));
+  const conContacto = new Set(sociedadesLocales(sitio).filter((s) => s.contacto).map((s) => s.slug));
+  for (const p of sitio.publicadas.values()) {
+    if (p.plantilla === 'T3' && sociedades.has(p.ruta) && !conContacto.has(p.ruta)) {
+      problemas.push({
+        gate: GATES.g2,
+        archivo: p.archivo,
+        seccion: 'Contacto local (B-10)',
+        mensaje: `T3 exige el contacto comercial del mercado en content/entidad.json (correo institucional o teléfono, sin dudas abiertas) para ${p.ruta}`,
+      });
+    }
+    if (p.plantilla === 'T3' && !sociedades.has(p.ruta)) {
+      problemas.push({
+        gate: GATES.g2,
+        archivo: p.archivo,
+        seccion: 'Información legal (B-04)',
+        mensaje: `T3 exige la sociedad local publicable en content/entidad.json (slug ${p.ruta}: razón social, fecha de constitución y domicilio, sin dudas abiertas)`,
+      });
+    }
+  }
+
   if (sitio.publicadas.has('/') && !paginaEntidad(sitio)) {
     problemas.push({ gate: GATES.g1, archivo: 'content/sitemap.json', seccion: '/', mensaje: 'la home no se genera sin una página T1 (entidad) publicada: su bloque de entidad enlazaría a un 404' });
   }
@@ -113,6 +137,14 @@ export function verificarEnlaces(sitio: Sitio): Problema[] {
       if (esCta) {
         const cta = parsearCta(seccion);
         if (cta && ANCLAS_VACIAS.test(cta.texto)) add(`el llamado «${cta.texto}» no describe el destino`);
+      }
+
+      if (def.bloque === 'B-09') {
+        for (const e of construirTrio(sitio, pagina, seccion).errores) problemas.push({ gate: GATES.g2, archivo: pagina.archivo, seccion: def.nombre, mensaje: e });
+      }
+
+      if (def.nombre === 'Glosario relacionado') {
+        for (const e of resolverReferencias(sitio, pagina).errores) add(e);
       }
 
       for (const { url, texto } of seccion.enlaces) {
@@ -220,14 +252,32 @@ function cssDe(archivo: string, texto: string): string[] {
   return [...bloques, ...inline];
 }
 
+/**
+ * var() no funciona dentro de @media: ahí los breakpoints se escriben literales, y solo se
+ * admiten los de tokens.json → layout.breakpoints (sintaxis de rango: `(width < 900px)`).
+ */
+function breakpoints(): Set<string> {
+  const tokens = JSON.parse(readFileSync(join(RAIZ, 'design', 'tokens.json'), 'utf8')) as { layout: { breakpoints: Record<string, string> } };
+  return new Set(Object.values(tokens.layout.breakpoints));
+}
+
 export function verificarPlantillas(): Problema[] {
   const problemas: Problema[] = [];
+  const permitidos = breakpoints();
   for (const abs of listarRecursivo(SRC, /\.(astro|css)$/)) {
     const texto = readFileSync(abs, 'utf8');
     const archivo = rel(abs);
     for (const css of cssDe(archivo, texto)) {
       const sinComentarios = css.replace(/\/\*[\s\S]*?\*\//g, '');
-      for (const m of sinComentarios.matchAll(/([a-z-]+)\s*:\s*([^;{}]+)/gi)) {
+      for (const m of sinComentarios.matchAll(/@media([^{]+)\{/g)) {
+        for (const valor of m[1].matchAll(/\d*\.?\d+[a-z]+/gi)) {
+          if (!permitidos.has(valor[0])) {
+            problemas.push({ gate: GATES.tokens, archivo, mensaje: `@media${m[1].trimEnd()}: ${valor[0]} no es un breakpoint de tokens.json (${[...permitidos].join(', ')})` });
+          }
+        }
+      }
+      const declaraciones = sinComentarios.replace(/@media[^{]+\{/g, '{');
+      for (const m of declaraciones.matchAll(/([a-z-]+)\s*:\s*([^;{}]+)/gi)) {
         for (const [patron, tipo] of VALOR_PROHIBIDO) {
           const hallado = m[2].match(patron);
           if (hallado) {

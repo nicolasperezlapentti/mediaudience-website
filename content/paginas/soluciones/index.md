@@ -43,7 +43,7 @@ Los productos de Mobile Push tienen restricciones de categoría: alcohol, tabaco
 ## FAQ
 
 **¿Hay un monto mínimo de inversión?**
-En Connected TV no hay montos mínimos de inversión *(según datos de la compañía — D-24)*.
+En Connected TV no hay montos mínimos de inversión (según datos de la compañía — D-24).
 
 **¿Por qué Mobile Push se presenta como tres productos y no como uno?**
 Porque son tres universos de usuarios, tres rangos de CTR de referencia y dos ventanas de disparo distintas. Presentarlos como un solo producto lleva a expectativas equivocadas de alcance y rendimiento.

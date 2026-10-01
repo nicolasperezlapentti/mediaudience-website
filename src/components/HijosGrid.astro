@@ -1,0 +1,101 @@
+---
+/**
+ * T6 · grilla de hijos del hub: solo los hijos ready (sitemap.json), cada uno con el title y
+ * la metaDescription de su propia página. Sin hijos publicados no se renderiza.
+ */
+import Seccion from './Seccion.astro';
+import type { EnlaceGenerado } from '../lib/render.ts';
+
+interface Props {
+  hijos: EnlaceGenerado[];
+}
+
+const { hijos } = Astro.props;
+---
+
+<Seccion id="indice">
+  {
+    hijos.length > 0 && (
+      <ul class="hijos">
+        {hijos.map((h, i) => (
+          <li class="hijo">
+            <p class="hijo__n">{String(i + 1).padStart(2, '0')}</p>
+            <h2 class="hijo__titulo">
+              <a href={h.href}>{h.texto}</a>
+            </h2>
+            {h.descripcion && <p class="hijo__desc">{h.descripcion}</p>}
+          </li>
+        ))}
+      </ul>
+    )
+  }
+</Seccion>
+
+<style>
+  .hijos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--ma-layout-card-min-width)), 1fr));
+    gap: var(--ma-space-grid-gap);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .hijo {
+    position: relative;
+    display: grid;
+    align-content: start;
+    gap: var(--ma-space-sm);
+    padding: var(--ma-space-xl);
+    background: var(--ma-surface);
+    border: var(--ma-border-width) solid var(--ma-border);
+    border-radius: var(--ma-radius-md);
+    transition:
+      background-color var(--ma-duration-base) var(--ma-ease-base),
+      border-color var(--ma-duration-base) var(--ma-ease-base);
+  }
+
+  /* Card clicable entera, sin JavaScript: el enlace del título se extiende a la card. */
+  .hijo:hover {
+    background: var(--ma-surface-raised);
+    border-color: var(--ma-border-strong);
+  }
+
+  .hijo__titulo a::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+  }
+
+  .hijo__n {
+    margin: 0;
+    font-family: var(--ma-font-mono);
+    font-size: var(--ma-caption-size);
+    letter-spacing: var(--ma-caption-letter-spacing);
+    color: var(--ma-text-tertiary);
+  }
+
+  .hijo__titulo {
+    margin: 0;
+    font-family: var(--ma-font-display);
+    font-size: var(--ma-h3-size);
+    font-weight: var(--ma-h3-weight);
+    line-height: var(--ma-h3-line-height);
+    letter-spacing: var(--ma-h3-letter-spacing);
+  }
+
+  .hijo__titulo a {
+    color: var(--ma-text);
+  }
+
+  .hijo__titulo a:hover {
+    text-decoration: none;
+  }
+
+  .hijo__desc {
+    margin: 0;
+    font-size: var(--ma-small-size);
+    line-height: var(--ma-small-line-height);
+    color: var(--ma-text-muted);
+  }
+</style>

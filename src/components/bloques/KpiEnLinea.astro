@@ -1,0 +1,29 @@
+---
+/**
+ * B-06 · KPI dentro de prosa: el mismo dato, sin card. Cifra con <data value> y formato es-EC.
+ * El párrafo que lo contiene lleva su línea B-02 debajo; eso lo pone quien lo usa.
+ */
+import { formatoNumero } from '../../lib/formato.ts';
+
+interface Props {
+  valor: number;
+  unidad?: '%' | 'USD' | null;
+  decimales?: number;
+}
+
+const { valor, unidad = null, decimales = unidad === '%' ? 1 : 2 } = Astro.props;
+if (!Number.isFinite(valor)) throw new Error(`B-06 · KPI en línea con valor no numérico (${valor})`);
+const maquina = unidad === '%' ? String(Number((valor / 100).toFixed(decimales + 2))) : String(valor);
+const texto = formatoNumero(valor, { max: decimales });
+---
+
+<span class="kpi-en-linea">{unidad === 'USD' && 'USD '}<data value={maquina}>{texto}</data>{unidad === '%' && '%'}</span>
+
+<style>
+  .kpi-en-linea {
+    font-family: var(--ma-font-display);
+    font-weight: var(--ma-weight-semibold);
+    font-variant-numeric: tabular-nums;
+    color: var(--ma-text);
+  }
+</style>

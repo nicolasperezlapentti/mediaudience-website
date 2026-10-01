@@ -1,0 +1,192 @@
+---
+/**
+ * B-09 · selector de productos (design/referencia/bloques.html · PLANTILLAS T2-hub).
+ *
+ * Tres cards independientes, cada una con su URL, su número de orden, su descripción y sus
+ * datos: no hay cifra agregada ni card madre. Las pestañas son enlaces a cada card dentro de
+ * esta misma página; la card a la que se llegó por enlace (:target) muestra la regla superior.
+ * Las tres cards siempre visibles: no es un tab que oculta. Cero JavaScript.
+ * Datos: la tabla de la sección + title y metaDescription de cada página hija (src/lib/trio.ts).
+ */
+import { MARCA } from '../../lib/marca.ts';
+import type { Trio } from '../../lib/trio.ts';
+
+type Props = Trio & { ruta: string };
+
+const { leyenda, antesHtml, productos, despuesHtml, ruta } = Astro.props;
+const total = productos.length;
+const nn = (n: number) => String(n).padStart(2, '0');
+const anchor = (nombre: string) => (nombre.includes(MARCA) ? nombre : `${nombre} de ${MARCA}`);
+---
+
+{antesHtml && <Fragment set:html={antesHtml} />}
+{
+  total > 0 && (
+    <>
+      <ul class="pestanas" aria-label={leyenda || undefined}>
+        {productos.map((p, i) => (
+          <li>
+            <a href={`${ruta}#${p.id}`}>
+              <span class="pestanas__n">{nn(i + 1)}</span>
+              {p.nombre}
+            </a>
+          </li>
+        ))}
+      </ul>
+      <ol class="trio" aria-label={leyenda || undefined}>
+        {productos.map((p, i) => (
+          <li>
+            <article class="trio__card" id={p.id} aria-labelledby={`${p.id}-t`}>
+              <p class="trio__indice">
+                Producto {i + 1} de {total}
+              </p>
+              <h3 class="trio__nombre" id={`${p.id}-t`}>
+                {p.nombre}
+              </h3>
+              <p class="trio__desc">{p.descripcion}</p>
+              {p.datos.length > 0 && (
+                <dl class="trio__datos">
+                  {p.datos.map((d) => (
+                    <div>
+                      <dt>{d.rotulo}</dt>
+                      <dd>{d.valor}</dd>
+                    </div>
+                  ))}
+                </dl>
+              )}
+              <a class="trio__enlace" href={p.href}>
+                {anchor(p.nombre)} <span aria-hidden="true">→</span>
+              </a>
+            </article>
+          </li>
+        ))}
+      </ol>
+    </>
+  )
+}
+{despuesHtml && <Fragment set:html={despuesHtml} />}
+
+<style>
+  .pestanas {
+    display: flex;
+    gap: 0;
+    margin: var(--ma-space-lg) 0 var(--ma-space-grid-gap);
+    padding: 0;
+    overflow-x: auto;
+    list-style: none;
+    border-bottom: var(--ma-border-width) solid var(--ma-border);
+  }
+
+  .pestanas a {
+    display: flex;
+    align-items: center;
+    gap: var(--ma-space-sm);
+    min-height: var(--ma-form-min-height);
+    margin-bottom: calc(-1 * var(--ma-border-width));
+    padding: 0 var(--ma-space-lg);
+    border-bottom: var(--ma-border-width-strong) solid transparent;
+    white-space: nowrap;
+    font-family: var(--ma-font-mono);
+    font-size: var(--ma-caption-size);
+    letter-spacing: var(--ma-caption-letter-spacing);
+    text-transform: uppercase;
+    color: var(--ma-text-muted);
+  }
+
+  .pestanas a:hover {
+    color: var(--ma-text);
+    text-decoration: none;
+  }
+
+  .pestanas__n {
+    color: var(--ma-text-placeholder);
+  }
+
+  .trio {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--ma-layout-card-min-width)), 1fr));
+    gap: var(--ma-space-grid-gap);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .trio__card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: var(--ma-space-md);
+    height: 100%;
+    padding: var(--ma-space-xl);
+    background: var(--ma-surface);
+    border: var(--ma-border-width) solid var(--ma-border);
+    border-radius: var(--ma-radius-md);
+    scroll-margin-top: calc(var(--ma-layout-topbar-height) + var(--ma-space-lg));
+  }
+
+  /* Seleccionada = la card a la que se llegó por su enlace. */
+  .trio__card:target::before {
+    content: '';
+    position: absolute;
+    top: calc(-1 * var(--ma-border-width));
+    left: calc(-1 * var(--ma-border-width));
+    right: calc(-1 * var(--ma-border-width));
+    height: var(--ma-border-width-strong);
+    background: var(--ma-primary);
+    border-radius: var(--ma-radius-md) var(--ma-radius-md) 0 0;
+  }
+
+  .trio__indice {
+    margin: 0;
+    font-family: var(--ma-font-mono);
+    font-size: var(--ma-caption-size);
+    letter-spacing: var(--ma-caption-letter-spacing);
+    text-transform: uppercase;
+    color: var(--ma-text-placeholder);
+  }
+
+  .trio__nombre {
+    margin: 0;
+    font-family: var(--ma-font-display);
+    font-size: var(--ma-h3-size);
+    font-weight: var(--ma-h3-weight);
+    line-height: var(--ma-h3-line-height);
+    letter-spacing: var(--ma-h3-letter-spacing);
+  }
+
+  .trio__desc {
+    margin: 0;
+    font-size: var(--ma-small-size);
+    line-height: var(--ma-small-line-height);
+    color: var(--ma-text-muted);
+  }
+
+  .trio__datos {
+    display: grid;
+    gap: var(--ma-space-md);
+    margin: 0;
+    padding-top: var(--ma-space-md);
+    border-top: var(--ma-border-width) solid var(--ma-border-subtle);
+  }
+
+  dt {
+    font-family: var(--ma-font-mono);
+    font-size: var(--ma-label-size);
+    letter-spacing: var(--ma-label-letter-spacing);
+    text-transform: uppercase;
+    color: var(--ma-text-muted);
+  }
+
+  dd {
+    margin: var(--ma-space-xs) 0 0;
+    font-size: var(--ma-small-size);
+    line-height: var(--ma-small-line-height);
+    color: var(--ma-text);
+  }
+
+  .trio__enlace {
+    margin-top: auto;
+    padding-top: var(--ma-space-sm);
+    font-size: var(--ma-small-size);
+  }
+</style>

@@ -40,3 +40,11 @@ export const MENCION_MARCA = /mediaudience/gi;
 export function tituloDocumento(titulo: string): string {
   return titulo.includes(MARCA) ? titulo : `${titulo} · ${MARCA}`;
 }
+
+/**
+ * Logotipo en tipografía viva (GUIA-DE-USO §1): «medi» + «a» en acento + «udience», en
+ * minúscula. Se deriva de MARCA para que ningún componente escriba el nombre.
+ */
+const minuscula = MARCA.toLowerCase();
+export const WORDMARK = { antes: minuscula.slice(0, 4), acento: minuscula.slice(4, 5), despues: minuscula.slice(5) } as const;
+if (WORDMARK.acento !== 'a') throw new Error('marca.ts: el wordmark resalta la «a» central de la marca');

@@ -6,6 +6,7 @@
     "D-03": { "estado": "cerrada", "titulo": "Duda de prueba ya cerrada", "cerradaEl": "2026-09-01" },
     "D-13": { "estado": "abierta", "titulo": "Casos" },
     "D-15": { "estado": "abierta", "titulo": "Partnership" },
-    "D-31": { "estado": "abierta", "titulo": "Socio local" }
+    "D-31": { "estado": "abierta", "titulo": "Socio local" },
+    "D-40": { "estado": "abierta", "titulo": "Dato de prueba sin licencia de publicación", "bloqueaPublicacion": true }
   }
 }

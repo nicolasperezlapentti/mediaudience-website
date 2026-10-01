@@ -1,0 +1,33 @@
+---
+/**
+ * B-06 · fila de KPI. Grilla intrínseca (layout.kpiMinWidth) y una sola cifra en acento por
+ * fila: validarFila() rompe el build si hay más. Sin KPI no se renderiza (B-11).
+ */
+import Kpi from './Kpi.astro';
+import { validarFila, type DatosKpi } from '../../lib/kpi.ts';
+
+interface Props {
+  kpis: DatosKpi[];
+}
+
+const { kpis } = Astro.props;
+validarFila(kpis);
+---
+
+{
+  kpis.length > 0 && (
+    <div class="kpi-fila">
+      {kpis.map((k) => (
+        <Kpi kpi={k} />
+      ))}
+    </div>
+  )
+}
+
+<style>
+  .kpi-fila {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--ma-layout-kpi-min-width)), 1fr));
+    gap: var(--ma-space-grid-gap);
+  }
+</style>

@@ -1,0 +1,122 @@
+---
+/**
+ * B-08 · glosario completo (T4-glosario, sección «Términos»).
+ *
+ * Índice alfabético con solo las letras que tienen términos (B-11: lo que no existe no se
+ * muestra) y un grupo por letra. Los enlaces del índice llevan la ruta de la página + la
+ * letra: son fragmentos dentro de una página canónica, no anclas sueltas. Sin términos no se
+ * renderiza.
+ */
+import Termino from './Termino.astro';
+import type { GrupoLetra } from '../../lib/glosario.ts';
+
+interface Props {
+  ruta: string;
+  grupos: GrupoLetra[];
+}
+
+const { ruta, grupos } = Astro.props;
+---
+
+{
+  grupos.length > 0 && (
+    <>
+      <nav aria-label="Índice alfabético del glosario">
+        <ul class="alfabeto">
+          {grupos.map((g) => (
+            <li>
+              <a href={`${ruta}#${g.id}`}>{g.letra}</a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+      <div class="glosario">
+        {grupos.map((g) => (
+          <section class="grupo" id={g.id} aria-labelledby={`${g.id}-t`}>
+            <h3 class="grupo__letra" id={`${g.id}-t`}>
+              {g.letra}
+            </h3>
+            <dl class="grupo__lista">
+              {g.terminos.map((t) => (
+                <Termino termino={t} />
+              ))}
+            </dl>
+          </section>
+        ))}
+      </div>
+    </>
+  )
+}
+
+<style>
+  .alfabeto {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--ma-space-xs);
+    margin: 0 0 var(--ma-space-xl);
+    padding: 0;
+    list-style: none;
+  }
+
+  .alfabeto a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--ma-space-2xl);
+    height: var(--ma-space-2xl);
+    border: var(--ma-border-width) solid var(--ma-border);
+    border-radius: var(--ma-radius-sm);
+    font-family: var(--ma-font-mono);
+    font-size: var(--ma-mono-size);
+    text-transform: uppercase;
+    color: var(--ma-text);
+  }
+
+  .alfabeto a:hover {
+    background: var(--ma-surface-hover);
+    color: var(--ma-text);
+    text-decoration: none;
+  }
+
+  .glosario {
+    margin: 0;
+  }
+
+  .grupo {
+    display: grid;
+    grid-template-columns: var(--ma-space-3xl) minmax(0, 1fr);
+    gap: var(--ma-space-xl);
+    padding: var(--ma-space-xl) 0;
+    border-top: var(--ma-border-width) solid var(--ma-border);
+  }
+
+  .grupo__letra {
+    margin: 0;
+    font-family: var(--ma-font-display);
+    font-size: var(--ma-kpi-small-size);
+    font-weight: var(--ma-kpi-small-weight);
+    line-height: var(--ma-kpi-small-line-height);
+    color: var(--ma-text-muted);
+  }
+
+  .grupo__lista {
+    margin: 0;
+  }
+
+  @media (width < 640px) {
+    .alfabeto {
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      padding-bottom: var(--ma-space-sm);
+    }
+
+    .alfabeto li {
+      flex: none;
+    }
+
+    .grupo {
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--ma-space-md);
+    }
+  }
+</style>

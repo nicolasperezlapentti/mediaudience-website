@@ -13,7 +13,9 @@ lastUpdated: "2026-08-26"
 
 ## Respuesta directa
 
-El Push Programático de Mediaudience entrega notificaciones en imagen o video directamente al dispositivo del usuario, aunque no esté navegando. Según datos de la compañía alcanza un CTR de referencia superior al 1%, con ventana de disparo de lunes a domingo.
+El Push Programático de Mediaudience entrega notificaciones en imagen o video directamente al dispositivo del usuario, aunque no esté navegando.
+
+Según datos de la compañía alcanza un CTR de referencia superior al 1%, con ventana de disparo de lunes a domingo.
 
 ## Datos clave
 

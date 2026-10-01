@@ -1,7 +1,7 @@
 {
   "meta": {
     "fuente": "factbook-mediaudience.md v1.2 §11 — Registro de dudas abiertas",
-    "regla": "Una sección con gate se renderiza solo si todas sus dudas están 'cerrada'. Un D-XX citado en contenido, plantillas o sitemap.json que no figure acá rompe el build. Al cerrar una duda con el cliente, cambiar 'estado' a 'cerrada' y anotar 'cerradaEl'."
+    "regla": "Una sección con gate se renderiza solo si todas sus dudas están 'cerrada'. Una duda con bloqueaPublicacion: true, mientras siga abierta, oculta cada párrafo, ítem de lista o fila de tabla que la cite. Un D-XX citado en contenido, plantillas o sitemap.json que no figure acá rompe el build. Al cerrar una duda con el cliente, cambiar 'estado' a 'cerrada' y anotar 'cerradaEl'."
   },
   "dudas": {
     "D-01": { "estado": "abierta", "titulo": "Sociedad peruana de origen: razón social, RUC y fecha de constitución" },
@@ -25,9 +25,9 @@
     "D-19": { "estado": "abierta", "titulo": "Corrección de grafía en canales de terceros" },
     "D-20": { "estado": "abierta", "titulo": "Cantidad de empleados del grupo" },
     "D-21": { "estado": "abierta", "titulo": "Qué se hace con Facebook" },
-    "D-22": { "estado": "abierta", "titulo": "Licencia para reproducir datos de Comscore" },
+    "D-22": { "estado": "abierta", "titulo": "Licencia para reproducir datos de Comscore", "bloqueaPublicacion": true },
     "D-23": { "estado": "abierta", "titulo": "Verificación de tercero de VTR y Viewability" },
-    "D-24": { "estado": "abierta", "titulo": "Vigencia de «sin montos mínimos» en CTV" },
+    "D-24": { "estado": "abierta", "titulo": "Vigencia de «sin montos mínimos» en CTV", "bloqueaPublicacion": true },
     "D-25": { "estado": "abierta", "titulo": "Distinción de ventanas de disparo (regla de redacción)" },
     "D-26": { "estado": "abierta", "titulo": "Sitio actual invisible para las máquinas" },
     "D-27": { "estado": "abierta", "titulo": "Creación del ítem de Wikidata" },

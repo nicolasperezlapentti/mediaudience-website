@@ -7,6 +7,13 @@
       "slug": "/soluciones/", "title": "Soluciones de prueba", "type": "pilar", "status": "ready", "nav": { "label": "Soluciones" },
       "children": [
         { "slug": "/soluciones/producto-a/", "title": "Producto A", "type": "pilar", "status": "ready", "nav": { "label": "Producto A" }, "children": [] },
+        {
+          "slug": "/soluciones/familia/", "title": "Familia de prueba", "type": "pilar", "status": "ready", "nav": { "label": "Familia" },
+          "children": [
+            { "slug": "/soluciones/familia/uno/", "title": "Producto Uno", "type": "cluster", "status": "ready", "nav": { "label": "Uno" }, "children": [] },
+            { "slug": "/soluciones/familia/dos/", "title": "Producto Dos", "type": "cluster", "status": "ready", "nav": { "label": "Dos" }, "children": [] }
+          ]
+        },
         { "slug": "/soluciones/producto-b/", "title": "Producto B", "type": "pilar", "status": "blocked", "blockedBy": ["D-02"], "nav": { "label": "Producto B" }, "children": [] },
         { "slug": "/soluciones/producto-c/", "title": "Producto C", "type": "pilar", "status": "draft", "nav": { "label": "Producto C" }, "children": [] }
       ]
@@ -16,6 +23,13 @@
       "children": [
         { "slug": "/mercados/pais-uno/", "title": "País Uno", "type": "local", "status": "ready", "nav": { "label": "País Uno" }, "children": [] },
         { "slug": "/mercados/pais-dos/", "title": "País Dos", "type": "local", "status": "blocked", "blockedBy": ["D-01"], "nav": { "label": "País Dos" }, "children": [] }
+      ]
+    },
+    {
+      "slug": "/recursos/", "title": "Recursos", "type": "pilar", "status": "draft", "nav": { "label": "Recursos" },
+      "children": [
+        { "slug": "/recursos/explicador-de-prueba/", "title": "Explicador de prueba", "type": "cluster", "status": "ready", "nav": { "label": "Explicador" }, "children": [] },
+        { "slug": "/recursos/glosario-de-prueba/", "title": "Glosario de prueba", "type": "cluster", "status": "ready", "nav": { "label": "Glosario" }, "children": [] }
       ]
     },
     { "slug": "/contacto/", "title": "Contacto", "type": "cluster", "status": "ready", "nav": { "label": "Contacto" }, "children": [] }
@@ -40,9 +54,19 @@
       ] },
       "legal": { "label": "Legal", "items": [] }
     },
-    "header": ["objetivos", "productos", "compania"],
+    "header": [
+      {
+        "tipo": "mega",
+        "label": "Soluciones",
+        "columnas": [{ "grupo": "objetivos", "label": "Por objetivo" }, { "grupo": "productos", "label": "Por producto" }],
+        "nota": "Nota de prueba del mega-menú",
+        "todas": { "label": "Todas", "anchor": "Todas las soluciones de prueba", "href": "/soluciones/" }
+      },
+      { "tipo": "dropdown", "grupo": "compania" }
+    ],
     "headerCta": { "label": "Agenda una demo", "anchor": "Agenda una demo", "href": "/contacto/" },
     "footer": ["objetivos", "productos", "compania"],
+    "footerContacto": { "label": "Contacto", "anchor": "Contacto de prueba", "href": "/contacto/" },
     "footerMercados": "mercados",
     "footerLegal": "legal"
   }

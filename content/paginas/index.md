@@ -13,14 +13,18 @@ lastUpdated: "2026-08-26"
 
 ## Respuesta directa
 
-Mediaudience es una compañía multilatina de tecnología publicitaria y representación de medios digitales. De origen peruano, es empresa local en Perú, México, Ecuador y Chile. Opera como SSP de primera línea de compra, con Connected TV, Mobile Push Premium con Claro y publicidad programática vía DV360.
+Mediaudience es una compañía multilatina de tecnología publicitaria y representación de medios digitales.
+
+De origen peruano, es empresa local en Perú, México, Ecuador y Chile. Opera como SSP de primera línea de compra, con Connected TV, Mobile Push Premium con Claro y publicidad programática vía DV360.
 
 ## Datos clave
 
 - Empresa local en cuatro mercados: Perú, México, Ecuador y Chile
-- 80 millones de oportunidades mensuales en Connected TV en Ecuador *(según datos de la compañía; fecha de corte pendiente — D-05)*
-- 3,5 millones de usuarios únicos de TV en Ecuador *(según datos de la compañía — D-05)*
-- 7,5 millones de usuarios únicos mobile en Ecuador *(según datos de la compañía — D-05)*
+- 80 millones de oportunidades mensuales en Connected TV en Ecuador (D-05)
+- 3,5 millones de usuarios únicos de TV en Ecuador (D-05)
+- 7,5 millones de usuarios únicos mobile en Ecuador (D-05)
+
+Según datos de la compañía.
 
 ## Desarrollo
 
@@ -29,13 +33,6 @@ Mediaudience se ubica en la primera línea de compra: como SSP, conecta a agenci
 El portafolio cubre el funnel completo con cuatro líneas comercializables: Connected TV con inventario premium de streaming, Mobile Push en tres productos distintos, publicidad programática sobre DV360, y retargeting cruzado CTV–Mobile como capacidad transversal.
 
 La operación es local en cada mercado. Cada país cuenta con sociedad constituida, equipo comercial y capacidad de contratación y facturación local, bajo una misma marca, una misma tecnología y un mismo estándar de servicio.
-
-## Soluciones
-
-- **[Connected TV de Mediaudience](/soluciones/connected-tv/)** — inventario premium de streaming con segmentación contextual por siete ejes.
-- **[Mobile Push de Mediaudience](/soluciones/mobile-push/)** — tres productos: Premium con Claro, Premium Video georreferenciado y Programático.
-- **[Publicidad programática de Mediaudience](/soluciones/programmatic/)** — compra programática sobre DV360.
-- **[Retargeting cruzado CTV + Mobile](/soluciones/retargeting-ctv-mobile/)** — doble impacto sobre la misma audiencia por reconocimiento de IP.
 
 ## Prueba / caso relacionado
 

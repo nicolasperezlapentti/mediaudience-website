@@ -1,0 +1,32 @@
+---
+/**
+ * B-08 · «Glosario relacionado» de un explicador T4: una card por término referenciado, con
+ * la definición traída del glosario (una sola fuente). Sin referencias no se renderiza.
+ */
+import Termino from './Termino.astro';
+import type { ReferenciaResuelta } from '../../lib/glosario.ts';
+
+interface Props {
+  referencias: ReferenciaResuelta[];
+}
+
+const { referencias } = Astro.props;
+---
+
+{
+  referencias.length > 0 && (
+    <div class="relacionado">
+      {referencias.map((r) => (
+        <Termino termino={r.termino} card={{ href: r.href, glosario: r.glosario }} />
+      ))}
+    </div>
+  )
+}
+
+<style>
+  .relacionado {
+    display: grid;
+    gap: var(--ma-space-grid-gap);
+    max-width: var(--ma-layout-max-width-prose);
+  }
+</style>

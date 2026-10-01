@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { formatoNumero, formatoPorcentaje, formatoUSD } from '../src/lib/formato.ts';
+import { formatoFechaLarga, formatoMes, formatoNumero, formatoPorcentaje, formatoUSD } from '../src/lib/formato.ts';
 
 test('es-EC: los tres ejemplos de PLANTILLAS §5.7', () => {
   assert.equal(formatoPorcentaje(9.3), '9,3%');
@@ -24,4 +24,16 @@ test('es-EC: decimales', () => {
 test('es-EC: rechaza valores no finitos', () => {
   assert.throws(() => formatoNumero(Number.NaN));
   assert.throws(() => formatoNumero(Number.POSITIVE_INFINITY));
+});
+
+test('es-EC: fecha larga, sin corrimiento de zona horaria', () => {
+  assert.equal(formatoFechaLarga('2022-01-10'), '10 de enero de 2022');
+  assert.equal(formatoFechaLarga('2025-12-31'), '31 de diciembre de 2025');
+  assert.throws(() => formatoFechaLarga('2022-13-45'));
+});
+
+test('es-EC: mes de corte', () => {
+  assert.equal(formatoMes('2025-03'), 'marzo 2025');
+  assert.throws(() => formatoMes('2025-13'));
+  assert.throws(() => formatoMes('marzo'));
 });

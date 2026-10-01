@@ -13,20 +13,13 @@ lastUpdated: "2026-08-26"
 
 ## Respuesta directa
 
-Mediaudience es una compañía multilatina de tecnología publicitaria (AdTech) y representación de medios digitales, de origen peruano, que opera como empresa local en Perú, México, Ecuador y Chile. Representa e implementa Connected TV, Push Premium y programmatic para agencias y anunciantes de la región, como SSP de primera línea de compra.
+Mediaudience es una compañía multilatina de tecnología publicitaria (AdTech) y representación de medios digitales, de origen peruano, que opera como empresa local en Perú, México, Ecuador y Chile.
+
+Representa e implementa Connected TV, Push Premium y programmatic para agencias y anunciantes de la región, como SSP de primera línea de compra.
 
 ## Mediaudience en la región
 
 Mediaudience opera como una sola compañía con presencia legal propia en cada mercado. Cada operación local cuenta con su sociedad constituida en el país, su equipo comercial y su capacidad de contratación y facturación local, bajo una misma marca, una misma tecnología y un mismo estándar de servicio.
-
-| Mercado | Razón social | Ciudad | Página |
-|---|---|---|---|
-| Perú | *(pendiente — D-30)* | *(pendiente — D-01)* | [Mediaudience Perú](/mercados/peru/) |
-| México | *(pendiente — D-30)* | *(pendiente — D-29)* | [Mediaudience México](/mercados/mexico/) |
-| Ecuador | Mediaudience S.A.S. | Samborondón, Guayas | [Mediaudience Ecuador](/mercados/ecuador/) |
-| Chile | *(pendiente — D-30)* | *(pendiente — D-29)* | [Mediaudience Chile](/mercados/chile/) |
-
-<!-- BLOQUEADO D-30: razones sociales y ciudades de PE/MX/CL. La tabla no se publica incompleta. -->
 
 ## Origen y modelo
 

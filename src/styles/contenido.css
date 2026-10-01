@@ -1,0 +1,263 @@
+/*
+ * Elementos que salen del Markdown (set:html): no los alcanzan los estilos con scope de los
+ * componentes, así que viven acá. Valores solo desde --ma-*.
+ */
+
+/* ---------- B-02 · Línea de encuadre ----------
+   HTML en sentence case («Según datos de la compañía, corte agosto 2026»); la mayúscula la
+   pone CSS. Nunca itálica. */
+
+.framing {
+  display: flex;
+  align-items: center;
+  gap: var(--ma-space-sm);
+  margin: var(--ma-space-md) 0 0;
+  font-family: var(--ma-font-mono);
+  font-size: var(--ma-caption-size);
+  line-height: var(--ma-caption-line-height);
+  letter-spacing: var(--ma-caption-letter-spacing);
+  text-transform: uppercase;
+  color: var(--ma-text-muted);
+}
+
+.framing::before {
+  content: '';
+  flex: none;
+  width: var(--ma-icon-sm);
+  height: var(--ma-border-width);
+  background: var(--ma-border-strong);
+}
+
+.framing time {
+  color: inherit;
+}
+
+/* ---------- Tablas (B-03, B-07) ----------
+   Globales: las usan los componentes de tabla y, desde B-07, las tablas del Markdown. */
+
+.table-wrap {
+  margin: var(--ma-space-lg) 0 0;
+  overflow-x: auto;
+  background: var(--ma-surface);
+  border: var(--ma-border-width) solid var(--ma-border);
+  border-radius: var(--ma-radius-md);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--ma-mono-size);
+}
+
+.table caption {
+  caption-side: top;
+  padding: var(--ma-space-md) var(--ma-space-lg);
+  border-bottom: var(--ma-border-width) solid var(--ma-border);
+  text-align: left;
+  font-family: var(--ma-font-mono);
+  font-size: var(--ma-caption-size);
+  letter-spacing: var(--ma-caption-letter-spacing);
+  text-transform: uppercase;
+  color: var(--ma-text-muted);
+}
+
+.table th[scope='col'] {
+  padding: var(--ma-space-md) var(--ma-space-lg);
+  border-bottom: var(--ma-border-width) solid var(--ma-border);
+  text-align: left;
+  vertical-align: bottom;
+  font-family: var(--ma-font-mono);
+  font-size: var(--ma-label-size);
+  font-weight: var(--ma-weight-regular);
+  letter-spacing: var(--ma-label-letter-spacing);
+  text-transform: uppercase;
+  color: var(--ma-text-muted);
+}
+
+.table th[scope='row'],
+.table td {
+  padding: var(--ma-space-md) var(--ma-space-lg);
+  border-bottom: var(--ma-border-width) solid var(--ma-border-subtle);
+  text-align: left;
+  vertical-align: top;
+}
+
+.table tbody tr:last-child > * {
+  border-bottom: 0;
+}
+
+.table tbody tr {
+  transition: background-color var(--ma-duration-fast) var(--ma-ease-base);
+}
+
+.table tbody tr:hover {
+  background: var(--ma-surface-raised);
+}
+
+.table th[scope='row'] {
+  font-family: var(--ma-font-display);
+  font-size: var(--ma-small-size);
+  font-weight: var(--ma-weight-medium);
+  color: var(--ma-text);
+}
+
+.table td {
+  font-size: var(--ma-small-size);
+  line-height: var(--ma-body-line-height);
+  color: var(--ma-text-muted);
+}
+
+.market-code {
+  display: inline-block;
+  margin-right: var(--ma-space-sm);
+  font-family: var(--ma-font-mono);
+  font-size: var(--ma-caption-size);
+  letter-spacing: var(--ma-caption-letter-spacing);
+  color: var(--ma-text-muted);
+}
+
+@media (width < 640px) {
+  .table--stack thead {
+    position: absolute;
+    width: var(--ma-border-width);
+    height: var(--ma-border-width);
+    overflow: hidden;
+    clip-path: inset(50%);
+  }
+
+  .table--stack tr {
+    display: block;
+    padding: var(--ma-space-md) var(--ma-space-lg);
+    border-bottom: var(--ma-border-width) solid var(--ma-border-subtle);
+  }
+
+  .table--stack tbody tr:last-child {
+    border-bottom: 0;
+  }
+
+  .table--stack th[scope='row'],
+  .table--stack td {
+    display: grid;
+    grid-template-columns: var(--ma-layout-table-stack-label) minmax(0, 1fr);
+    gap: var(--ma-space-md);
+    padding: var(--ma-space-xs) 0;
+    border: 0;
+  }
+
+  .table--stack th[scope='row']::before,
+  .table--stack td::before {
+    content: attr(data-label);
+    padding-top: var(--ma-space-xs);
+    font-family: var(--ma-font-mono);
+    font-size: var(--ma-label-size);
+    font-weight: var(--ma-weight-regular);
+    letter-spacing: var(--ma-label-letter-spacing);
+    text-transform: uppercase;
+    color: var(--ma-text-muted);
+  }
+}
+
+/* ---------- B-07 · Tabla comparativa ----------
+   Criterios en filas, opciones en columnas. Sin zebra, sin bordes de celda, sin columna
+   «ganadora». Bajo el ancho mínimo, desplazamiento horizontal dentro de .table-wrap con la
+   primera columna fija. */
+
+.table-wrap--compare {
+  overflow: visible;
+}
+
+.table-scroll {
+  overflow-x: auto;
+}
+
+.table-leyenda {
+  margin: 0;
+  padding: var(--ma-space-md) var(--ma-space-lg);
+  border-bottom: var(--ma-border-width) solid var(--ma-border);
+  font-family: var(--ma-font-mono);
+  font-size: var(--ma-caption-size);
+  letter-spacing: var(--ma-caption-letter-spacing);
+  text-transform: uppercase;
+  color: var(--ma-text-muted);
+}
+
+.table--compare {
+  min-width: var(--ma-layout-compare-min-width);
+}
+
+.table--compare caption {
+  position: absolute;
+  width: var(--ma-border-width);
+  height: var(--ma-border-width);
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.table--compare th[scope='col']:first-child {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  background: var(--ma-surface);
+}
+
+.table--compare th[scope='col'] {
+  width: 25%;
+}
+
+.table--compare th[scope='col']:first-child {
+  width: 18%;
+}
+
+.table--compare th[scope='row'] {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  background: var(--ma-surface);
+}
+
+.table--compare tbody tr:hover th[scope='row'] {
+  background: var(--ma-surface-raised);
+}
+
+.table--compare td {
+  color: var(--ma-text);
+}
+
+/* ---------- Prosa del Markdown dentro de una sección (B-11) ----------
+   Cuerpo en textMuted y a ancho de prosa (GUIA-DE-USO §3). */
+
+.page-section > p,
+.page-section > ul,
+.page-section > ol {
+  max-width: var(--ma-layout-max-width-prose);
+  margin: 0 0 var(--ma-space-lg);
+  color: var(--ma-text-muted);
+}
+
+.page-section > :last-child {
+  margin-bottom: 0;
+}
+
+.page-section li + li {
+  margin-top: var(--ma-space-xs);
+}
+
+.page-section strong {
+  color: var(--ma-text);
+  font-weight: var(--ma-weight-medium);
+}
+
+.page-section > h3 {
+  margin: var(--ma-space-xl) 0 var(--ma-space-md);
+  font-family: var(--ma-font-display);
+  font-size: var(--ma-h3-size);
+  font-weight: var(--ma-h3-weight);
+  line-height: var(--ma-h3-line-height);
+  letter-spacing: var(--ma-h3-letter-spacing);
+  color: var(--ma-text);
+}
+
+.page-section > h2 + h3 {
+  margin-top: 0;
+}

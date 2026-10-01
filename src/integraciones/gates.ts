@@ -27,6 +27,9 @@ export default function gates(): AstroIntegration {
         const problemas = verificarFuente();
         if (problemas.length) throw new ErrorDeGates(problemas);
         logger.info('✓ tokens.css al día · gates de fuente OK');
+        for (const p of cargarSitio({ refrescar: true }).publicadas.values()) {
+          for (const o of p.documento.ocultos) logger.info(`oculto hasta cerrar la duda · ${p.archivo} · ${o}`);
+        }
       },
       'astro:build:done': ({ dir, logger }) => {
         const problemas = verificarSalida(fileURLToPath(dir), cargarSitio({ refrescar: true }));

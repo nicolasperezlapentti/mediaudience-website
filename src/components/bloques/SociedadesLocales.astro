@@ -1,0 +1,51 @@
+---
+/**
+ * B-03 · Tabla de sociedades locales (design/referencia/bloques.html · PLANTILLAS §2).
+ *
+ * Una fila por mercado con datos verificables, generada desde content/entidad.json con la
+ * misma regla que los nodos Organization del JSON-LD (src/lib/sociedades.ts). Hoy, una sola
+ * fila: la estructura de tabla se mantiene igual para que crezca sin cambiar el marcado.
+ * Sin filas no se renderiza (B-11). Bajo 640px cada fila se apila con rótulos de data-label.
+ */
+import { MARCA } from '../../lib/marca.ts';
+import type { SociedadLocal } from '../../lib/sociedades.ts';
+
+interface Props {
+  filas: SociedadLocal[];
+}
+
+const { filas } = Astro.props;
+---
+
+{
+  filas.length > 0 && (
+    <div class="table-wrap">
+      <table class="table table--stack">
+        <caption>Sociedades locales de {MARCA}</caption>
+        <thead>
+          <tr>
+            <th scope="col">Mercado</th>
+            <th scope="col">Razón social</th>
+            <th scope="col">Ciudad</th>
+            <th scope="col">Página del país</th>
+          </tr>
+        </thead>
+        <tbody>
+          {filas.map((f) => (
+            <tr>
+              <th scope="row" data-label="Mercado">
+                <span>
+                  <span class="market-code">{f.codigo}</span>
+                  {f.pais}
+                </span>
+              </th>
+              <td data-label="Razón social">{f.legalName}</td>
+              <td data-label="Ciudad">{f.ciudad}</td>
+              <td data-label="Página">{f.pagina && <a href={f.pagina.href}>{f.pagina.texto}</a>}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  )
+}

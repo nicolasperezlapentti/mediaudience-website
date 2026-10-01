@@ -24,8 +24,13 @@ export interface DefSeccion {
   estado: Estado;
   gate?: readonly string[];
   bloque?: string;
-  /** false: la sección no lleva H2 visible (el answer target va pegado al H1; el CTA es un enlace). */
-  titulo?: boolean;
+  /**
+   * Título visible. false: sin H2 (el answer target va pegado al H1; el CTA es un enlace).
+   * Un texto: el H2 visible, cuando el nombre de la sección es interno («FAQ»).
+   */
+  titulo?: boolean | string;
+  /** B-05: acordeón (por defecto) o lista abierta, para páginas donde las preguntas son el contenido. */
+  variante?: 'acordeon' | 'lista';
   /** Admite el token de homónimo. 'requerido': debe contenerlo exactamente una vez. */
   homonimo?: 'permitido' | 'requerido';
 }
@@ -34,6 +39,8 @@ export interface DefPlantilla {
   nombre: string;
   secciones: readonly DefSeccion[];
   generado?: readonly string[];
+  /** H2 que ya no se escriben porque el bloque se genera desde datos: nombre → dónde vive el dato. */
+  generadosNoEscritos?: Readonly<Record<string, string>>;
   /** La plantilla entera depende de estas dudas: una página ready con alguna abierta rompe el build. */
   gatePlantilla?: readonly string[];
 }
@@ -42,7 +49,7 @@ const RESPUESTA: DefSeccion = { nombre: 'Respuesta directa', estado: 'OBL', bloq
 const DATOS: DefSeccion = { nombre: 'Datos clave', estado: 'OPC', bloque: 'B-02' };
 const DESARROLLO: DefSeccion = { nombre: 'Desarrollo', estado: 'OPC' };
 const PRUEBA: DefSeccion = { nombre: 'Prueba / caso relacionado', estado: 'GATE', gate: ['D-13'], bloque: 'B-06' };
-const FAQ: DefSeccion = { nombre: 'FAQ', estado: 'OPC', bloque: 'B-05' };
+const FAQ: DefSeccion = { nombre: 'FAQ', estado: 'OPC', bloque: 'B-05', titulo: 'Preguntas frecuentes' };
 const CTA: DefSeccion = { nombre: 'CTA de cierre', estado: 'OPC', titulo: false };
 
 const obl = (s: DefSeccion): DefSeccion => ({ ...s, estado: 'OBL' });
@@ -54,12 +61,12 @@ export const PLANTILLAS = {
       RESPUESTA,
       DATOS,
       DESARROLLO,
-      { nombre: 'Soluciones', estado: 'OPC' },
       PRUEBA,
       { ...FAQ, homonimo: 'permitido' },
       obl(CTA),
     ],
-    generado: ['bloque de entidad (descriptor + enlace a la página T1)', 'resúmenes de facetas (PLANTILLAS §1.5)'],
+    generado: ['«Datos clave» en el hero', 'resúmenes de los cuatro ejes, desde sitemap.json → navegacion (PLANTILLAS §1.5)', 'bloque de entidad: answer target de la página T1 + enlace'],
+    generadosNoEscritos: { Soluciones: 'los resúmenes de los cuatro ejes se generan desde sitemap.json → navegacion' },
   },
 
   T1: {
@@ -77,7 +84,7 @@ export const PLANTILLAS = {
       { ...obl(FAQ), homonimo: 'requerido' },
       CTA,
     ],
-    generado: ['grafo JSON-LD de dos capas completo'],
+    generado: ['grafo JSON-LD de dos capas completo', 'B-03: tabla de sociedades locales al final de su sección, desde content/entidad.json'],
   },
 
   T2: {
@@ -117,14 +124,19 @@ export const PLANTILLAS = {
       RESPUESTA,
       DATOS,
       { nombre: 'Soluciones disponibles', estado: 'OBL' },
-      { nombre: 'Información legal', estado: 'OBL', bloque: 'B-04' },
       { nombre: 'Socio local', estado: 'GATE', gate: ['D-31'] },
-      { nombre: 'Contacto local', estado: 'OBL', bloque: 'B-10' },
+      { nombre: 'Contacto local', estado: 'OPC', bloque: 'B-10', titulo: false },
       DESARROLLO,
+      PRUEBA,
       FAQ,
       CTA,
     ],
-    generado: ['enlace a la entidad única (página T1)'],
+    generado: [
+      'enlace a la entidad única (página T1)',
+      'B-10: contacto local, desde content/entidad.json (obligatorio: al menos correo o teléfono publicable); el Markdown de «Contacto local» es solo su introducción',
+      'B-04: bloque legal al pie, desde content/entidad.json (obligatorio: sin sociedad publicable, la página no es ready)',
+    ],
+    generadosNoEscritos: { 'Información legal': 'el bloque legal (B-04) se genera desde content/entidad.json' },
   },
 
   T4: {

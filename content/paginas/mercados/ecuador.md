@@ -13,15 +13,19 @@ lastUpdated: "2026-08-26"
 
 ## Respuesta directa
 
-Mediaudience Ecuador es la operación local de Mediaudience, compañía multilatina de AdTech de origen peruano, en Ecuador. Con sociedad constituida en Samborondón, ofrece Connected TV y los tres productos de Mobile Push a agencias y anunciantes locales, con contratación y facturación en el país.
+Mediaudience Ecuador es la operación local de Mediaudience, compañía multilatina de AdTech de origen peruano, en Ecuador.
+
+Con sociedad constituida en Samborondón, ofrece Connected TV y los tres productos de Mobile Push a agencias y anunciantes locales, con contratación y facturación en el país.
 
 ## Datos clave
 
-- 80 millones de oportunidades mensuales en Connected TV *(según datos de la compañía — D-05)*
-- 3,5 millones de usuarios únicos de TV *(según datos de la compañía — D-05)*
-- 7,5 millones de usuarios únicos mobile *(según datos de la compañía — D-05)*
-- Universo Push Premium con Claro: 4 millones *(según datos de la compañía — D-06)*
-- Universo Push Premium Video: 12 millones *(según datos de la compañía — D-06)*
+- 80 millones de oportunidades mensuales en Connected TV (D-05)
+- 3,5 millones de usuarios únicos de TV (D-05)
+- 7,5 millones de usuarios únicos mobile (D-05)
+- Universo Push Premium con Claro: 4 millones (D-06)
+- Universo Push Premium Video: 12 millones (D-06)
+
+Según datos de la compañía.
 
 ## Soluciones disponibles
 
@@ -31,15 +35,6 @@ Mediaudience Ecuador es la operación local de Mediaudience, compañía multilat
 - [Push Programático](/soluciones/mobile-push/programatico/)
 - [Publicidad programática (DV360)](/soluciones/programmatic/)
 - [Retargeting cruzado CTV + Mobile](/soluciones/retargeting-ctv-mobile/)
-
-## Información legal
-
-| Dato | Valor |
-|---|---|
-| Razón social | Mediaudience S.A.S. |
-| Constitución | 10 de enero de 2022 |
-| Domicilio | Av. Primera 212, Samborondón, Guayas, Ecuador |
-| Actividad (CIIU) | M7310.04 |
 
 ## Contacto local
 

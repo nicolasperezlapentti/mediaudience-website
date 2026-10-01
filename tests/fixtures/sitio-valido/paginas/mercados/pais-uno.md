@@ -17,16 +17,10 @@ La operación de prueba en País Uno ofrece el Producto A.
 
 - [Producto A de prueba](/soluciones/producto-a/)
 
-## Información legal
-
-| Dato | Valor |
-|---|---|
-| Razón social | Sociedad de Prueba S.A.S. |
-
 ## Socio local
 
 Este texto no debe publicarse mientras D-31 siga abierta.
 
 ## Contacto local
 
-Contacto de prueba.
+Introducción de prueba al contacto comercial.

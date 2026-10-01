@@ -1,0 +1,35 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "vista-previa-contenido",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "/Users/niolasperez/Documents/GitHub/mediaudience-website/.claude/servir-estatico.mjs",
+        "/Users/niolasperez/Documents/GitHub/mediaudience-website/dist-preview",
+        "4400"
+      ],
+      "port": 4400
+    },
+    {
+      "name": "referencia-diseno",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "/Users/niolasperez/Documents/GitHub/mediaudience-website/.claude/servir-estatico.mjs",
+        "/Users/niolasperez/Documents/GitHub/mediaudience-website/design/referencia",
+        "4401"
+      ],
+      "port": 4401
+    },
+    {
+      "name": "vista-previa-fixture",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "/Users/niolasperez/Documents/GitHub/mediaudience-website/.claude/servir-estatico.mjs",
+        "/Users/niolasperez/Documents/GitHub/mediaudience-website/dist-fixture",
+        "4402"
+      ],
+      "port": 4402
+    }
+  ]
+}

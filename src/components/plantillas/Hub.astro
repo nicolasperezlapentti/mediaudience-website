@@ -1,0 +1,24 @@
+---
+/**
+ * T6 · hub de índice (PLANTILLAS §4): H1, answer target, grilla de hijos ready y enlace a la
+ * entidad; después, las secciones opcionales del hub.
+ */
+import BloqueEntidad from '../BloqueEntidad.astro';
+import HijosGrid from '../HijosGrid.astro';
+import PageHead from '../PageHead.astro';
+import Secciones from '../Secciones.astro';
+import type { ModeloPagina } from '../../lib/render.ts';
+
+interface Props {
+  p: ModeloPagina;
+}
+
+const { p } = Astro.props;
+---
+
+<PageHead cabecera={p.cabecera} />
+<div class="contenedor">
+  <HijosGrid hijos={p.hijos} />
+  {p.entidad && <BloqueEntidad entidad={p.entidad} />}
+  <Secciones secciones={p.secciones} />
+</div>

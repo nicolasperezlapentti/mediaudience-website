@@ -13,7 +13,9 @@ lastUpdated: "2026-08-26"
 
 ## Respuesta directa
 
-Mediaudience comercializa tres productos distintos de Mobile Push: Push Premium con Claro (notificación vía apps nativas de Claro con first-party data), Push Premium Video georreferenciado (hipersegmentado por seis drivers de comportamiento) y Push Programático (notificación al dispositivo aunque el usuario no esté navegando). Cada uno tiene universo, CTR de referencia y ventana de disparo propios.
+Mediaudience comercializa tres productos distintos de Mobile Push: Push Premium con Claro (notificación vía apps nativas de Claro con first-party data), Push Premium Video georreferenciado (hipersegmentado por seis drivers de comportamiento) y Push Programático (notificación al dispositivo aunque el usuario no esté navegando).
+
+Cada uno tiene universo, CTR de referencia y ventana de disparo propios.
 
 ## Los tres productos
 
@@ -21,13 +23,15 @@ Mediaudience comercializa tres productos distintos de Mobile Push: Push Premium 
 
 No es una distinción de formato: son tres universos de usuarios diferentes, tres rangos de CTR de referencia y dos ventanas de disparo distintas. Presentarlos como un solo producto lleva a expectativas equivocadas de alcance y de rendimiento.
 
+Tabla: Los tres productos.
+
 | Producto | Universo Ecuador | CTR de referencia | Ventana |
 |---|---|---|---|
 | [Premium con Claro](/soluciones/mobile-push/premium-claro/) | 4 millones *(D-06)* | +3% (retargeting +2%) | Lunes a viernes |
 | [Premium Video georreferenciado](/soluciones/mobile-push/premium-video/) | 12 millones *(D-06)* | 8%+ | Lunes a viernes |
 | [Programático](/soluciones/mobile-push/programatico/) | — | +1% | Lunes a domingo |
 
-*Cifras según datos de la compañía, sin fecha de corte (D-06).*
+Según datos de la compañía (D-06).
 
 ## Desarrollo
 

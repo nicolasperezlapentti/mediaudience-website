@@ -15,10 +15,7 @@ La entidad de prueba es una compañía de prueba con operación en País Uno.
 
 ## Mediaudience en la región
 
-| Mercado | Razón social | Página |
-|---|---|---|
-| País Dos | *(pendiente — D-01)* | [País Dos](/mercados/pais-dos/) |
-| País Uno | Sociedad de Prueba S.A.S. | [Operación en País Uno](/mercados/pais-uno/) |
+Texto de prueba sobre la estructura regional.
 
 ## Origen y modelo
 

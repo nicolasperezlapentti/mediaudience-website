@@ -1,0 +1,264 @@
+---
+/**
+ * Footer global (design/referencia/navegacion.html · PLANTILLAS §1.4).
+ *
+ * Mapa del sitio en columnas (las cuatro facetas + Compañía), bloque de entidad con el
+ * DESCRIPTOR —la misma oración en todas las páginas— y barra legal. Todo desde
+ * sitemap.json → navegacion, filtrado por status ready.
+ *
+ * Sin razón social: la del grupo está pendiente (D-01) y la única disponible es la de la sociedad
+ * de Ecuador. La línea de datos lleva las operaciones locales publicadas y el contacto.
+ */
+import Wordmark from './Wordmark.astro';
+import { DESCRIPTOR, MARCA } from '../lib/marca.ts';
+import { construirNavegacion } from '../lib/navegacion.ts';
+import { cargarSitio } from '../lib/sitio.ts';
+
+const nav = construirNavegacion(cargarSitio());
+const datos = [...(nav.mercados?.items ?? []), ...(nav.contacto ? [nav.contacto] : [])];
+const anio = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="inner">
+    {
+      nav.footer.length > 0 && (
+        <nav class="mapa" aria-label="Mapa del sitio">
+          {nav.footer.map((g) => (
+            <div class="col">
+              <p class="heading">{g.label}</p>
+              <ul class="links">
+                {g.items.map((i) => (
+                  <li>
+                    {i.etiqueta && <span class="etiqueta">{i.etiqueta}</span>}
+                    <a href={i.href}>{i.anchor}</a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </nav>
+      )
+    }
+
+    <div class="entidad">
+      <p class="entidad__marca" aria-hidden="true"><Wordmark tamano="footer" /></p>
+      <div>
+        <p class="entidad__texto">{DESCRIPTOR}</p>
+        {
+          datos.length > 0 && (
+            <address class="entidad__datos">
+              {datos.map((i, n) => (
+                <>
+                  {n > 0 && (
+                    <span class="sep" aria-hidden="true">
+                      ·
+                    </span>
+                  )}
+                  <a href={i.href}>{i.anchor}</a>
+                </>
+              ))}
+            </address>
+          )
+        }
+      </div>
+    </div>
+
+    <div class="legal">
+      {
+        nav.legal && (
+          <ul class="legal__links">
+            {nav.legal.items.map((i) => (
+              <li>
+                <a href={i.href}>{i.anchor}</a>
+              </li>
+            ))}
+          </ul>
+        )
+      }
+      <p class="copy">© {anio} {MARCA}</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--ma-background-alt);
+    border-top: var(--ma-border-width) solid var(--ma-border);
+    color: var(--ma-text-muted);
+  }
+
+  .inner {
+    max-width: var(--ma-layout-max-width);
+    margin: 0 auto;
+    padding: 0 var(--ma-layout-gutter);
+  }
+
+  /* ---------- mapa del sitio ---------- */
+
+  .mapa {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(0, 1fr);
+    gap: var(--ma-space-xl);
+    padding: var(--ma-space-3xl) 0 var(--ma-space-2xl);
+  }
+
+  .heading {
+    margin: 0 0 var(--ma-space-md);
+    font-family: var(--ma-font-mono);
+    font-size: var(--ma-caption-size);
+    letter-spacing: var(--ma-caption-letter-spacing);
+    text-transform: uppercase;
+    color: var(--ma-text);
+  }
+
+  .links {
+    display: grid;
+    gap: var(--ma-space-sm);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .links a {
+    font-size: var(--ma-small-size);
+    line-height: var(--ma-caption-line-height);
+    color: var(--ma-text-muted);
+  }
+
+  .links a:hover {
+    color: var(--ma-text);
+  }
+
+  .etiqueta {
+    display: block;
+    font-family: var(--ma-font-mono);
+    font-size: var(--ma-caption-size);
+    letter-spacing: var(--ma-caption-letter-spacing);
+    text-transform: uppercase;
+    color: var(--ma-text-placeholder);
+  }
+
+  /* ---------- bloque de entidad ---------- */
+
+  .entidad {
+    display: grid;
+    grid-template-columns: minmax(0, var(--ma-layout-sidebar-width)) minmax(0, 1fr);
+    gap: var(--ma-space-xl);
+    padding: var(--ma-space-2xl) 0;
+    border-top: var(--ma-border-width) solid var(--ma-border);
+  }
+
+  .entidad__marca {
+    margin: 0;
+  }
+
+  .entidad__texto {
+    max-width: var(--ma-layout-max-width-prose);
+    margin: 0 0 var(--ma-space-md);
+    font-size: var(--ma-body-size);
+    line-height: var(--ma-body-large-line-height);
+    color: var(--ma-text);
+    text-wrap: pretty;
+  }
+
+  .entidad__datos {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: var(--ma-space-sm);
+    font-style: normal;
+    font-family: var(--ma-font-mono);
+    font-size: var(--ma-mono-size);
+    letter-spacing: var(--ma-mono-letter-spacing);
+    color: var(--ma-text-muted);
+  }
+
+  .entidad__datos a {
+    color: var(--ma-text-muted);
+    text-decoration: underline;
+    text-decoration-color: var(--ma-border-strong);
+  }
+
+  .entidad__datos a:hover {
+    color: var(--ma-text);
+  }
+
+  /* ---------- barra legal ---------- */
+
+  .legal {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--ma-space-md) var(--ma-space-xl);
+    padding: var(--ma-space-lg) 0;
+    border-top: var(--ma-border-width) solid var(--ma-border);
+  }
+
+  .legal__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--ma-space-lg);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .legal a,
+  .copy {
+    margin: 0;
+    font-family: var(--ma-font-mono);
+    font-size: var(--ma-caption-size);
+    letter-spacing: var(--ma-caption-letter-spacing);
+    text-transform: uppercase;
+    color: var(--ma-text-muted);
+  }
+
+  .legal a:hover {
+    color: var(--ma-text);
+  }
+
+  /* ---------- responsive ---------- */
+
+  @media (width < 1100px) {
+    .mapa {
+      grid-auto-flow: row;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  @media (width < 640px) {
+    .mapa {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      padding: var(--ma-space-2xl) 0 var(--ma-space-xl);
+    }
+
+    .links a {
+      display: inline-flex;
+      align-items: center;
+      min-height: var(--ma-form-min-height);
+    }
+
+    .entidad {
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--ma-space-md);
+    }
+
+    .entidad__datos {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--ma-space-xs);
+    }
+
+    .sep {
+      display: none;
+    }
+
+    .legal {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+</style>

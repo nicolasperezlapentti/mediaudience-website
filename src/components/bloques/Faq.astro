@@ -1,0 +1,148 @@
+---
+/**
+ * B-05 · FAQ (design/referencia/bloques.html · PLANTILLAS §2).
+ *
+ * Acordeón con <details> nativo: la respuesta está en el HTML aunque el ítem esté cerrado,
+ * funciona sin JavaScript y los motores la leen. El primer ítem arranca abierto. Pregunta en
+ * <h3> dentro de <summary>; respuesta en párrafos reales. El texto es el mismo del FAQPage
+ * del JSON-LD: los dos salen de parsearFaq().
+ * Variante «lista»: todo abierto, sin <details>, para páginas donde las preguntas son el
+ * contenido principal. Sin ítems no se renderiza (B-11).
+ */
+interface Props {
+  variante: 'acordeon' | 'lista';
+  items: { preguntaHtml: string; respuestaHtml: string }[];
+}
+
+const { variante, items } = Astro.props;
+---
+
+{
+  items.length > 0 &&
+    (variante === 'lista' ? (
+      <div class="faq faq--lista">
+        {items.map((i) => (
+          <div class="faq__item">
+            <h3 class="faq__pregunta" set:html={i.preguntaHtml} />
+            <div class="faq__respuesta" set:html={i.respuestaHtml} />
+          </div>
+        ))}
+      </div>
+    ) : (
+      <div class="faq">
+        {items.map((i, n) => (
+          <details class="faq__item" open={n === 0}>
+            <summary class="faq__q">
+              <h3 class="faq__pregunta" set:html={i.preguntaHtml} />
+              <span class="faq__indicador" aria-hidden="true" />
+            </summary>
+            <div class="faq__respuesta" set:html={i.respuestaHtml} />
+          </details>
+        ))}
+      </div>
+    ))
+}
+
+<style>
+  .faq {
+    max-width: var(--ma-layout-max-width-prose);
+    border-top: var(--ma-border-width) solid var(--ma-border);
+  }
+
+  .faq__item {
+    border-bottom: var(--ma-border-width) solid var(--ma-border);
+  }
+
+  .faq__q {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: var(--ma-space-lg);
+    padding: var(--ma-space-lg) 0;
+    list-style: none;
+    cursor: pointer;
+  }
+
+  .faq__q::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq__pregunta {
+    margin: 0;
+    font-family: var(--ma-font-display);
+    font-size: var(--ma-body-large-size);
+    font-weight: var(--ma-weight-medium);
+    line-height: var(--ma-h3-line-height);
+    letter-spacing: var(--ma-h3-letter-spacing);
+    text-wrap: pretty;
+    transition: color var(--ma-duration-fast) var(--ma-ease-base);
+  }
+
+  .faq__q:hover .faq__pregunta {
+    color: var(--ma-primary);
+  }
+
+  /* Indicador +/–: dos hairlines; la vertical se apaga al abrir. */
+  .faq__indicador {
+    position: relative;
+    flex: none;
+    width: var(--ma-space-md);
+    height: var(--ma-space-md);
+    margin-top: var(--ma-space-sm);
+    color: var(--ma-text-muted);
+  }
+
+  .faq__indicador::before,
+  .faq__indicador::after {
+    content: '';
+    position: absolute;
+    background: currentColor;
+  }
+
+  .faq__indicador::before {
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: var(--ma-border-width);
+  }
+
+  .faq__indicador::after {
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: var(--ma-border-width);
+    transition: opacity var(--ma-duration-base) var(--ma-ease-base);
+  }
+
+  .faq__item[open] .faq__indicador::after {
+    opacity: 0;
+  }
+
+  .faq__respuesta {
+    max-width: var(--ma-layout-max-width-prose);
+    padding: 0 0 var(--ma-space-xl);
+    color: var(--ma-text-muted);
+  }
+
+  .faq__respuesta :global(p) {
+    margin: 0 0 var(--ma-space-md);
+  }
+
+  .faq__respuesta :global(p:last-child) {
+    margin: 0;
+  }
+
+  /* ---------- variante lista ---------- */
+
+  .faq--lista .faq__item {
+    padding: var(--ma-space-lg) 0;
+  }
+
+  .faq--lista .faq__pregunta {
+    margin-bottom: var(--ma-space-sm);
+  }
+
+  .faq--lista .faq__respuesta {
+    padding: 0;
+  }
+</style>

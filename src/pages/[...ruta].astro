@@ -1,11 +1,18 @@
 ---
 /**
- * Una ruta por página ready. Fase A: HTML semántico sin componentes visuales, para que el
- * pipeline completo (contenido → gates → HTML de servidor → test de aceptación) corra de
- * punta a punta. Fase B reemplaza el cuerpo por los bloques de design/referencia/.
+ * Una ruta por página ready. Elige el componente de plantilla según el `template` de la página
+ * y le pasa el modelo de render (src/lib/render.ts). Todo el contenido sale en el HTML de
+ * servidor: cero hidratación.
  */
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import Estandar from '../components/plantillas/Estandar.astro';
+import Home from '../components/plantillas/Home.astro';
+import Hub from '../components/plantillas/Hub.astro';
+import Pais from '../components/plantillas/Pais.astro';
+import type { IdPlantilla } from '../lib/plantillas.ts';
 import { modeloPagina } from '../lib/render.ts';
 import { cargarSitio } from '../lib/sitio.ts';
 
@@ -17,46 +24,19 @@ export async function getStaticPaths() {
   }));
 }
 
+const PLANTILLA: Partial<Record<IdPlantilla, typeof Home>> = { home: Home, T3: Pais, T6: Hub };
+
 const { id } = Astro.props;
-const p = modeloPagina(cargarSitio(), id);
+const sitio = cargarSitio();
+const p = modeloPagina(sitio, id);
+const Plantilla = PLANTILLA[sitio.publicadas.get(id)!.plantilla] ?? Estandar;
 ---
 
 <Base titulo={p.titulo} descripcion={p.descripcion} canonica={p.canonica}>
   <script type="application/ld+json" slot="jsonld" set:html={p.jsonld} />
+  <SiteHeader slot="header" actual={id} />
   <main id="contenido">
-    <h1>{p.h1}</h1>
-    <p data-answer-target set:html={p.answerTargetHtml} />
-    {
-      p.secciones.map((s) => (
-        <section id={s.id}>
-          {s.titulo && <h2>{s.titulo}</h2>}
-          <Fragment set:html={s.html} />
-        </section>
-      ))
-    }
-    {
-      p.hijos.length > 0 && (
-        <section id="indice">
-          <ul>
-            {p.hijos.map((h) => (
-              <li>
-                <a href={h.href}>{h.texto}</a>
-                <p>{h.descripcion}</p>
-              </li>
-            ))}
-          </ul>
-        </section>
-      )
-    }
-    {
-      p.entidad && (
-        <section id="entidad">
-          {p.entidad.descriptor && <p>{p.entidad.descriptor}</p>}
-          <p>
-            <a href={p.entidad.enlace.href}>{p.entidad.enlace.texto}</a>
-          </p>
-        </section>
-      )
-    }
+    <Plantilla p={p} />
   </main>
+  <SiteFooter slot="footer" />
 </Base>

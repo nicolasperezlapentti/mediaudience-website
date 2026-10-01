@@ -28,6 +28,7 @@ import { ID_MARCA } from '../src/lib/jsonld.ts';
 import { SITIO } from '../src/lib/marca.ts';
 import { answerTarget, normalizarEspacios, parsearCta } from '../src/lib/markdown.ts';
 import { cargarSitio, type PaginaPublicada } from '../src/lib/sitio.ts';
+import { construirTrio } from '../src/lib/trio.ts';
 
 const args = process.argv.slice(2);
 const baseArg = args.includes('--base') ? args[args.indexOf('--base') + 1] : null;
@@ -98,10 +99,17 @@ async function verificarRuta(base: string, p: PaginaPublicada): Promise<string[]
   const cuerpo = compacto(raiz.querySelector('main')?.text ?? '');
   for (const { def, seccion } of p.visibles) {
     if (def.titulo !== false && !raiz.querySelector(`section#${seccion.id} > h2`)) fallas.push(`cuerpo: falta el H2 «${def.nombre}»`);
+    const trio = def.bloque === 'B-09' ? construirTrio(sitio, p, seccion).trio : null;
     const texto =
       def.nombre === 'CTA de cierre'
         ? (parsearCta(seccion)?.texto ?? '')
-        : seccion.nodos.slice(def.nombre === 'Respuesta directa' ? 1 : 0).map((n) => toString(n)).join(' ');
+        : trio
+          ? trio.productos.map((x) => `${x.nombre} ${x.descripcion} ${x.datos.map((d) => `${d.rotulo} ${d.valor}`).join(' ')}`).join(' ')
+        : seccion.nodos
+            .slice(def.nombre === 'Respuesta directa' ? 1 : 0)
+            // El caption de una tabla viene de su línea «Tabla: …»: en el HTML va antes de las celdas.
+            .map((n) => `${(n.data as { caption?: string } | undefined)?.caption ?? ''} ${toString(n)}`)
+            .join(' ');
     const muestra = compacto(texto).slice(0, 80);
     if (muestra && !cuerpo.includes(muestra)) fallas.push(`cuerpo: no llega el texto de «${def.nombre}» («${texto.trim().slice(0, 50)}…»)`);
   }
@@ -115,7 +123,14 @@ async function verificarRuta(base: string, p: PaginaPublicada): Promise<string[]
       if (!nodos.some((n) => n['@id'] === ID_MARCA)) fallas.push('JSON-LD: falta la marca-entidad');
       if (!nodos.some((n) => n.url === `${SITIO}${p.ruta}` && String(n['@id']).endsWith('#webpage'))) fallas.push('JSON-LD: falta el nodo de la página');
       const faq = p.visibles.some((v) => v.def.nombre === 'FAQ');
-      if (faq && !nodos.some((n) => n['@type'] === 'FAQPage')) fallas.push('JSON-LD: hay FAQ visible y falta FAQPage');
+      const faqPage = nodos.find((n) => n['@type'] === 'FAQPage') as { mainEntity?: { name: string }[] } | undefined;
+      if (faq && !faqPage) fallas.push('JSON-LD: hay FAQ visible y falta FAQPage');
+      if (faqPage) {
+        // Google exige que el FAQPage diga lo mismo que la página: se comparan pregunta por pregunta.
+        const visibles = raiz.querySelectorAll('.faq__pregunta').map((h) => normalizarEspacios(h.text));
+        const marcadas = (faqPage.mainEntity ?? []).map((q) => q.name);
+        if (visibles.join('|') !== marcadas.join('|')) fallas.push(`FAQPage no coincide con las preguntas visibles: ${JSON.stringify({ visibles, marcadas })}`);
+      }
     } catch (e) {
       fallas.push(`JSON-LD inválido: ${(e as Error).message}`);
     }
