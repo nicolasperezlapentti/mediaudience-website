@@ -3,3 +3,5 @@ dist/
 dist-*/
 .astro/
 .DS_Store
+html-paginas/
+html-paginas.zip

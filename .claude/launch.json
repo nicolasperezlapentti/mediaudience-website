@@ -30,6 +30,16 @@
         "4402"
       ],
       "port": 4402
+    },
+    {
+      "name": "html-paginas",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "/Users/niolasperez/Documents/GitHub/mediaudience-website/.claude/servir-estatico.mjs",
+        "/Users/niolasperez/Documents/GitHub/mediaudience-website/html-paginas",
+        "4403"
+      ],
+      "port": 4403
     }
   ]
 }
