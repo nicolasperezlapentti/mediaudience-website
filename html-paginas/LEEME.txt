@@ -1,0 +1,40 @@
+Mediaudience · HTML de las páginas (VISTA PREVIA, no publicable)
+
+Cómo abrirlo
+  Doble clic en index.html (la home). Los enlaces entre páginas, los estilos y las
+  fuentes funcionan sin servidor: todo es relativo y las fuentes van dentro del CSS.
+
+Qué es
+  Las 12 páginas con status «ready» en content/sitemap.json, generadas por los
+  componentes reales del sitio (header, footer, plantillas T1–T6 y bloques B-01…B-11).
+  Todo el contenido está en el HTML: se lee igual sin JavaScript.
+
+Por qué NO es el sitio publicable
+  El build real (npm run build) hoy falla con 28 incumplimientos de contenido. Para
+  poder generar esta vista previa, una copia local del contenido agrega:
+
+  1. «Vista previa local: sección pendiente de redacción.» en las secciones obligatorias
+     que faltan en los 7 pilares de solución (23 apariciones).
+  2. Un subtítulo «Fragmento del menú» en 4 pilares, para que existan los destinos
+     #alcance, #consideracion, #conversion y #visitas-a-tienda de Objetivos.
+  3. Un correo de prueba, vista-previa@ejemplo.com, como contacto de Ecuador. Aparece
+     en /mercados/ecuador/ y en el JSON-LD de /nosotros/. El dato real está pendiente
+     (D-18).
+
+  Todo lo demás es el contenido real de content/, sin cambios. No subir estos archivos
+  al hosting: el sitio publicable sale de npm run build cuando el contenido esté completo.
+
+Páginas
+  index.html                                     Home
+  nosotros/index.html                            Qué es Mediaudience (T1)
+  soluciones/index.html                          Hub de soluciones (T6)
+  soluciones/connected-tv/index.html             Connected TV (T2)
+  soluciones/mobile-push/index.html              Mobile Push, hub de 3 productos (T2-hub)
+  soluciones/mobile-push/premium-claro/…         Push Premium con Claro (T2)
+  soluciones/mobile-push/premium-video/…         Push Premium Video georreferenciado (T2)
+  soluciones/mobile-push/programatico/…          Push Programático (T2)
+  soluciones/programmatic/index.html             Publicidad programática DV360 (T2)
+  soluciones/retargeting-ctv-mobile/index.html   Retargeting cruzado CTV + Mobile (T2)
+  mercados/ecuador/index.html                    Mediaudience Ecuador (T3)
+  contacto/index.html                            Contacto
+  robots.txt · sitemap.xml · llms.txt            Fase 0

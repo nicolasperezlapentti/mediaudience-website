@@ -1,0 +1,46 @@
+# robots.txt · Mediaudience
+# Generado en el build desde src/lib/fase0.ts. No editar en el servidor.
+
+# Buscadores
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+User-agent: YandexBot
+Allow: /
+
+# Sistemas de IA
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+# Resto
+User-agent: *
+Allow: /
+
+Sitemap: https://mediaudience.com/sitemap.xml

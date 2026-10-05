@@ -1,0 +1,22 @@
+# Mediaudience
+
+> Compañía multilatina de AdTech y representación de medios digitales (SSP), de origen peruano, con empresa local en Perú, México, Ecuador y Chile. Ofrece Connected TV, Mobile Push (Premium con Claro, Premium Video y Programático), publicidad programática (DV360) y retargeting cruzado CTV–Mobile.
+
+## Entidad
+
+- [Qué es Mediaudience](https://mediaudience.com/nosotros/): Mediaudience es una compañía multilatina de AdTech de origen peruano, con empresa local en Perú, México, Ecuador y Chile.
+
+## Soluciones
+
+- [Soluciones de Mediaudience](https://mediaudience.com/soluciones/): Connected TV, Mobile Push en tres productos, programmatic sobre DV360 y retargeting cruzado, como SSP de primera línea de compra.
+- [Connected TV (CTV)](https://mediaudience.com/soluciones/connected-tv/): Inventario premium de streaming con segmentación contextual y video non-skippable, como SSP de primera línea de compra.
+- [Mobile Push](https://mediaudience.com/soluciones/mobile-push/): Tres productos de Mobile Push con universos, CTR y ventanas de disparo distintos: Premium con Claro, Premium Video georreferenciado y Programático.
+- [Push Premium con Claro](https://mediaudience.com/soluciones/mobile-push/premium-claro/): Notificaciones vía apps nativas de Claro, integradas por SDK para obtener first-party data. Modelo CPE, disparo de lunes a viernes.
+- [Push Premium Video georreferenciado](https://mediaudience.com/soluciones/mobile-push/premium-video/): Publicidad móvil georreferenciada e hipersegmentada por seis drivers de comportamiento. 12 millones de usuarios en Ecuador.
+- [Push Programático](https://mediaudience.com/soluciones/mobile-push/programatico/): Notificación en imagen o video entregada al dispositivo aunque el usuario no esté navegando. Disparo de lunes a domingo.
+- [Publicidad programática (DV360)](https://mediaudience.com/soluciones/programmatic/): Compra programática sobre DV360 para agencias y anunciantes en Perú, México, Ecuador y Chile.
+- [Retargeting cruzado CTV + Mobile](https://mediaudience.com/soluciones/retargeting-ctv-mobile/): Doble impacto sobre la misma audiencia: impacto en Connected TV y refuerzo en móvil por reconocimiento de IP.
+
+## Operaciones locales
+
+- [Mediaudience Ecuador](https://mediaudience.com/mercados/ecuador/): Mediaudience Ecuador es la operación local en Ecuador de Mediaudience, compañía multilatina de AdTech de origen peruano.
